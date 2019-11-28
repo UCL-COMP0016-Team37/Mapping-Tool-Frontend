@@ -23,3 +23,7 @@ body {
 .App-link {
   color: #09d3ac;
 }
+
+.page {
+  height: 50vh;
+}
