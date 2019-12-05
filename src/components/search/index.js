@@ -15,7 +15,7 @@ export default class Search extends React.Component {
     
     setSearch(e){
         const form = this.state.name
-        history.push('/search-results/value='+ this.state.search)
+        history.push('/search-results/?value='+ this.state.search)
     }
 
     handleChange = (e) => {
@@ -28,11 +28,16 @@ export default class Search extends React.Component {
         this.setState({search: e.target.value})
     }
 
+    handleKeyPress=e=>{
+        if (e.key === "Enter") {
+            this.setSearch(e)
+          }
+    }
     
     render() {
         return (
             <div>
-                <input className="search-bar" placeholder="Search Input Here"value={this.state.name} onChange={this.onChange.bind(this)} ></input>
+                <input className="search-bar" placeholder="Search Input Here"value={this.state.name} onChange={this.onChange.bind(this)} onKeyPress={this.handleKeyPress} ></input>
                 <button className="search-button" onClick={(e) => this.setSearch(e)}>search</button>
             </div>
         )

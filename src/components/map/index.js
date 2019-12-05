@@ -11,7 +11,7 @@ export default class Map extends React.Component {
     }    
 
     render() {
-        // const hello = mapData.map((item) => infoboxesWithPushPins= {item})
+      
         return <div className="map-container">
             <ReactBingmaps 
                 bingmapKey={API_KEY}
