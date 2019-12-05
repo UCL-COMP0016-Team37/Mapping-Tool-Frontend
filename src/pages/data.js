@@ -2,6 +2,10 @@ import React from 'react';
 
 export default class DataPage extends React.Component {
     render() {
-        return ;
+        return(
+          <div>
+              DataPage
+          </div> 
+        ) ;
     }
 }
