@@ -18,15 +18,9 @@ function App() {
                 <Router history={history}>
                     <Search />
                     <Switch>
-                        <Route path = "/data">
-                            <Data/>
-                        </Route>
-                        <Route path = "/search-results">
-                            <SearchResults/>
-                        </Route>
-                        <Route path = "/">
-                            <Map/>
-                        </Route>
+                        <Route path="/data" component={Data}/>
+                        <Route path="/search-results" component={SearchResults}/>
+                        <Route path="/" component={Map}/>
                         <Route>
                             {/* Error */}
                         </Route>

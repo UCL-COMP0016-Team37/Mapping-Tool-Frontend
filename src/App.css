@@ -24,6 +24,10 @@ body {
   color: #09d3ac;
 }
 
+.page-container {
+  color: white;
+}
+
 .page {
   height: 90vh;
 }
