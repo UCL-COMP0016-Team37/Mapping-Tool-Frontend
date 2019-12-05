@@ -2,6 +2,6 @@ import React from 'react';
 
 export default class SearchResultsPage extends React.Component {
     render() {
-        return ;
+        return <div></div>;
     }
 }
