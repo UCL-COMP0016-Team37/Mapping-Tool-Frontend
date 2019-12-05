@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    Router,
     Switch,
     Route
 } from 'react-router-dom';
@@ -9,13 +9,14 @@ import Search from './components/search';
 import Map from './pages/map';
 import Data from './pages/data';
 import SearchResults from './pages/searchResults';
+import history from './history';
 
 function App() {
     return (
         <div className = "App">
-            <div className = "page-container">
-                <Search/>
-                <Router>
+            <div className = "page-container">    
+                <Router history={history}>
+                    <Search />
                     <Switch>
                         <Route path = "/data">
                             <Data/>
@@ -23,8 +24,11 @@ function App() {
                         <Route path = "/search-results">
                             <SearchResults/>
                         </Route>
-                        <Route>
+                        <Route path = "/">
                             <Map/>
+                        </Route>
+                        <Route>
+                            {/* Error */}
                         </Route>
                     </Switch>
                 </Router>
