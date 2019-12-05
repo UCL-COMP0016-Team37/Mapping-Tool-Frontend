@@ -10,11 +10,13 @@ import Map from './pages/map';
 import Data from './pages/data';
 import SearchResults from './pages/searchResults';
 import history from './history';
+import Header from './header'
 
 function App() {
     return (
         <div className = "App">
-            <div className = "page-container">    
+            <div className = "page-container"> 
+            <Header/>   
                 <Router history={history}>
                     <Search />
                     <Switch>
