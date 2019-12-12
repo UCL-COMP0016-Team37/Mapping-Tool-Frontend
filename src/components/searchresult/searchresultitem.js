@@ -7,6 +7,7 @@ class searchResultItem extends React.Component {
         // var results = searchResultItem.map(items =><li>{items}</li>)
         return(
             <li>
+                {this.props.country.id}: 
                 {this.props.country.title}
             </li>
         )
