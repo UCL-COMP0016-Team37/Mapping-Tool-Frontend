@@ -11,6 +11,13 @@ export default class Map extends React.Component {
     }    
 
     render() {
+        // let thisisthemap
+        // mapData.map(mapDatas=> thisisthemap = { "location" : mapDatas.location, 
+        //                                                                     "addHandler": mapDatas.addHandler,
+        //                                                                     "infoboxOption"  : mapDatas.infoboxOption,
+        //                                                                     "pushPinOption" : mapDatas.pushPinOption,
+        //                                                                     "infoboxAddHandler":mapDatas.infoboxAddHandler,
+        //                                                                     "pushpinAddHAndler": mapDatas.pushPinAddHandler })
       
         return <div className="map-container">
             <ReactBingmaps 

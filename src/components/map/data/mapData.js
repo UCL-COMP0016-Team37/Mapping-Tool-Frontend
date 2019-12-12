@@ -1,11 +1,11 @@
 const mapData= [
     {
-        "location":[13.0827, 80.2707], 
-        "addHandler":"mouseover", //on mouseover the pushpin, infobox shown
-        "infoboxOption": { title: 'India', description: '78' },
-        "pushPinOption":{ title: 'India', description: 'Pushpin' },
-        "infoboxAddHandler": {"type" : "click" }, //, callback: this.callBackMethod
-        "pushPinAddHandler": {"type" : "click" } //, callback: this.callBackMethod
+        location:[13.0827, 80.2707], 
+        addHandler:"mouseover", //on mouseover the pushpin, infobox shown
+        infoboxOption: { title: 'India', description: '78' },
+        pushPinOption:{ title: 'India', description: 'Pushpin' },
+        infoboxAddHandler: {"type" : "click" }, //, callback: this.callBackMethod
+        pushPinAddHandler: {"type" : "click" } //, callback: this.callBackMethod
       },
       {
         "location":[25.9304, 50.6378], 
@@ -81,3 +81,4 @@ const mapData= [
       }
 ]
 export default mapData
+
