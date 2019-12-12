@@ -1,14 +1,23 @@
 import React from 'react'
 import SearchResultItem from './searchresultitem'
 
+import API from '../../utils/backendApi';
+
 class searchResult extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {results: []};
+        API.getSearch('test').then((response) => {
+            this.setState({ results: response.data });
+        });
+    }
+
     render(){
-        var country = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria",
-                        "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus"]
-        return(country.map(something=> <SearchResultItem key={something} country={something}/>)
-        )
         
+            return this.state.results.map(
+                something => <SearchResultItem key={something.title} country={something}/>
+            );
     }
 }
 export default searchResult

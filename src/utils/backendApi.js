@@ -9,16 +9,8 @@ const API = {
     getSearch: (term) => {
         console.log(term);
         return Promise.resolve({
-            data: [
-                {
-                    title: 'Project Test',
-                    description: 'ASJDOASDasdlaslkdajsdlkasdlkasdjalskd',
-                },
-                {
-                    title: 'Project Test 2',
-                    description: 'tjasdajldalkjsdaklsdlkjasdl',
-                },
-            ],
+            data: ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria",
+            "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus"].map(el => ({title: el})),
         });
     },
 };
