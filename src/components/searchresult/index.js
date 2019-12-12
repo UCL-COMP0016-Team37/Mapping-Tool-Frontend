@@ -6,7 +6,7 @@ class searchResult extends React.Component{
     render(){
         var country = ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria",
                         "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus"]
-        return(country.map(something=> <SearchResultItem key={country} country={something}/>)
+        return(country.map(something=> <SearchResultItem key={something} country={something}/>)
         )
         
     }
