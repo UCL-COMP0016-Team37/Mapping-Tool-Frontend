@@ -17,7 +17,10 @@ const API = {
         console.log(term);
         return Promise.resolve({
             data: ["Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia","Australia","Austria",
-            "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus"].map(el => ({title: el})),
+            "Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus"].map(el => ({
+                    title: el,
+                    id: `id-${el.slice(0, 2)}`,
+                })),
         });
     },
 };
