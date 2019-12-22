@@ -4,8 +4,14 @@ import { ReactBingmaps } from 'react-bingmaps';
 import mapData from './data/mapData'
 import API_KEY from '../../utils/bingMaps';
 import './map.scss';
+import API from '../../utils/backendApi';
 
 export default class Map extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {results: []}
+        console.log(API.getMap('test'))
+    }
     callBackMethod() {
         console.log('test');
     }    
