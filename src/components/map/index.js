@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactBingmaps } from 'react-bingmaps';
+import Spinner from 'react-bootstrap/Spinner';
 
 import mapData from './data/mapData';
 import API_KEY from 'utils/bingMaps';
@@ -21,6 +22,7 @@ export default class Map extends React.Component {
     render() {      
         return <div className="map-container">
             <ErrorBoundary>
+                <Spinner className="loading" variant="primary" animation="border"/>
                 <ReactBingmaps 
                     bingmapKey={API_KEY}
                     // center={[13.0827, 80.2707]}

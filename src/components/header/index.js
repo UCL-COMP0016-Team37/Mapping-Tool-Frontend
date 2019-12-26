@@ -9,7 +9,7 @@ import './navbar.scss';
 export default class Header extends React.Component {
     render() {
         return <Navbar>
-            <Navbar.Brand href="/">
+            <Navbar.Brand className="logo-title" href="/">
                 <Logo/>
             </Navbar.Brand>
             <Nav className='mr-auto'></Nav>
