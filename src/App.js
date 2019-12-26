@@ -8,10 +8,8 @@ import {
 import Map from 'pages/map';
 import Data from 'pages/data';
 import SearchResults from 'pages/searchResults';
-import Search from 'components/search';
-import Header from 'components/navbar/header';
+import Navbar from 'components/navbar';
 import FilterSearch from './components/filterSearch';
-import MyTab from 'tabs/tabs';
 import history from 'utils/history';
 import './App.css';
 
@@ -20,14 +18,8 @@ function App() {
     return (
         <div className = "App">
             <div className = "page-container">
-                <Router history={history}>  
-                    <div className = "App-header">
-                        <Header/>  
-                    </div>
-                    <div className = "header-element">
-                        <MyTab className="side-bar"/>
-                        <Search className="search-bar" /> 
-                    </div>
+                <Router history={history}>
+                    <Navbar/>
                     <Switch>
                         <Route path="/data" component={Data}/>
                         <Route path="/search" component={FilterSearch}/>

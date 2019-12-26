@@ -11,9 +11,10 @@ body {
 }
 
 a,
-a:visited {
+a:visited,
+a:active {
     text-decoration: none;
-    color: white;
+    color: inherit;
 }
 
 .App-header {

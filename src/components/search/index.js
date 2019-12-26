@@ -34,8 +34,15 @@ export default class Search extends React.Component {
     render() {
         return (
             <div className="search">
-                <input className="search-bar" placeholder="Search Input Here"value={this.state.name} onChange={this.onChange.bind(this)} onKeyPress={this.handleKeyPress} ></input>
+                <input
+                    className="search-bar"
+                    placeholder="Search Input Here"
+                    value={this.state.search}
+                    onChange={this.onChange.bind(this)} 
+                    onKeyPress={this.handleKeyPress}
+                ></input>
                 <button className="search-button" onClick={this.setSearch.bind(this)}>Search</button>
+                <button className='advanced-search-button'>Advanced</button>
             </div>
         );
     }
