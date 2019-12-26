@@ -24,7 +24,6 @@ a:active {
     align-items: center;
     justify-content: center;
     font-size: calc(4px + 2vmin);
-    color: white;
 }
 
 .header-element {
@@ -34,10 +33,6 @@ a:active {
 
 .App-link {
     color: #09d3ac;
-}
-
-.page-container {
-    color: white;
 }
 
 .page {

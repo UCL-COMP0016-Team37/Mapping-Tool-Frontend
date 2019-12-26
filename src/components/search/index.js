@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Button, InputGroup, FormControl } from 'react-bootstrap';
+
 import './search.scss';
 import history from 'utils/history';
 
@@ -11,8 +13,12 @@ export default class Search extends React.Component {
         };
     }
     
-    setSearch(){
+    setSearch() {
         history.push('/search-results/?value='+ this.state.search);
+    }
+
+    advanced() {
+        history.push('/search');
     }
 
     handleChange(e) {
@@ -33,17 +39,19 @@ export default class Search extends React.Component {
     
     render() {
         return (
-            <div className="search">
-                <input
+            <InputGroup className="search">
+                <FormControl
                     className="search-bar"
-                    placeholder="Search Input Here"
+                    placeholder=""
                     value={this.state.search}
                     onChange={this.onChange.bind(this)} 
                     onKeyPress={this.handleKeyPress}
-                ></input>
-                <button className="search-button" onClick={this.setSearch.bind(this)}>Search</button>
-                <button className='advanced-search-button'>Advanced</button>
-            </div>
+                />
+                <InputGroup.Append>
+                    <Button variant="primary" className='search-button' onClick={this.setSearch.bind(this)}>Search</Button>
+                    <Button variant="secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button>
+                </InputGroup.Append>
+            </InputGroup>
         );
     }
 }
