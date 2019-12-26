@@ -1,9 +1,9 @@
 import React from 'react';
-import SearchResultItem from '../components/searchresult/index'
+import SearchResult from 'components/searchResult';
 
 export default class SearchResultsPage extends React.Component {
     render() {
-        return (<SearchResultItem/>);
+        return (<SearchResult/>);
     }
 }
 
