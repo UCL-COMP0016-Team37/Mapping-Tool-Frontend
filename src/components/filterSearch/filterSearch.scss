@@ -1,0 +1,26 @@
+.form{
+    background-color: grey;
+    padding: 3em 0;
+    text-align: left;
+    form {
+        width: 30em;
+        max-width: 100%;
+        margin: auto;
+    }
+}
+
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    line-height: 26px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.multiple {
+height: 20px;
+flex: 0 0 200px;
+margin-right: 2%;
+}
