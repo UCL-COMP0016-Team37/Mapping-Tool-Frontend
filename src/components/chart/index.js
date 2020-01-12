@@ -10,12 +10,13 @@ export default class chart extends React.Component{
         this.state = {results: []};
         this.chartRef = React.createRef();
         API.getSearch('test').then((response) => {
+            console.log(response);
             this.setState({ results: response.data });
         });
     }
 
     componentDidUpdate(){
-        const country = this.state.results.map(country => country);
+        const country = this.state.results.map(country => country.title);
         // ['Afghanistan','Albania','Algeria','Andorra','Angola','UK']
         let ctx = 'myChart';
         new Chart(ctx, {
