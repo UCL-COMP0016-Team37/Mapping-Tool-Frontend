@@ -2,6 +2,9 @@ import React from 'react';
 
 import SearchResultItem from './searchResultItem';
 import API from 'utils/backendApi';
+import history from 'utils/history';
+import { Button } from 'react-bootstrap';
+import './searchResult.scss';
 
 export default class SearchResult extends React.Component{
 
@@ -13,7 +16,16 @@ export default class SearchResult extends React.Component{
         });
     }
 
+    chartview(){
+        history.push('/chart');
+    }
+
     render(){
-        return this.state.results.map(something => <SearchResultItem key={something.title} country={something}/>);
+        return (
+            <div>
+                {this.state.results.map(something => <SearchResultItem key={something.title} country={something}/>)}
+                <Button className='chart-view-button' onClick={this.chartview.bind(this)}>Chart</Button>
+            </div>
+            )
     }
 }
