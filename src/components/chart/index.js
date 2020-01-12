@@ -1,10 +1,10 @@
 import React from 'react';
-import Chart from 'chart.js';
 
 import './chart.scss';
 import API from 'utils/backendApi';
+import IndexItem from './indexItem';
 
-export default class chart extends React.Component{
+export default class Chart extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: []};
@@ -13,38 +13,11 @@ export default class chart extends React.Component{
             console.log(response);
             this.setState({ results: response.data });
         });
-    }
-
-    componentDidUpdate(){
-        const country = this.state.results.map(country => country.title);
-        // ['Afghanistan','Albania','Algeria','Andorra','Angola','UK']
-        let ctx = 'myChart';
-        new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: country,
-                datasets: [{
-                    borderColor : 'grey',
-                    data: [10, 5, 2, 20, 30, 45],
-                }],
-            },
-
-            // Configuration options go here
-            options: {},
-        });
-    }
-
+    }   
     render() {
-        return (
-            <div >
-                <canvas
-                    id="myChart"
-                    ref={this.chartRef}
-                />
-            </div>
-        );
+        return( <div>
+            <IndexItem id='chart' type='doughnut' title='doughnut' labels={this.state.results.map(country => country.title)}/>
+            <IndexItem id='charttwo' type='pie' title='pie' labels={this.state.results.map(country => country.title)}/>
+            </div>)    
     }
 }
