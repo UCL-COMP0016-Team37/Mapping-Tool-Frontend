@@ -8,9 +8,11 @@ import {
 import Map from 'pages/map';
 import Data from 'pages/data';
 import SearchResults from 'pages/searchResults';
+import Chart from 'pages/chart';
 import Navbar from 'components/header';
 import FilterSearch from './components/filterSearch';
 import history from 'utils/history';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -25,6 +27,7 @@ function App() {
                         <Route path="/data" component={Data}/>
                         <Route path="/search" component={FilterSearch}/>
                         <Route path="/search-results" component={SearchResults}/>
+                        <Route path="/chart" component={Chart}/>
                         <Route path="/" component={Map}/>
                         <Route>
                             {/* Error */}
