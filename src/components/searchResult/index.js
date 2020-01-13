@@ -3,7 +3,7 @@ import React from 'react';
 import SearchResultItem from './searchResultItem';
 import API from 'utils/backendApi';
 import history from 'utils/history';
-import { Button } from 'react-bootstrap';
+import { Button, ListGroup } from 'react-bootstrap';
 import './searchResult.scss';
 
 export default class SearchResult extends React.Component{
@@ -16,16 +16,19 @@ export default class SearchResult extends React.Component{
         });
     }
 
-    chartview(){
+    chartView(){
         history.push('/chart');
     }
 
     render(){
-        return (
-            <div>
-                {this.state.results.map(something => <SearchResultItem key={something.title} country={something}/>)}
-                <Button className='chart-view-button' onClick={this.chartview.bind(this)}>Chart</Button>
-            </div>
-            )
+        return <>
+            <ListGroup>
+                {this.state.results.map(
+                    something => <SearchResultItem key={something.title} country={something}/>,
+                )}
+            </ListGroup>
+
+            <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
+        </>;
     }
 }
