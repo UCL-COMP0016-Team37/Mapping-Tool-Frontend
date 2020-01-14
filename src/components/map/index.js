@@ -12,24 +12,41 @@ export default class Map extends React.Component {
     constructor(props){
         super(props);
         this.state = {results: []};
-        console.log(API.getMap('test'));
+        API.getMap('test').then((response)=> {
+            this.setState({results: response.data})
+        });
     }
 
     callBackMethod() {
         console.log('test');
-    }    
-
-    render() {      
+    }  
+  
+    render() {  
+        const newData = this.state.results.map(
+            data => { 
+                return {
+                location: data.location,
+                addHandler: 'mouseover',
+                infoboxOption:{ title: data.title, description: data.description },
+                pushPinOption:{ title: data.title, description: 'Pushpin' },
+                infoboxAddHandler: {'type' : 'click', callback: this.callBackMethod }, 
+                pushPinAddHandler: {'type' : 'click', callback: this.callBackMethod }, 
+                }
+            }
+        )   
+        console.log(mapData)
+        console.log(newData)
         return <div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>
                 <ReactBingmaps 
                     bingmapKey={API_KEY}
-                    // center={[13.0827, 80.2707]}
+                    center={[0,0]}
+                    infoboxesWithPushPins = {newData}
                     zoom={-10}
-                    infoboxesWithPushPins = {mapData}
                 />
             </ErrorBoundary>
         </div>;
     }
+       
 }
