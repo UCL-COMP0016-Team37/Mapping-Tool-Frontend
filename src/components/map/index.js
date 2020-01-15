@@ -26,9 +26,18 @@ export default class Map extends PureComponent {
             this.setState({results: response.data});
         });
     }
+
+    async componentDidMount(){
+        try{
+            let trying = await API.getTrying();
+            console.log(trying);
+        }catch(e){
+            console.log('failed')
+        }
+    }
    
     _onClickMarker = city => {
-        console.log(city)
+        // console.log(city)
         this.setState({popupInfo: city});
       };
     
@@ -46,7 +55,7 @@ export default class Map extends PureComponent {
               onClose={() => this.setState({popupInfo: null})}
             >
               <div>
-               {popupInfo.city+ " "+ popupInfo.description}
+               {popupInfo.city+ " | "+ popupInfo.description}
               </div>
             </Popup>
           )
@@ -72,7 +81,7 @@ export default class Map extends PureComponent {
                     <MapGL
                         {...this.state.viewport}
                         width="100vw"
-                        height="100vh"
+                        height="90vh"
                         mapStyle="mapbox://styles/mapbox/dark-v9"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>

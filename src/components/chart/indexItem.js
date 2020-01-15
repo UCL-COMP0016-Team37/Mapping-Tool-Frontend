@@ -20,7 +20,7 @@ export default class IndexItem extends React.Component{
                 labels: this.props.labels,
                 datasets: [{
                     borderColor : 'grey',
-                    data: [10, 5, 2, 20, 30, 45],
+                    data: this.props.data,
                 }],
             },
 
@@ -40,7 +40,7 @@ export default class IndexItem extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className="chart-canvas">
                 <canvas
                     id={this.props.id}
                     ref={this.chartRef}
