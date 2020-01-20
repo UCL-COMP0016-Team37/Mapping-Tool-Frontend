@@ -22,7 +22,7 @@ export default class SearchResult extends React.Component{
     }
 
     chartView(){
-        history.push('/chart');
+        history.push('/chart/?search='+this.props.searchTerm);
     }
     
     render() {

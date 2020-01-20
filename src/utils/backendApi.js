@@ -7,10 +7,6 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
-    getTrying:()=>{
-        return Axios.get(base_url+'/');
-    },
-
     getMap: () => {
         return Promise.resolve({
             data: [
@@ -88,14 +84,8 @@ const API = {
     },
 
     getSearch: (term) => {
-        console.log(term);
-        return Axios.get(base_url+'/0/100');
-        // return Promise.resolve({
-        //     data: ['Afghanistan','Albania','Algeria','Andorra','Angola','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus'].map(elem => ({
-        //         title: elem,
-        //         id: `id-${elem.slice(0, 2)}`,
-        //     })),
-        // });
+        // console.log(term);
+        return Axios.get(base_url+'/');//0/100
     },
 };
 
