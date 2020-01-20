@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 export default class SearchResultItem extends React.Component {
     render() {
-        const {data} = this.props;
+        const { data } = this.props;
         return (
             <tbody>
                 <tr>
@@ -18,3 +19,7 @@ export default class SearchResultItem extends React.Component {
         );
     }
 }
+
+SearchResultItem.propTypes = {
+    data: PropTypes.any,
+};

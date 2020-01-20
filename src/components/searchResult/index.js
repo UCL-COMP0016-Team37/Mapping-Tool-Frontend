@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SearchResultItem from './searchResultItem';
 import API from 'utils/backendApi';
 import history from 'utils/history';
 import { Button, Table } from 'react-bootstrap';
 import './searchResult.scss';
+
+function isMatch(needle, haystack) {
+    return haystack.toLowerCase().includes(needle.toLowerCase());
+}
 
 export default class SearchResult extends React.Component{
 
@@ -19,9 +24,8 @@ export default class SearchResult extends React.Component{
     chartView(){
         history.push('/chart');
     }
-
     
-    render(){
+    render() {
         return <>
             <Table striped bordered hover>
                 <thead>
@@ -34,7 +38,7 @@ export default class SearchResult extends React.Component{
                         <th>Humanitarian</th>
                     </tr>
                 </thead>
-                {this.state.results.map(
+                {this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(
                     something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
                 )}
             </Table>
@@ -44,3 +48,6 @@ export default class SearchResult extends React.Component{
     }
 }
 
+SearchResult.propTypes = {
+    searchTerm: PropTypes.string,
+};

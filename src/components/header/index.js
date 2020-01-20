@@ -1,7 +1,11 @@
 import React from 'react';
-import { Navbar, Nav, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Navbar, Nav} from 'react-bootstrap';
 
 import Search from 'components/search';
+
+import extractSearchTerm from 'utils/extractSearchTerm';
+
 import './header.scss';
 
 export default class Header extends React.Component {
@@ -11,9 +15,13 @@ export default class Header extends React.Component {
                 ANCSSC Mapping Tool
             </Navbar.Brand>
             <Nav className='mr-auto'></Nav>
-            <Form inline>
-                <Search/>
-            </Form>
+            <Search searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>
         </Navbar>;
     }
 }
+
+Header.propTypes = {
+    location: PropTypes.shape({
+        search: PropTypes.string,
+    }),
+};

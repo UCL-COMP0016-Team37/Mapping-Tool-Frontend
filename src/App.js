@@ -22,7 +22,7 @@ function App() {
         <div className = "App">
             <div className = "page-container">
                 <Router history={history}>
-                    <Navbar/>
+                    <Route component={Navbar}/>
                     <Switch>
                         <Route path="/data" component={Data}/>
                         <Route path="/search" component={FilterSearch}/>

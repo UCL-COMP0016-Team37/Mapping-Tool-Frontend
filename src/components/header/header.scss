@@ -4,3 +4,17 @@
         color: #a7a7a7;
     }
 }
+
+.container.search-container {
+    flex-flow: row wrap;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto;
+    margin-right: 0;
+
+    .form-control {
+        width: unset;
+    }
+}
