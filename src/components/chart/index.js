@@ -19,25 +19,24 @@ export default class Chart extends React.Component{
         });
     }   
     render() {
-    //     console.log(this.props.searchTerm);
-        const returnhumanitarian = []
-        const returnstatus = []
-        const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(data => data.humanitarian)
-        const status = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(data => data.status)
+        const returnhumanitarian = [];
+        const returnstatus = [];
+        const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName))
+       
         var count = 0;
         var stat = 0;
-        for(var i = 0; i < status.length; ++i){
-            if(status[i] === 'active')
+        for(var i = 0; i < humanitarian.length; ++i){
+            if(humanitarian[i].status === 'active')
                 count++;
-            if(humanitarian[i] === 'TRUE')
+            if(humanitarian[i].humanitarian === 'TRUE')
                 stat++;
         }
         const humanitarianlabels = ['true','false'];
         const statuslabels = ['active','not active'];
         returnstatus[0] = count;
-        returnstatus[1] = status.length - count;
+        returnstatus[1] = humanitarian.length - count;
         returnhumanitarian[0] = stat;
-        returnhumanitarian[1] = status.length - stat;
+        returnhumanitarian[1] = humanitarian.length - stat;
 
         return( <div className="chart-canvas">
             <IndexItem id='chart' type='doughnut' title='project status' labels={statuslabels} data={returnstatus}/>

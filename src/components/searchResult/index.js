@@ -33,6 +33,7 @@ export default class SearchResult extends React.Component{
                         <th>id</th>
                         <th>Project Name</th>
                         <th>organisation</th>
+                        <th>Sector</th>
                         <th>country</th>
                         <th>Status</th>
                         <th>Humanitarian</th>
