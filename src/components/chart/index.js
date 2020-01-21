@@ -39,7 +39,7 @@ export default class Chart extends React.Component{
         returnhumanitarian[0] = stat;
         returnhumanitarian[1] = status.length - stat;
 
-        return( <div>
+        return( <div className="chart-canvas">
             <IndexItem id='chart' type='doughnut' title='project status' labels={statuslabels} data={returnstatus}/>
             <IndexItem id='charttwo' type='pie' title='humanitarian' labels={humanitarianlabels} data={returnhumanitarian}/>
         </div>)    
