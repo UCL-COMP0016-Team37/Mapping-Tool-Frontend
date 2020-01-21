@@ -14,6 +14,11 @@ export default class Header extends React.Component {
             <Navbar.Brand className="logo-title" href="/">
                 ANCSSC Mapping Tool
             </Navbar.Brand>
+            <Nav variant="pills">
+                <Nav.Item>
+                    <Nav.Link href="/top-100">Top 100</Nav.Link>
+                </Nav.Item>
+            </Nav>
             <Nav className='mr-auto'></Nav>
             <Search searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>
         </Navbar>;
