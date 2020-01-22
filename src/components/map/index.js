@@ -27,14 +27,14 @@ export default class Map extends PureComponent {
         });
     }
 
-    async componentDidMount(){
-        try{
-            let trying = await API.getTrying();
-            console.log(trying);
-        }catch(e){
-            console.log('failed')
-        }
-    }
+    // async componentDidMount(){
+    //     try{
+    //         let trying = await API.getTrying();
+    //         // console.log(trying);
+    //     }catch(e){
+    //         console.log('failed')
+    //     }
+    // }
    
     _onClickMarker = city => {
         // console.log(city)
@@ -82,7 +82,7 @@ export default class Map extends PureComponent {
                         {...this.state.viewport}
                         width="100vw"
                         height="90vh"
-                        mapStyle="mapbox://styles/mapbox/dark-v9"
+                        mapStyle="mapbox://styles/mapbox/light-v9"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={data} onClick={this._onClickMarker}/>

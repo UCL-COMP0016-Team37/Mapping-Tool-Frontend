@@ -12,7 +12,7 @@ export default class Search extends React.Component {
     }
     
     setSearch() {
-        console.log(this.state.search);
+        // console.log(this.state.search);
         history.push('/search-results/?search='+ this.state.search);
     }
 

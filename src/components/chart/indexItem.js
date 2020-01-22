@@ -40,7 +40,7 @@ export default class IndexItem extends React.Component{
 
     render() {
         return (
-            <div className="chart-canvas">
+            <div>
                 <canvas
                     id={this.props.id}
                     ref={this.chartRef}

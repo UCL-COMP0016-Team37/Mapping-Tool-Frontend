@@ -12,6 +12,7 @@ import Chart from 'pages/chart';
 import Navbar from 'components/header';
 import FilterSearch from './components/filterSearch';
 import history from 'utils/history';
+import Top100 from 'components/top100';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,6 +26,7 @@ function App() {
                     <Route component={Navbar}/>
                     <Switch>
                         <Route path="/data" component={Data}/>
+                        <Route path="/top-100" component={Top100}/>
                         <Route path="/search" component={FilterSearch}/>
                         <Route path="/search-results" component={SearchResults}/>
                         <Route path="/chart" component={Chart}/>
