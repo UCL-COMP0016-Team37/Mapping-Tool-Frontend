@@ -2,7 +2,7 @@ import React from 'react';
 
 import './chart.scss';
 import API from 'utils/backendApi';
-import IndexItem from './indexItem';
+import IndexItem from '../../utils/indexItem';
 
 function isMatch(needle, haystack) {
     return haystack.toLowerCase().includes(needle.toLowerCase());

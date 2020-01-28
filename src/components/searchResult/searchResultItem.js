@@ -1,8 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Button } from 'react-bootstrap';
+import history from 'utils/history';
 
 export default class SearchResultItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {project: this.props};
+    }
+
+    projectView(){
+        const projectid = this.state.project.data.interaction_intervention_id;
+        history.push('/project-page/?id='+projectid);
+    }
+
     render() {
         const { data } = this.props;
         return (
@@ -10,11 +21,7 @@ export default class SearchResultItem extends React.Component {
                 <tr>
                     <td> {data.interaction_intervention_id}</td>
                     <td>{data.projectName}</td>
-                    <td>{data.organization}</td>
-                    <td>{data.sectors.split('|').join(',\n')}</td>
-                    <td>{data.location.split('>')[0].split('|').join(',\n')}</td>
-                    <td>{data.status}</td>
-                    <td>{data.humanitarian}</td>
+                    <td><Button variant="light" onClick={this.projectView.bind(this)}>view project</Button></td>
                 </tr>
             </tbody>
         );

@@ -7,6 +7,10 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
+    getProjects: (id) => {
+        return Axios.get(base_url+ '/'+ id)
+    },
+    
     getMap: () => {
         return Promise.resolve({
             data: [

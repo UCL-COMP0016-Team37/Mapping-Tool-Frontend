@@ -27,16 +27,11 @@ export default class SearchResult extends React.Component{
     
     render() {
         return <>
-            <Table striped bordered hover>
+            <Table striped bordered hover >
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Project Name</th>
-                        <th>organisation</th>
-                        <th>Sector</th>
-                        <th>country</th>
-                        <th>Status</th>
-                        <th>Humanitarian</th>
                     </tr>
                 </thead>
                 {this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(

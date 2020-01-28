@@ -1,7 +1,7 @@
 import React from 'react';
 
 import API from 'utils/backendApi';
-import IndexItem from '../chart/indexItem';
+import IndexItem from '../../utils/indexItem';
 import getarrayvalue from 'utils/sortUniqueArray'
 
 export default class Top100 extends React.Component{
