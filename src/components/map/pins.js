@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 // from https://github.com/uber/react-map-gl/blob/5.2-release/examples/controls/src/pins.js
 
 import React, {PureComponent} from 'react';
