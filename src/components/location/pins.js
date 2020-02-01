@@ -17,7 +17,7 @@ export default class Pins extends PureComponent {
                     <img src={require('../../utils/images/red-white.png')} width="25" height="25" 
                         onMouseOver={() => onMouseOver(data)} 
                         onMouseOut ={() => onMouseLeave()}
-                        onClick ={() =>onClick(data.city)}/>
+                        onClick ={() => onClick(data.city)}/>
                     <div className="image-marker">{data.description}</div>
                 </div>
             </Marker>

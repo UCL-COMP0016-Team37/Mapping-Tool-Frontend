@@ -9,28 +9,24 @@ import Pins from './pins';
 import history from 'utils/history';
 
 //partly referred from https://github.com/uber/react-map-gl/blob/5.2-release/examples/controls/src/app.js
-export default class Map extends PureComponent {
+export default class MapLocation extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             searchTerm: props.searchTerm,
-            viewport: {
-                latitude: 30,
-                longitude: 0,
-                zoom: 1,
-                bearing: 0,
-                pitch: 0,
-            },
+            viewport: null,
             results: [],
             popupInfo : null
         };
-       
-        // if (this.props.searchTerm !== undefined){
-        //     term = this.props.searchTerm;
-        // }
-        // else{term='all'}
         API.getMap(this.state.searchTerm).then((response)=> {
             this.setState({results: response.data});
+            this.setState({viewport: {
+                latitude: response.data[0].latitude,
+                longitude: response.data[0].longitude,
+                zoom: 10,
+                bearing: 0,
+                pitch: 0,
+            }})
         });
     }
 
@@ -43,8 +39,9 @@ export default class Map extends PureComponent {
     };
     
     _onClick = city => {
-        history.push('/location/?location='+ city)
+        history.push('/search-results/?search='+ city)
     }
+    
       _renderPopup() {
         const {popupInfo} = this.state;
     
