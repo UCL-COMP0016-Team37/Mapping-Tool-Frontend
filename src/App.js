@@ -9,13 +9,14 @@ import Map from 'pages/map';
 import Data from 'pages/data';
 import SearchResults from 'pages/searchResults';
 import Chart from 'pages/chart';
+import Location from 'pages/location'
 import Navbar from 'components/header';
 import FilterSearch from './components/filterSearch';
 import history from 'utils/history';
 import Top100 from 'components/top100';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import projectPage from 'pages/project';
 
 
 function App() {
@@ -29,7 +30,9 @@ function App() {
                         <Route path="/top-100" component={Top100}/>
                         <Route path="/search" component={FilterSearch}/>
                         <Route path="/search-results" component={SearchResults}/>
+                        <Route path="/project-page" component={projectPage}/>
                         <Route path="/chart" component={Chart}/>
+                        <Route path="/location" component={Location}/>
                         <Route path="/" component={Map}/>
                         <Route>
                             {/* Error */}

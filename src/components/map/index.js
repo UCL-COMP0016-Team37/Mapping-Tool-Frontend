@@ -6,41 +6,54 @@ import './map.scss';
 import React,{PureComponent} from 'react';
 import MapGL,{Popup} from 'react-map-gl';
 import Pins from './pins';
+import history from 'utils/history';
 
 //partly referred from https://github.com/uber/react-map-gl/blob/5.2-release/examples/controls/src/app.js
 export default class Map extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            searchTerm: props.searchTerm,
             viewport: {
-                latitude: 0,
+                latitude: 30,
                 longitude: 0,
-                zoom: 0,
+                zoom: 1,
                 bearing: 0,
                 pitch: 0,
             },
             results: [],
             popupInfo : null
         };
-        API.getMap().then((response)=> {
+        API.getMap(this.state.searchTerm).then((response)=> {
             this.setState({results: response.data});
+            if(props.pathname === '/location/'){
+                this.setState({viewport: {
+                    latitude: response.data[0].latitude,
+                    longitude: response.data[0].longitude,
+                    zoom: 10,
+                    bearing: 0,
+                    pitch: 0,
+                }})
+            }
         });
     }
 
-    // async componentDidMount(){
-    //     try{
-    //         let trying = await API.getTrying();
-    //         // console.log(trying);
-    //     }catch(e){
-    //         console.log('failed')
-    //     }
-    // }
-   
-    _onClickMarker = city => {
-        // console.log(city)
+    _onMouseOver = city => {
         this.setState({popupInfo: city});
       };
+
+    _onMouseLeave = () => {
+        this.setState({popupInfo: null});
+    };
     
+    _onClick = city => {
+        if (this.props.pathname === '/location/'){
+            history.push('/search-results/?search='+ city)
+        }
+        else{
+        history.push('/location/?location='+ city)
+        }
+    }
       _renderPopup() {
         const {popupInfo} = this.state;
     
@@ -48,11 +61,10 @@ export default class Map extends PureComponent {
           popupInfo && (
             <Popup
               tipSize={5}
-              anchor="top"
+              anchor="bottom"
               longitude={popupInfo.longitude}
               latitude={popupInfo.latitude}
-              closeOnClick={false}
-              onClose={() => this.setState({popupInfo: null})}
+              closeButton={false}
             >
               <div>
                {popupInfo.city+ " | "+ popupInfo.description}
@@ -63,6 +75,7 @@ export default class Map extends PureComponent {
       }
     
     render() {
+        // console.log(this.props.searchTerm)
         const data = this.state.results.map(
             dta=>{ 
                 return {
@@ -82,10 +95,13 @@ export default class Map extends PureComponent {
                         {...this.state.viewport}
                         width="100vw"
                         height="90vh"
-                        mapStyle="mapbox://styles/mapbox/light-v9"
+                        mapStyle="mapbox://styles/mapbox/dark-v9"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
-                        <Pins data={data} onClick={this._onClickMarker}/>
+                        <Pins data={data} 
+                              onMouseOver={this._onMouseOver} 
+                              onMouseLeave={this._onMouseLeave}
+                              onClick={this._onClick}/>
                         {this._renderPopup()}
                     </MapGL>
                 </ErrorBoundary>
