@@ -26,6 +26,15 @@ export default class Map extends PureComponent {
         };
         API.getMap(this.state.searchTerm).then((response)=> {
             this.setState({results: response.data});
+            if(props.pathname === '/location/'){
+                this.setState({viewport: {
+                    latitude: response.data[0].latitude,
+                    longitude: response.data[0].longitude,
+                    zoom: 10,
+                    bearing: 0,
+                    pitch: 0,
+                }})
+            }
         });
     }
 
@@ -38,7 +47,12 @@ export default class Map extends PureComponent {
     };
     
     _onClick = city => {
+        if (this.props.pathname === '/location/'){
+            history.push('/search-results/?search='+ city)
+        }
+        else{
         history.push('/location/?location='+ city)
+        }
     }
       _renderPopup() {
         const {popupInfo} = this.state;

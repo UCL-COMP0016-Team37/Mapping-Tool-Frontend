@@ -1,11 +1,12 @@
 import React from 'react';
 import extractSearchTerm from 'utils/extractSearchTerm';
-import LocationMap from '../components/location'
+import Map from '../components/map'
 
 export default class LocationPage extends React.Component {
     render() {
         return <div className="page">
-            <LocationMap searchTerm={extractSearchTerm(this.props.location.search, 'location')}/>
+            {/* {console.log(this.props)} */}
+            <Map searchTerm={extractSearchTerm(this.props.location.search, 'location')} pathname={this.props.location.pathname}/>
         </div>;
     }
 }
