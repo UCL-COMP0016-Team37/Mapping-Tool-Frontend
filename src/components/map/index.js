@@ -5,7 +5,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import './map.scss';
 import React,{PureComponent} from 'react';
 import MapGL,{Popup} from 'react-map-gl';
-import Pins from '../../utils/pins';
+import Pins from './pins';
 import history from 'utils/history';
 
 //partly referred from https://github.com/uber/react-map-gl/blob/5.2-release/examples/controls/src/app.js
