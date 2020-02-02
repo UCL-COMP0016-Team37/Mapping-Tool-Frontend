@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './chart.scss';
 import API from 'utils/backendApi';
-import IndexItem from '../../utils/indexItem';
+import IndexItem from 'utils/indexItem';
 
 function isMatch(needle, haystack) {
     return haystack.toLowerCase().includes(needle.toLowerCase());
@@ -13,7 +13,7 @@ export default class Chart extends React.Component{
         super(props);
         this.state = {results: []};
         this.chartRef = React.createRef();
-        API.getSearch('test').then((response) => {
+        API.getSearch(this.props.searchTerm).then((response) => {
             console.log(response);
             this.setState({ results: response.data });
         });

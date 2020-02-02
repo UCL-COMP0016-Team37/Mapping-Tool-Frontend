@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 
-// import './chart.scss';
-
 export default class IndexItem extends React.Component{
     constructor(props) {
         super(props);
