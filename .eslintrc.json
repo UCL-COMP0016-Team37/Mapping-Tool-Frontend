@@ -41,6 +41,9 @@
         "comma-dangle": [
             "error",
             "always-multiline"
+        ],
+        "no-extra-parens": [
+            "error"
         ]
     }
 }
