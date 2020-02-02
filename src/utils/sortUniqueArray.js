@@ -1,6 +1,6 @@
-export default function getArrayValue(original){
-    var compressed = [];
-    var copy = original.slice(0);
+export default function getArrayValue(original) {
+    let compressed = [];
+    let copy = original.slice(0);
 
     for (var i = 0; i < original.length; i++){
 
@@ -14,12 +14,11 @@ export default function getArrayValue(original){
         }
 
         if (count > 0) {
-            var a = new Object();
+            let a = {};
             a.value = original[i];
             a.count = count;
             compressed.push(a);
         }
-
     }
     return compressed;
 }

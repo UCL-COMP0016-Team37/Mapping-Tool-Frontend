@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import API from 'utils/backendApi';
 
 export default class projectPage extends React.Component{
@@ -20,7 +20,7 @@ export default class projectPage extends React.Component{
             <h3>{this.state.results.organization}</h3>
             <h3>{this.state.results.location}</h3>
             <p>sector: {this.state.results.sectors}</p>
-        	<p>Start date: {this.state.results.startDate}</p>
+            <p>Start date: {this.state.results.startDate}</p>
             <p>End date: {this.state.results.endDate}</p>
             <p><a href={this.state.results.projectWebsite}>{this.state.results.projectWebsite}</a></p>
             <p>{this.state.results.projectDescription}</p>
@@ -28,7 +28,7 @@ export default class projectPage extends React.Component{
             <p>name: {this.state.results.projectContactPerson}</p>
             <p>position: {this.state.results.projectContactPosition}</p>
             <p>email: {this.state.results.projectContactEmail}</p>    
-        </>
+        </>;
     }
     
 }

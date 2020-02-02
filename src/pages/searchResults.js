@@ -6,7 +6,7 @@ import extractSearchTerm from 'utils/extractSearchTerm';
 
 export default class SearchResultsPage extends React.Component {
     render() {
-        return (<SearchResult searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>);
+        return <SearchResult searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>;
     }
 }
 

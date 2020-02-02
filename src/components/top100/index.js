@@ -24,8 +24,8 @@ export default class Top100 extends React.Component{
         const value = topArray.map(data => data.value);
         const count = topArray.map(data => data.count);
         console.log(topArray);
-        return( <div>
+        return <div>
             <IndexItem id='chart' type='horizontalBar' title='Top 100 donor with number of projects' labels={value} data={count}/>
-        </div>);    
+        </div>;    
     }
 }

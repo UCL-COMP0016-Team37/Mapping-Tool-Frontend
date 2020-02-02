@@ -59,7 +59,7 @@ export default class Map extends PureComponent {
         const {popupInfo} = this.state;
     
         return (
-            popupInfo && (
+            popupInfo && 
                 <Popup
                     tipSize={5}
                     anchor="bottom"
@@ -71,7 +71,6 @@ export default class Map extends PureComponent {
                         {popupInfo.city + ' | ' + popupInfo.description}
                     </div>
                 </Popup>
-            )
         );
     }
     

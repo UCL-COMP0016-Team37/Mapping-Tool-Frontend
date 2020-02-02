@@ -5,7 +5,7 @@ import extractSearchTerm from 'utils/extractSearchTerm';
 
 export default class ChartPage extends React.Component {
     render() {
-        return (<Chart searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>);
+        return <Chart searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>;
     }
 }
 

@@ -13,7 +13,7 @@ export default class Pins extends PureComponent {
     render() {
         const {data,onMouseOver,onMouseLeave,onClick} = this.props;
         // console.log(data);
-        return data.map(data => (
+        return data.map(data => 
             <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                 <div className="image-container" 
                     onMouseOver={() => onMouseOver(data)} 
@@ -22,8 +22,8 @@ export default class Pins extends PureComponent {
                     <img src={PinImage} width="25" height="25"/>
                     <div className="image-marker">{data.description}</div>
                 </div>
-            </Marker>
-        ));
+            </Marker>,
+        );
     }
 }
 
