@@ -17,13 +17,11 @@ export default class SearchResultItem extends React.Component {
     render() {
         const { data } = this.props;
         return (
-            <tbody>
-                <tr>
-                    <td> {data.interaction_intervention_id}</td>
-                    <td>{data.projectName}</td>
-                    <td><Button variant="light" onClick={this.projectView.bind(this)}>view project</Button></td>
-                </tr>
-            </tbody>
+            <tr>
+                <td>{data.interaction_intervention_id}</td>
+                <td>{data.projectName}</td>
+                <td><Button variant="light" onClick={this.projectView.bind(this)}>View Project</Button></td>
+            </tr>
         );
     }
 }
