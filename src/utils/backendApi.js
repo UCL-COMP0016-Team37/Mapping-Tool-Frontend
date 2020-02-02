@@ -8,11 +8,11 @@ const API = {
     },
 
     getProjects: (id) => {
-        return Axios.get(base_url+ '/'+ id)
+        return Axios.get(base_url+ '/'+ id);
     },
     
     getMap: (term) => {
-        console.log(term)
+        console.log(term);
         if (term === undefined){
             return Promise.resolve({
                 data: [
@@ -112,11 +112,11 @@ const API = {
                     description: '12',
                 },
             ],
-        })}
+        });}
     },
 
     getSearch: (term) => {
-        // console.log(term);
+        console.log(term);
         return Axios.get(base_url+'/');//0/100
     },
 };

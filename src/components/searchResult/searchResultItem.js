@@ -10,8 +10,8 @@ export default class SearchResultItem extends React.Component {
     }
 
     projectView(){
-        const projectid = this.state.project.data.interaction_intervention_id;
-        history.push('/project-page/?id='+projectid);
+        const projectId = this.state.project.data.interaction_intervention_id;
+        history.push('/project-page/?id='+projectId);
     }
 
     render() {

@@ -1,9 +1,10 @@
+import React,{PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
 import API_KEY from 'utils/bingMaps';
 import API from 'utils/backendApi';
 import ErrorBoundary from 'utils/errorBoundary';
 import './map.scss';
-import React,{PureComponent} from 'react';
 import MapGL,{Popup} from 'react-map-gl';
 import Pins from './pins';
 import history from 'utils/history';
@@ -22,7 +23,7 @@ export default class Map extends PureComponent {
                 pitch: 0,
             },
             results: [],
-            popupInfo : null
+            popupInfo : null,
         };
         API.getMap(this.state.searchTerm).then((response)=> {
             this.setState({results: response.data});
@@ -33,46 +34,46 @@ export default class Map extends PureComponent {
                     zoom: 10,
                     bearing: 0,
                     pitch: 0,
-                }})
+                }});
             }
         });
     }
 
-    _onMouseOver = city => {
+    _onMouseOver(city) {
         this.setState({popupInfo: city});
-      };
+    }
 
-    _onMouseLeave = () => {
+    _onMouseLeave() {
         this.setState({popupInfo: null});
-    };
+    }
     
-    _onClick = city => {
+    _onClick(city) {
         if (this.props.pathname === '/location/'){
-            history.push('/search-results/?search='+ city)
+            history.push('/search-results/?search='+ city);
         }
         else{
-        history.push('/location/?location='+ city)
+            history.push('/location/?location='+ city);
         }
     }
-      _renderPopup() {
+    _renderPopup() {
         const {popupInfo} = this.state;
     
         return (
-          popupInfo && (
-            <Popup
-              tipSize={5}
-              anchor="bottom"
-              longitude={popupInfo.longitude}
-              latitude={popupInfo.latitude}
-              closeButton={false}
-            >
-              <div>
-               {popupInfo.city+ " | "+ popupInfo.description}
-              </div>
-            </Popup>
-          )
+            popupInfo && (
+                <Popup
+                    tipSize={5}
+                    anchor="bottom"
+                    longitude={popupInfo.longitude}
+                    latitude={popupInfo.latitude}
+                    closeButton={false}
+                >
+                    <div>
+                        {popupInfo.city + ' | ' + popupInfo.description}
+                    </div>
+                </Popup>
+            )
         );
-      }
+    }
     
     render() {
         // console.log(this.props.searchTerm)
@@ -99,9 +100,9 @@ export default class Map extends PureComponent {
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={data} 
-                              onMouseOver={this._onMouseOver} 
-                              onMouseLeave={this._onMouseLeave}
-                              onClick={this._onClick}/>
+                            onMouseOver={this._onMouseOver} 
+                            onMouseLeave={this._onMouseLeave}
+                            onClick={this._onClick}/>
                         {this._renderPopup()}
                     </MapGL>
                 </ErrorBoundary>
@@ -110,4 +111,9 @@ export default class Map extends PureComponent {
 
     }
 
-} 
+}
+
+Map.propTypes = {
+    pathname: PropTypes.string,
+    searchTerm: PropTypes.string,
+};

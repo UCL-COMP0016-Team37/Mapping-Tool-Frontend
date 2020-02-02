@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Spinner from 'react-bootstrap/Spinner';
 
 import SearchResultItem from './searchResultItem';
 import API from 'utils/backendApi';
@@ -34,9 +35,12 @@ export default class SearchResult extends React.Component{
                         <th>Project Name</th>
                     </tr>
                 </thead>
-                {this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(
-                    something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
-                )}
+                {this.state.results ?
+                    this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(
+                        something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
+                    ) :
+                    <Spinner/>
+                }
             </Table>
 
             <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>

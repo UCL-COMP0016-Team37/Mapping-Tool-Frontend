@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Chart from 'chart.js';
 
 // import './chart.scss';
@@ -33,7 +34,7 @@ export default class IndexItem extends React.Component{
                     display: true,
                     text: this.props.title,
                     position: 'bottom',
-                }
+                },
             },
         });
     }
@@ -50,3 +51,10 @@ export default class IndexItem extends React.Component{
     }
 }
 
+IndexItem.propTypes = {
+    id: PropTypes.any,
+    type: PropTypes.any,
+    title: PropTypes.any,
+    labels: PropTypes.any,
+    data: PropTypes.any,
+};
