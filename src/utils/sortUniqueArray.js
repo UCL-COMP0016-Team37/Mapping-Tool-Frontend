@@ -1,4 +1,4 @@
-export default function getarrayvalue(original){
+export default function getArrayValue(original){
     var compressed = [];
     var copy = original.slice(0);
 
