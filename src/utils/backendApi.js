@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const base_url = 'https://mapping-tool-api.azurewebsites.net/api/v1/projects';
+const base_url = 'https://mapping-tool-api.azurewebsites.net/api/';
 
 const API = {
     getGreeting: () => {
@@ -117,7 +117,7 @@ const API = {
 
     getSearch: (term) => {
         console.log(term);
-        return Axios.get(base_url+'/');//0/100
+        return Axios.get(base_url + 'v1/projects/0/100');
     },
 };
 
