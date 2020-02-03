@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import API from 'utils/backendApi';
+import { Container } from 'react-bootstrap';
 
 export default class projectPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: []};
-        
+
         API.getProjects(this.props.searchTerm).then((response) => {
             this.setState({ results: response.data });
         });
-    }   
+    }
 
     render(){
 
         console.log(this.state.results);
-        return <>
+        return <Container fluid className="text-left">
             <h1>{this.state.results.projectName}</h1>
             <h3>{this.state.results.organization}</h3>
             <h3>{this.state.results.location}</h3>
@@ -27,10 +28,10 @@ export default class projectPage extends React.Component{
             <p>contact:</p>
             <p>name: {this.state.results.projectContactPerson}</p>
             <p>position: {this.state.results.projectContactPosition}</p>
-            <p>email: {this.state.results.projectContactEmail}</p>    
-        </>;
+            <p>email: {this.state.results.projectContactEmail}</p>
+        </Container>;
     }
-    
+
 }
 
 projectPage.propTypes = {

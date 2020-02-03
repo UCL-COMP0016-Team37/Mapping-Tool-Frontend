@@ -17,12 +17,12 @@ export default class Chart extends React.Component{
             console.log(response);
             this.setState({ results: response.data });
         });
-    }   
+    }
     render() {
         const returnHumanitarian = [];
         const returnStatus = [];
         const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName));
-       
+
         var count = 0;
         var stat = 0;
         for(var i = 0; i < humanitarian.length; ++i){

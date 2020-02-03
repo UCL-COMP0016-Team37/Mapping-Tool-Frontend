@@ -7,7 +7,7 @@ export default class IndexItem extends React.Component{
         super(props);
         this.chartRef = React.createRef();
     }
-    
+
     componentDidUpdate(){
         let ctx = this.props.id;
         new Chart(ctx, {

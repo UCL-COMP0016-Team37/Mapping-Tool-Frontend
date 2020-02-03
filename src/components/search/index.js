@@ -10,7 +10,7 @@ export default class Search extends React.Component {
             search: props.searchTerm,
         };
     }
-    
+
     setSearch() {
         // console.log(this.state.search);
         history.push('/search-results/?search='+ this.state.search);
@@ -29,14 +29,14 @@ export default class Search extends React.Component {
             this.setSearch();
         }
     }
-    
+
     render() {
         return <Container className='search-container'>
             <Form.Control
                 className="search-bar"
                 placeholder="Search..."
                 value={this.state.search}
-                onChange={this.handleChange.bind(this)} 
+                onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
             />
             <Button variant="outline-primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>

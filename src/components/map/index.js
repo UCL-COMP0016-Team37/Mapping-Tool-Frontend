@@ -46,7 +46,7 @@ export default class Map extends PureComponent {
     _onMouseLeave() {
         this.setState({popupInfo: null});
     }
-    
+
     _onClick(city) {
         if (this.props.pathname === '/location/'){
             history.push('/search-results/?search='+ city);
@@ -57,9 +57,9 @@ export default class Map extends PureComponent {
     }
     _renderPopup() {
         const {popupInfo} = this.state;
-    
+
         return (
-            popupInfo && 
+            popupInfo &&
                 <Popup
                     tipSize={5}
                     anchor="bottom"
@@ -73,11 +73,11 @@ export default class Map extends PureComponent {
                 </Popup>
         );
     }
-    
+
     render() {
         // console.log(this.props.searchTerm)
         const data = this.state.results.map(
-            dta=>{ 
+            dta=>{
                 return {
                     index: dta.index,
                     longitude : dta.longitude,
@@ -86,8 +86,8 @@ export default class Map extends PureComponent {
                     description: dta.description,
                 };
             });
-        
-        return ( 
+
+        return (
             <div className="map-container">
                 <ErrorBoundary>
                     <Spinner className="loading" variant="primary" animation="border"/>
@@ -98,8 +98,8 @@ export default class Map extends PureComponent {
                         mapStyle="mapbox://styles/mapbox/dark-v9"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
-                        <Pins data={data} 
-                            onMouseOver={this._onMouseOver.bind(this)} 
+                        <Pins data={data}
+                            onMouseOver={this._onMouseOver.bind(this)}
                             onMouseLeave={this._onMouseLeave.bind(this)}
                             onClick={this._onClick.bind(this)}/>
                         {this._renderPopup()}

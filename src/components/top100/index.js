@@ -13,7 +13,7 @@ export default class Top100 extends React.Component{
             console.log(response);
             this.setState({ results: response.data });
         });
-    }   
+    }
 
     render() {
         const donor = this.state.results.map(data => data.organization);
@@ -26,6 +26,6 @@ export default class Top100 extends React.Component{
         console.log(topArray);
         return <div>
             <IndexItem id='chart' type='horizontalBar' title='Top 100 donor with number of projects' labels={value} data={count}/>
-        </div>;    
+        </div>;
     }
 }

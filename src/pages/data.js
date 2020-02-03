@@ -5,7 +5,7 @@ export default class DataPage extends React.Component {
         return(
             <div>
                 DataPage
-            </div> 
+            </div>
         );
     }
 }

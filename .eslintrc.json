@@ -44,6 +44,9 @@
         ],
         "no-extra-parens": [
             "error"
+        ],
+        "no-trailing-spaces": [
+            "error"
         ]
     }
 }

@@ -24,7 +24,7 @@ export default class SearchResult extends React.Component{
     chartView() {
         history.push('/chart/?search='+this.props.searchTerm);
     }
-    
+
     render() {
         if (this.state.ready)
             return <Container className="text-left" fluid>
