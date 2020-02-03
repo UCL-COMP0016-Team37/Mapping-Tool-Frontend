@@ -26,7 +26,6 @@ export default class SearchResult extends React.Component{
     }
 
     render() {
-<<<<<<< HEAD
         if (this.state.ready)
             return <Container className="text-left" fluid>
                 Loaded {this.state.results.length} results before filtering.
@@ -36,22 +35,6 @@ export default class SearchResult extends React.Component{
                 <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
-=======
-        return <>
-            <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
-            <Table striped bordered hover >
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Project Name</th>
-                    </tr>
-                </thead>
-                {this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(
-                    something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
-                )}
-            </Table>
-        </>;
->>>>>>> map-gl-version
     }
 }
 
