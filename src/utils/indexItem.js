@@ -31,8 +31,13 @@ export default class IndexItem extends React.Component{
                 title: {
                     display: true,
                     text: this.props.title,
+<<<<<<< HEAD
                     position: 'bottom',
                 },
+=======
+                    position: 'top',
+                }
+>>>>>>> map-gl-version
             },
         });
     }

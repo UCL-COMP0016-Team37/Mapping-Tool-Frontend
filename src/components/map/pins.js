@@ -15,11 +15,19 @@ export default class Pins extends PureComponent {
         // console.log(data);
         return data.map(data =>
             <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
+<<<<<<< HEAD
                 <div className="image-container"
                     onMouseOver={() => onMouseOver(data)}
                     onMouseOut ={() => onMouseLeave()}
                     onClick ={() => onClick(data.city)}>
                     <img src={PinImage} width="25" height="25"/>
+=======
+                <div className="image-container">
+                    <img src={require('../../utils/images/white-white.png')} width="25" height="25" 
+                        onMouseOver={() => onMouseOver(data)} 
+                        onMouseOut ={() => onMouseLeave()}
+                        onClick ={() => onClick(data.city)}/>
+>>>>>>> map-gl-version
                     <div className="image-marker">{data.description}</div>
                 </div>
             </Marker>,

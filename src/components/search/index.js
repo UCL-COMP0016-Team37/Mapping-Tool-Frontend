@@ -16,9 +16,9 @@ export default class Search extends React.Component {
         history.push('/search-results/?search='+ this.state.search);
     }
 
-    advanced() {
-        history.push('/search');
-    }
+    // advanced() {
+    //     history.push('/search');
+    // }
 
     handleChange(e) {
         this.setState({ search: e.target.value });
@@ -39,8 +39,13 @@ export default class Search extends React.Component {
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
             />
+<<<<<<< HEAD
             <Button variant="outline-primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
             <Button variant="outline-secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button>
+=======
+            <Button variant="primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
+            {/* <Button variant="secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button> */}
+>>>>>>> map-gl-version
         </Container>;
     }
 }

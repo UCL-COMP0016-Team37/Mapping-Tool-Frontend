@@ -14,12 +14,12 @@ function mapCurrencySymbol(currencyCode) {
 }
 
 function splitThousands(value, character = ' ', splitCount = 3) {
-    if (typeof value == 'string') {
+    if (typeof value ==='string') {
         value = parseFloat(value);
     }
     value = value.toString();
     let decimalIndex = value.indexOf('.');
-    if (decimalIndex == -1) {
+    if (decimalIndex === -1) {
         decimalIndex = value.length;
     }
     decimalIndex -= splitCount;

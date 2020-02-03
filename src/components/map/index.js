@@ -18,7 +18,7 @@ export default class Map extends PureComponent {
             viewport: {
                 latitude: 30,
                 longitude: 0,
-                zoom: 1,
+                zoom: 1.25,
                 bearing: 0,
                 pitch: 0,
             },
@@ -31,7 +31,7 @@ export default class Map extends PureComponent {
                 this.setState({viewport: {
                     latitude: response.data[0].latitude,
                     longitude: response.data[0].longitude,
-                    zoom: 10,
+                    zoom: 8,
                     bearing: 0,
                     pitch: 0,
                 }});

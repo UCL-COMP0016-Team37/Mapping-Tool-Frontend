@@ -23,6 +23,9 @@ export default class Header extends React.Component {
                         <Nav.Link>Top 100</Nav.Link>
                     </LinkContainer>
                 </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/search">Filter Data</Nav.Link>
+                </Nav.Item>
             </Nav>
             <Nav className='mr-auto'></Nav>
             <Search searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>
