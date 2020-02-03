@@ -16,9 +16,9 @@ export default class Search extends React.Component {
         history.push('/search-results/?search='+ this.state.search);
     }
 
-    advanced() {
-        history.push('/search');
-    }
+    // advanced() {
+    //     history.push('/search');
+    // }
 
     handleChange(e) {
         this.setState({ search: e.target.value });
@@ -40,7 +40,7 @@ export default class Search extends React.Component {
                 onKeyPress={this.handleKeyPress.bind(this)}
             />
             <Button variant="primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
-            <Button variant="secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button>
+            {/* <Button variant="secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button> */}
         </Container>;
     }
 }

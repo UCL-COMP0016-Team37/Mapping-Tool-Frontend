@@ -27,6 +27,7 @@ export default class SearchResult extends React.Component{
     
     render() {
         return <>
+            <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
             <Table striped bordered hover >
                 <thead>
                     <tr>
@@ -38,8 +39,6 @@ export default class SearchResult extends React.Component{
                     something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
                 )}
             </Table>
-
-            <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
         </>;
     }
 }

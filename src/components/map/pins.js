@@ -14,7 +14,7 @@ export default class Pins extends PureComponent {
         return data.map(data => (
             <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                 <div className="image-container">
-                    <img src={require('../../utils/images/red-white.png')} width="25" height="25" 
+                    <img src={require('../../utils/images/white-white.png')} width="25" height="25" 
                         onMouseOver={() => onMouseOver(data)} 
                         onMouseOut ={() => onMouseLeave()}
                         onClick ={() => onClick(data.city)}/>
