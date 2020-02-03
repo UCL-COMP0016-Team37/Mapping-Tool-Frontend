@@ -34,13 +34,13 @@ export default class Search extends React.Component {
         return <Container className='search-container'>
             <Form.Control
                 className="search-bar"
-                placeholder=""
+                placeholder="Search..."
                 value={this.state.search}
                 onChange={this.handleChange.bind(this)} 
                 onKeyPress={this.handleKeyPress.bind(this)}
             />
-            <Button variant="primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
-            <Button variant="secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button>
+            <Button variant="outline-primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
+            <Button variant="outline-secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button>
         </Container>;
     }
 }

@@ -17,7 +17,7 @@ export default class Header extends React.Component {
                     ANCSSC Mapping Tool
                 </Navbar.Brand>
             </LinkContainer>
-            <Nav variant="pills">
+            <Nav>
                 <Nav.Item>
                     <LinkContainer to="/top-100">
                         <Nav.Link>Top 100</Nav.Link>
