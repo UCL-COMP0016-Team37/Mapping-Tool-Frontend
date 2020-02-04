@@ -6,11 +6,15 @@ export default class IndexItem extends React.Component{
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+        this.chart = undefined;
     }
 
     componentDidUpdate(){
         let ctx = this.props.id;
-        new Chart(ctx, {
+        if (this.chart !== undefined) {
+            this.chart.destroy();
+        }
+        this.chart = new Chart(ctx, {
             // The type of chart we want to create
             type: this.props.type ,
 
@@ -32,7 +36,7 @@ export default class IndexItem extends React.Component{
                     display: true,
                     text: this.props.title,
                     position: 'top',
-                }
+                },
             },
         });
     }

@@ -9,7 +9,7 @@ import Map from 'pages/map';
 import Data from 'pages/data';
 import SearchResults from 'pages/searchResults';
 import Chart from 'pages/chart';
-import Location from 'pages/location'
+import Location from 'pages/location';
 import Navbar from 'components/header';
 import FilterSearch from './components/filterSearch';
 import history from 'utils/history';

@@ -2,8 +2,8 @@ import React from 'react';
 
 import API from 'utils/backendApi';
 import IndexItem from '../../utils/indexItem';
-import getArrayValue from 'utils/sortUniqueArray'
-import './top100.scss'
+import getarrayvalue from 'utils/sortUniqueArray';
+import './top100.scss';
 
 export default class Top100 extends React.Component{
     constructor(props) {
@@ -18,14 +18,12 @@ export default class Top100 extends React.Component{
 
     render() {
         const donor = this.state.results.map(data => data.organization);
-        const topArray = getArrayValue(donor).slice(0,101);
-        topArray.sort(
-            (a, b) => b.count - a.count,
-        );
-        const value = topArray.map(data => data.value);
-        const count = topArray.map(data => data.count);
-        console.log(topArray);
-        return <div>
+        const toparray = getarrayvalue(donor).slice(0,101);
+        toparray.sort(function(a, b){ return b.count - a.count; });
+        const value = toparray.map(data => data.value);
+        const count = toparray.map(data => data.count);
+        console.log(toparray);
+        return <div className="top100-canvas">
             <IndexItem id='chart' type='horizontalBar' title='Top 100 donor with number of projects' labels={value} data={count}/>
         </div>;
     }
