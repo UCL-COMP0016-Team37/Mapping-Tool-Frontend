@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from '../components/map';
+import Map from '../components/map/heatmap';
 
 export default class MapPage extends React.Component {
     render() {
