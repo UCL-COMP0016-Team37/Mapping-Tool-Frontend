@@ -44,7 +44,7 @@ export default class Chart extends React.Component{
             return data.sector;
         }
         else if(this.state.info === 'location'){
-            return data.location;
+            return data.location.split('|')[0].split('>')[0];
         }
         else if(this.state.info === 'status'){
             return data.status;

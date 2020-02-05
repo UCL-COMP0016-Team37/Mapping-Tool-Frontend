@@ -2,7 +2,8 @@ import React from 'react';
 import API_KEY from '../../../utils/bingMaps';
 import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
-import MapGL from 'react-map-gl';
+import MapGL,{Source,Layer}  from 'react-map-gl';
+import API from 'utils/backendApi';
 
 export default class HeatMap extends React.Component{
     constructor(props){
@@ -17,9 +18,25 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
+        API.getMap().then((response) => {
+            this.setState({results: response.data});
+        });
     }
 
     render(){
+        const geojson = {
+            type: 'FeatureCollection',
+            features: this.state.results.map(
+                dta=>{
+                    return {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates : [dta.longitude,dta.latitude],
+                        },
+                    };
+                }),
+        };
         return (<div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>
@@ -30,6 +47,16 @@ export default class HeatMap extends React.Component{
                     mapStyle="mapbox://styles/mapbox/dark-v9"
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
+                    <Source id="my-data" 
+                        type="geojson" 
+                        data={geojson}
+                        // cluster={true}
+                        >
+                        <Layer
+                            id="point"
+                            type="heatmap"
+                        />
+                    </Source>
                 </MapGL>
             </ErrorBoundary>
         </div>);
