@@ -59,9 +59,14 @@ function clusterpins(original){
         if (copy[i] !== undefined){
             newlist.push(copy[i]);
             for (var j=i+1; j < copy.length; j++){
-                if (copy[j] !== undefined && copy[i] !== undefined && Math.abs(copy[i].latitude - copy[i].latitude) < 4 && Math.abs(copy[i].longitude - copy[j].longitude) < 4) {
-                    newlist.push(copy[j]);
-                    delete copy[j];
+                if (copy[j] !== undefined){
+                    let lat = Math.abs(copy[i].latitude - copy[j].latitude);
+                    let long = Math.abs(copy[i].longitude - copy[j].longitude);
+                    // console.log(copy[i].latitude - copy[i].latitude);
+                    if (lat < 5 && long < 5) {
+                        newlist.push(copy[j]);
+                        delete copy[j];
+                    }
                 }
             }
             let k = 0;
@@ -81,7 +86,7 @@ function clusterpins(original){
                 latitude : newlist[0].latitude,
                 city : desc,
             }
-            console.log(result);
+            // console.log(result);
             compressed.push(result);
         }
     }
