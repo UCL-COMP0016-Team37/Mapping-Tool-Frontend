@@ -113,6 +113,7 @@ export default class Map extends PureComponent {
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={data}
+                            viewportZoom = {this.state.viewport.zoom}
                             onMouseOver={this._onMouseOver.bind(this)}
                             onMouseLeave={this._onMouseLeave.bind(this)}
                             onClick={this._onClick.bind(this)}/>
@@ -121,13 +122,7 @@ export default class Map extends PureComponent {
                             type="geojson" 
                             data={geojson}
                             cluster={true}>
-                            <Layer
-                                id="point"
-                                type="circle"
-                                paint={{
-                                    'circle-radius': 10,
-                                    'circle-color': '#007cbf'
-                                }} />
+                            <Layer {...clusterLayer}/>
                         </Source> */}
                         <ControlPanel/>
                     </MapGL>

@@ -11,8 +11,23 @@ export default class Pins extends PureComponent {
 
 
     render() {
-        const {data,onMouseOver,onMouseLeave,onClick} = this.props;
-        // console.log(data);
+        const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
+        let final;
+        if (viewportZoom < 2){
+            const newdata = clusterpins(data);
+            console.log(newdata)
+            return newdata.map(data =>
+                <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
+                    <div className="image-container"
+                        onMouseOver={() => onMouseOver(data)}
+                        onMouseOut ={() => onMouseLeave()}
+                        onClick ={() => onClick(data.city)}>
+                        <img src={PinImage} width="25" height="25"/>
+                        <div className="image-marker">{data.description}</div>
+                    </div>
+                </Marker>);
+        }
+        // console.log(viewportZoom);
         return data.map(data =>
             <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                 <div className="image-container"
@@ -22,7 +37,7 @@ export default class Pins extends PureComponent {
                     <img src={PinImage} width="25" height="25"/>
                     <div className="image-marker">{data.description}</div>
                 </div>
-            </Marker>,
+            </Marker>
         );
     }
 }
@@ -33,3 +48,43 @@ Pins.propTypes = {
     onClick: PropTypes.any,
     onMouseLeave: PropTypes.any,
 };
+
+function clusterpins(original){
+    let compressed = [];
+    let copy = original.slice(0);
+
+    for (var i = 0; i < copy.length; i++){
+
+        var newlist = [];
+        if (copy[i] !== undefined){
+            newlist.push(copy[i]);
+            for (var j=i+1; j < copy.length; j++){
+                if (copy[j] !== undefined && copy[i] !== undefined && Math.abs(copy[i].latitude - copy[i].latitude) < 4 && Math.abs(copy[i].longitude - copy[j].longitude) < 4) {
+                    newlist.push(copy[j]);
+                    delete copy[j];
+                }
+            }
+            let k = 0;
+            var desc = '';
+            var num = 0;
+            for (k = 0; k < newlist.length; k++){
+                if (k > 0){
+                    desc = desc + ' & ' ;
+                }
+                desc= desc+ newlist[k].index;
+                num = num + parseInt(newlist[k].description);
+            }
+            const result = {
+                index : desc,
+                description: num.toString(),
+                longitude : newlist[0].longitude,
+                latitude : newlist[0].latitude,
+                city : desc,
+            }
+            console.log(result);
+            compressed.push(result);
+        }
+    }
+    // console.log(compressed)
+    return compressed;
+}

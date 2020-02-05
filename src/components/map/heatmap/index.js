@@ -50,7 +50,6 @@ export default class HeatMap extends React.Component{
                     <Source id="my-data" 
                         type="geojson" 
                         data={geojson}
-                        // cluster={true}
                     >
                         <Layer
                             id="point"
