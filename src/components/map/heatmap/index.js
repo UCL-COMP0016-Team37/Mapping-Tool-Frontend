@@ -4,14 +4,14 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-
+import ControlPanel from '../control-panel'
 export default class HeatMap extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             viewport: {
                 latitude: 30,
-                longitude: 0,
+                longitude: 50,
                 zoom: 1.25,
                 bearing: 0,
                 pitch: 0,
@@ -51,12 +51,13 @@ export default class HeatMap extends React.Component{
                         type="geojson" 
                         data={geojson}
                         // cluster={true}
-                        >
+                    >
                         <Layer
                             id="point"
                             type="heatmap"
                         />
                     </Source>
+                    <ControlPanel/>
                 </MapGL>
             </ErrorBoundary>
         </div>);

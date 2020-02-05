@@ -221,8 +221,8 @@ const mapdata = [
         description: '18', 
     },
     {
-        latitude:37.0431,
-        longitude: -100.9210,
+        latitude:6.42811,
+        longitude: -9.4295,
         title: 'Liberia',
         description: '5', 
     },
