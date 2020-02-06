@@ -1,5 +1,6 @@
 import React from 'react';
-import Map from '../components/map';
+// import Map from 'components/map';
+import Map from 'components/map/fundingFlow';
 
 export default class MapPage extends React.Component {
     render() {
