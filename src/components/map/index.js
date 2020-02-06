@@ -5,10 +5,10 @@ import API_KEY from 'utils/bingMaps';
 import API from 'utils/backendApi';
 import ErrorBoundary from 'utils/errorBoundary';
 import './map.scss';
-import MapGL,{Popup,Source,Layer} from 'react-map-gl';
+import MapGL,{Popup} from 'react-map-gl';
 import Pins from './pins';
 import history from 'utils/history';
-import ControlPanel from './control-panel'
+import ControlPanel from './control-panel';
 
 //partly referred from https://github.com/uber/react-map-gl/blob/5.2-release/examples/controls/src/app.js
 export default class Map extends PureComponent {
@@ -118,8 +118,8 @@ export default class Map extends PureComponent {
                             onMouseLeave={this._onMouseLeave.bind(this)}
                             onClick={this._onClick.bind(this)}/>
                         {this._renderPopup()}
-                        {/* <Source id="my-data" 
-                            type="geojson" 
+                        {/* <Source id="my-data"
+                            type="geojson"
                             data={geojson}
                             cluster={true}>
                             <Layer {...clusterLayer}/>

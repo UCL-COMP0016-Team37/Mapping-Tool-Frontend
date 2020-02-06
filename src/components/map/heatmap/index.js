@@ -4,7 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-import ControlPanel from '../control-panel'
+import ControlPanel from '../control-panel';
 export default class HeatMap extends React.Component{
     constructor(props){
         super(props);
@@ -37,7 +37,7 @@ export default class HeatMap extends React.Component{
                     };
                 }),
         };
-        return (<div className="map-container">
+        return <div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>
                 <MapGL
@@ -47,8 +47,8 @@ export default class HeatMap extends React.Component{
                     mapStyle="mapbox://styles/mapbox/dark-v9"
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
-                    <Source id="my-data" 
-                        type="geojson" 
+                    <Source id="my-data"
+                        type="geojson"
                         data={geojson}
                     >
                         <Layer
@@ -59,6 +59,6 @@ export default class HeatMap extends React.Component{
                     <ControlPanel/>
                 </MapGL>
             </ErrorBoundary>
-        </div>);
+        </div>;
     }
 }

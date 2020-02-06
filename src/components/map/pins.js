@@ -12,10 +12,9 @@ export default class Pins extends PureComponent {
 
     render() {
         const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
-        let final;
         if (viewportZoom < 2){
             const newdata = clusterpins(data);
-            console.log(newdata)
+            console.log(newdata);
             return newdata.map(data =>
                 <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                     <div className="image-container"
@@ -37,13 +36,14 @@ export default class Pins extends PureComponent {
                     <img src={PinImage} width="25" height="25"/>
                     <div className="image-marker">{data.description}</div>
                 </div>
-            </Marker>
+            </Marker>,
         );
     }
 }
 
 Pins.propTypes = {
     data: PropTypes.any,
+    viewportZoom: PropTypes.any,
     onMouseOver: PropTypes.any,
     onClick: PropTypes.any,
     onMouseLeave: PropTypes.any,
@@ -85,7 +85,7 @@ function clusterpins(original){
                 longitude : newlist[0].longitude,
                 latitude : newlist[0].latitude,
                 city : desc,
-            }
+            };
             // console.log(result);
             compressed.push(result);
         }

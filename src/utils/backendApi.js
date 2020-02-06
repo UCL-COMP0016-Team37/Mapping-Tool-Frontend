@@ -12,7 +12,7 @@ const API = {
     },
 
     getSearch: (term) => {
-        // console.log(term);
+        console.log(term);
         return Axios.get(base_url + '/v1/projects/');//0/100
     },
 
@@ -98,37 +98,37 @@ const mapdata = [
         latitude:-0.0236,
         longitude:  37.9062,
         title: 'Kenya',
-        description: '40', 
+        description: '40',
     },
     {
         latitude:33.8547,
         longitude:  35.8623,
         title: 'Lebanon',
-        description: '8', 
+        description: '8',
     },
     {
         latitude:43.9159,
         longitude:  17.6791,
         title: 'Bosnia and Herzegovina',
-        description: '1', 
+        description: '1',
     },
     {
         latitude:7.8731,
         longitude:  80.7718,
         title: 'Sri Lanka',
-        description: '9', 
+        description: '9',
     },
     {
         latitude:14.4974,
         longitude: -14.4524,
         title: 'Senegal',
-        description: '14', 
+        description: '14',
     },
     {
         latitude:-4.0383,
         longitude: 21.7587,
         title: 'Democratic Republic of Congo',
-        description: '17', 
+        description: '17',
     },
     {
         latitude: 15.7835,
@@ -194,37 +194,37 @@ const mapdata = [
         latitude:7.3697,
         longitude:  12.3547,
         title: 'Cameroon',
-        description: '2', 
+        description: '2',
     },
     {
         latitude:-1.8312,
         longitude:  -78.1834,
         title: 'Ecuador',
-        description: '4', 
+        description: '4',
     },
     {
         latitude:13.7942,
         longitude:  -88.8965,
         title: 'El Savador',
-        description: '9', 
+        description: '9',
     },
     {
         latitude:4.8604,
         longitude: -58.9302,
         title: 'Guyana',
-        description: '3', 
+        description: '3',
     },
     {
         latitude:15.2000,
         longitude: -86.2419,
         title: 'Honduras',
-        description: '18', 
+        description: '18',
     },
     {
         latitude:6.42811,
         longitude: -9.4295,
         title: 'Liberia',
-        description: '5', 
+        description: '5',
     },
     {
         latitude:35.8617,
@@ -243,6 +243,6 @@ const mapdata = [
         longitude: 38.9968,
         title: 'Syria',
         description: '3',
-    }
+    },
 ];
 

@@ -5,7 +5,7 @@ import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
 export default class Controlpanel extends React.Component{
     render(){
         return <div className="control-panel">
-            Filter Data Based on Funder/Thematic Areas 
+            Filter Data Based on Funder/Thematic Areas
             <ButtonToolbar>
                 <DropdownButton className="dropdown" id="dropdown-basic" title="Funder Filter">
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id}>{graph.name}</Dropdown.Item>)}
