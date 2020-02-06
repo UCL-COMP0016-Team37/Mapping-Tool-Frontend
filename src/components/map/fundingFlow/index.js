@@ -85,8 +85,8 @@ export default class Map extends React.Component {
                 layers={this._renderLayers()}
                 initialViewState={INITIAL_VIEW_STATE}
                 controller
-                width="100vw"
-                height="90vh"
+                width="100%"
+                height="100%"
             >
                 <StaticMap
                     reuseMaps
