@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import extractSearchTerm from 'utils/extractSearchTerm';
-import Map from '../components/map';
+import Map from '../components/map/pinMap';
 
 export default class LocationPage extends React.Component {
     render() {
