@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Marker } from 'react-map-gl';
 import PinImage from 'assets/images/white-white.png';
-import './map.scss';
+import '../map.scss';
 
 // Important for perf: the markers never change, avoid rerender when the map viewport changes
 export default class Pins extends PureComponent {

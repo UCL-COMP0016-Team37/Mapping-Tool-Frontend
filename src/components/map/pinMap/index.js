@@ -4,7 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import API_KEY from 'utils/bingMaps';
 import API from 'utils/backendApi';
 import ErrorBoundary from 'utils/errorBoundary';
-import './map.scss';
+import '../map.scss';
 import MapGL,{Popup} from 'react-map-gl';
 import Pins from './pins';
 import history from 'utils/history';

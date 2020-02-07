@@ -2,8 +2,8 @@ import React from 'react';
 import './map.scss';
 import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
 
-export default class Controlpanel extends React.Component{
-    render(){
+export default class ControlPanel extends React.Component{
+    render() {
         return <div className="control-panel">
             Filter Data Based on Funder/Thematic Areas
             <ButtonToolbar>

@@ -42,8 +42,8 @@ export default class HeatMap extends React.Component{
                 <Spinner className="loading" variant="primary" animation="border"/>
                 <MapGL
                     {...this.state.viewport}
-                    width="100vw"
-                    height="90vh"
+                    width="100%"
+                    height="100%"
                     mapStyle="mapbox://styles/mapbox/dark-v9"
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
