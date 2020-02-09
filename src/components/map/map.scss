@@ -26,20 +26,13 @@
     top: -10px;
 }
   
-// .control-panel{
-//     text-align: center;
-//     font-family: "Arial" , sans-serif;
-//     font-weight: bold;
-//     position: absolute;
-//     background-color: white;
-//     width: 15vw;
-//     height: 30vh;
-//     top: 8px;
-//     right: 16px;
-// }
+.map-buttons-container{
+    margin-top: 15vh;
+}
 
 .control-panel {
     position: absolute;
+    display: inline-block;
     top: 0;
     right: 0;
     max-width: 20vw;

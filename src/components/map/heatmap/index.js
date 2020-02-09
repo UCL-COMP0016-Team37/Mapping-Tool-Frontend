@@ -4,7 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-import ControlPanel from '../control-panel';
+
 export default class HeatMap extends React.Component{
     constructor(props){
         super(props);
@@ -56,7 +56,6 @@ export default class HeatMap extends React.Component{
                             type="heatmap"
                         />
                     </Source>
-                    <ControlPanel/>
                 </MapGL>
             </ErrorBoundary>
         </div>;

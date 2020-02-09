@@ -17,7 +17,7 @@ export default class Map extends PureComponent {
             searchTerm: props.searchTerm,
             viewport: {
                 latitude: 30,
-                longitude: 0,
+                longitude: 50,
                 zoom: 1.25,
                 bearing: 0,
                 pitch: 0,
