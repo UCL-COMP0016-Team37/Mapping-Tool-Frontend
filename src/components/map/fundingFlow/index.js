@@ -4,15 +4,16 @@ import {StaticMap} from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import {GeoJsonLayer, ArcLayer} from '@deck.gl/layers';
 import API_KEY from 'utils/bingMaps';
+import API from 'utils/backendApi';
 
 
 const INITIAL_VIEW_STATE = {
-    longitude: 3,
-    latitude: 0,
-    zoom: 1.25,
-    maxZoom: 15,
-    pitch: 0,
+    latitude: 30,
+    longitude: 50,
+    zoom: 1.15,
     bearing: 0,
+    pitch: 15,
+    maxZoom: 25,
 };
 
 const inFlowColors = [
@@ -35,27 +36,37 @@ const outFlowColors = [
     [177, 0, 38],
 ];
 
-const sampleArcs = Array(100).fill().map(() => ({
-    source: [Math.random() * 100 - 50, Math.random() * 100 - 50, 0],
-    target: [Math.random() * 100 - 50, Math.random() * 100 - 50, 0],
-    gain: -1,
-    quantile: Math.floor(Math.random() * 7),
-}));
+// const sampleArcs = Array(100).fill().map(() => ({
+//     source: [Math.random() * 100 - 50, Math.random() * 100 - 50, 0],
+//     target: [Math.random() * 100 - 50, Math.random() * 100 - 50, 0],
+//     gain: -1,
+//     quantile: Math.floor(Math.random() * 7),
+// }));
 
 export default class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            results: [],
             hoveredCounty: null,
             // Set default selection to San Francisco
             selectedCounty: null,
-            arcs: sampleArcs,
+            arcs: [],
         };
+        API.getMap().then((response) => {
+            this.setState({results: response.data});
+        });
     }
 
     _renderLayers() {
         const {data, strokeWidth = 2} = this.props;
-
+        const sampleArcs = this.state.results.map(data => {
+            return {
+                source: [this.state.results[0].longitude, this.state.results[0].latitude],
+                target: [data.longitude,data.latitude],
+                gain: -1,
+                quantile: Math.floor(Math.random() * 7),
+            };});
         return [
             new GeoJsonLayer({
                 id: 'geojson',
@@ -69,7 +80,7 @@ export default class Map extends React.Component {
             }),
             new ArcLayer({
                 id: 'arc',
-                data: this.state.arcs,
+                data: sampleArcs,
                 getSourcePosition: d => d.source,
                 getTargetPosition: d => d.target,
                 getSourceColor: d => (d.gain > 0 ? inFlowColors : outFlowColors)[d.quantile],

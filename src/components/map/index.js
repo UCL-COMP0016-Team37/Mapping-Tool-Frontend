@@ -10,7 +10,7 @@ export default class MapContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: 'pin',
+            active: 'fundingFlow',
         };
     }
 
@@ -31,13 +31,6 @@ export default class MapContainer extends React.Component {
         return <div className="map-container d-flex flex-column">
             {this.getActiveMap()}
             <ControlPanel handleButtonClickWrapper={this.handleButtonClickWrapper.bind(this)}/>
-            {/* <div className="map-buttons-container d-flex flex-column">
-                <ButtonGroup size="lg">
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('pin').bind(this)}>Points</Button>
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('heat').bind(this)}>Heatmap</Button>
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('fundingFlow').bind(this)}>Funding Flow</Button>
-                </ButtonGroup>
-            </div> */}
         </div>;
     }
 

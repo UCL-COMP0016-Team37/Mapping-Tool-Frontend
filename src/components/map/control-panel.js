@@ -9,18 +9,18 @@ export default class ControlPanel extends React.Component{
         return <div className="control-panel">
             Filter Data Based on Funder/Thematic Areas
             <ButtonToolbar>
-                <DropdownButton variant="outline-danger" className="dropdown" id="dropdown-basic" title="Funder Filter">
+                <DropdownButton variant="dark" className="dropdown" id="dropdown-basic" title="Funder Filter">
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id}>{graph.name}</Dropdown.Item>)}
                 </DropdownButton>
-                <DropdownButton  variant="outline-danger"  className="dropdown" id="dropdown-basic" title="Thematic Areas">
+                <DropdownButton  variant="dark"  className="dropdown" id="dropdown-basic" title="Thematic Areas">
                     {information.map(info => <Dropdown.Item key={info.id}  >{info.name}</Dropdown.Item>)}
                 </DropdownButton>
             </ButtonToolbar>
             <div className="map-buttons-container d-flex justify-content-center">
                 <ButtonGroup size="md">
-                    <Button variant="outline-danger" onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
-                    <Button variant="outline-danger" onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
-                    <Button variant="outline-danger" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button>
+                    <Button variant="dark" onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
+                    <Button variant="dark" onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
+                    <Button variant="dark" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button>
                 </ButtonGroup>
             </div>
         </div>;

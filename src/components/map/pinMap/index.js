@@ -18,7 +18,7 @@ export default class Map extends PureComponent {
             viewport: {
                 latitude: 30,
                 longitude: 50,
-                zoom: 1.25,
+                zoom: 1.15,
                 bearing: 0,
                 pitch: 0,
             },
