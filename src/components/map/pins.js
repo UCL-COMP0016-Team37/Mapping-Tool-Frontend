@@ -12,7 +12,6 @@ export default class Pins extends PureComponent {
 
     render() {
         const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
-        let final;
         if (viewportZoom < 2){
             const newdata = clusterpins(data);
             console.log(newdata)
@@ -20,8 +19,7 @@ export default class Pins extends PureComponent {
                 <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                     <div className="image-container"
                         onMouseOver={() => onMouseOver(data)}
-                        onMouseOut ={() => onMouseLeave()}
-                        onClick ={() => onClick(data.city)}>
+                        onMouseOut ={() => onMouseLeave()}>
                         <img src={PinImage} width="25" height="25"/>
                         <div className="image-marker">{data.description}</div>
                     </div>
@@ -47,6 +45,7 @@ Pins.propTypes = {
     onMouseOver: PropTypes.any,
     onClick: PropTypes.any,
     onMouseLeave: PropTypes.any,
+    viewportZoom: PropTypes.number,
 };
 
 function clusterpins(original){

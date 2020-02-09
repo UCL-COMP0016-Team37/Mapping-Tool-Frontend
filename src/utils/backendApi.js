@@ -13,7 +13,7 @@ const API = {
 
     getSearch: (term) => {
         // console.log(term);
-        return Axios.get(base_url + '/v1/projects/');//0/100
+        return Axios.get(base_url + '/v1/projects/0/100');//0/100
     },
 
     getMap: (term) => {
