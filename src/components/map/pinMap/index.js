@@ -99,6 +99,7 @@ export default class Map extends PureComponent {
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={data}
+                            viewportZoom={this.state.viewport.zoom}
                             onMouseOver={this._onMouseOver.bind(this)}
                             onMouseLeave={this._onMouseLeave.bind(this)}
                             onClick={this._onClick.bind(this)}/>

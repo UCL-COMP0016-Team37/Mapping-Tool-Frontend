@@ -6,33 +6,32 @@ import { Marker } from 'react-map-gl';
 import PinImage from 'assets/images/white-white.png';
 import '../map.scss';
 
-// Important for perf: the markers never change, avoid rerender when the map viewport changes
 export default class Pins extends PureComponent {
 
 
     render() {
         const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
+        // console.log(viewportZoom)
         if (viewportZoom < 2){
             const newdata = clusterpins(data);
-            console.log(newdata);
+            // console.log(newdata);
             return newdata.map(data =>
                 <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
                     <div className="image-container"
                         onMouseOver={() => onMouseOver(data)}
                         onMouseOut ={() => onMouseLeave()}>
-                        <img src={PinImage} width="25" height="25"/>
+                        <img src={PinImage} alt="pin map pins" width="25" height="25"/>
                         <div className="image-marker">{data.description}</div>
                     </div>
                 </Marker>);
         }
-        // console.log(viewportZoom);
         return data.map(data =>
-            <Marker key={`marker-${data.index}`} longitude={data.longitude} latitude={data.latitude}>
+            <Marker key={`marker-${data.city}`} longitude={data.longitude} latitude={data.latitude}>
                 <div className="image-container"
                     onMouseOver={() => onMouseOver(data)}
                     onMouseOut ={() => onMouseLeave()}
                     onClick ={() => onClick(data.city)}>
-                    <img src={PinImage} width="25" height="25"/>
+                    <img src={PinImage} alt="pin map pins" width="25" height="25"/>
                     <div className="image-marker">{data.description}</div>
                 </div>
             </Marker>,
@@ -42,7 +41,6 @@ export default class Pins extends PureComponent {
 
 Pins.propTypes = {
     data: PropTypes.any,
-    viewportZoom: PropTypes.any,
     onMouseOver: PropTypes.any,
     onClick: PropTypes.any,
     onMouseLeave: PropTypes.any,
@@ -50,6 +48,7 @@ Pins.propTypes = {
 };
 
 function clusterpins(original){
+    // console.log(original)
     let compressed = [];
     let copy = original.slice(0);
 
@@ -76,7 +75,7 @@ function clusterpins(original){
                 if (k > 0){
                     desc = desc + ' & ' ;
                 }
-                desc= desc+ newlist[k].index;
+                desc= desc+ newlist[k].city;
                 num = num + parseInt(newlist[k].description);
             }
             const result = {

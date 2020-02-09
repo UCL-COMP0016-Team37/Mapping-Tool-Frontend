@@ -12,13 +12,8 @@ const API = {
     },
 
     getSearch: (term) => {
-<<<<<<< HEAD
         console.log(term);
         return Axios.get(base_url + '/v1/projects/');//0/100
-=======
-        // console.log(term);
-        return Axios.get(base_url + '/v1/projects/0/100');//0/100
->>>>>>> map-gl-version
     },
 
     getMap: (term) => {
