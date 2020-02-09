@@ -1,9 +1,17 @@
 import React from 'react';
 import './map.scss';
-import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
+import {DropdownButton,Dropdown,ButtonToolbar,ToggleButton,ToggleButtonGroup} from 'react-bootstrap';
 
+<<<<<<< HEAD
 export default class ControlPanel extends React.Component{
     render() {
+=======
+export default class Controlpanel extends React.Component{
+    _handleChange(e){
+        console.log(e)
+    }
+    render(){
+>>>>>>> map-gl-version
         return <div className="control-panel">
             Filter Data Based on Funder/Thematic Areas
             <ButtonToolbar>

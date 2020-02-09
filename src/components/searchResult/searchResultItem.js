@@ -29,7 +29,7 @@ export default class SearchResultItem extends React.Component {
                 <Card.Title>{data.projectName}</Card.Title>
                 <Card.Subtitle>{data.organization}</Card.Subtitle>
                 <Card.Text>{trimText(data.projectDescription)}</Card.Text>
-                <Card.Link variant="light" href="#" onClick={this.projectView.bind(this)}>View Project</Card.Link>
+                <Card.Link variant="light" href="" onClick={this.projectView.bind(this)}>View Project</Card.Link>
             </Card.Body>
         </Card>;
     }
