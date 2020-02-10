@@ -3,7 +3,8 @@ import React from 'react';
 import PinMap from './pinMap';
 import HeatMap from './heatmap';
 import FundingFlowMap from './fundingFlow';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import ControlPanel from './control-panel'
+// import { ButtonGroup, Button } from 'react-bootstrap';
 
 export default class MapContainer extends React.Component {
     constructor(props) {
@@ -23,21 +24,13 @@ export default class MapContainer extends React.Component {
     }
 
     handleButtonClickWrapper(id) {
-        return () => {
-            this.setState({ active: id });
-        };
+        return this.setState({ active: id });
     }
 
     render() {
         return <div className="map-container d-flex flex-column">
             {this.getActiveMap()}
-            <div className="map-buttons-container d-flex flex-column">
-                <ButtonGroup size="lg">
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('pin').bind(this)}>Points</Button>
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('heat').bind(this)}>Heatmap</Button>
-                    <Button variant="secondary" onClick={this.handleButtonClickWrapper('fundingFlow').bind(this)}>Funding Flow</Button>
-                </ButtonGroup>
-            </div>
+            <ControlPanel handleButtonClickWrapper={this.handleButtonClickWrapper.bind(this)}/>
         </div>;
     }
 

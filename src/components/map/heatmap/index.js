@@ -4,7 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-import ControlPanel from '../control-panel';
+
 export default class HeatMap extends React.Component{
     constructor(props){
         super(props);
@@ -12,7 +12,7 @@ export default class HeatMap extends React.Component{
             viewport: {
                 latitude: 30,
                 longitude: 50,
-                zoom: 1.25,
+                zoom: 1.15,
                 bearing: 0,
                 pitch: 0,
             },
@@ -44,7 +44,7 @@ export default class HeatMap extends React.Component{
                     {...this.state.viewport}
                     width="100%"
                     height="100%"
-                    mapStyle="mapbox://styles/mapbox/dark-v9"
+                    mapStyle="mapbox://styles/mapbox/dark-v10"
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
                     <Source id="my-data"
@@ -56,7 +56,6 @@ export default class HeatMap extends React.Component{
                             type="heatmap"
                         />
                     </Source>
-                    <ControlPanel/>
                 </MapGL>
             </ErrorBoundary>
         </div>;

@@ -20,6 +20,14 @@ const API = {
         return Axios.get(base_url + '/v1/projects/');//0/100
     },
 
+    getpublisher: () => {
+        return Axios.get(base_url + '/v2/publisher/');
+    },
+
+    getMapPin: () => {
+        return Axios.get('https://mapping-tool-api.azurewebsites.net/api/v2/Country/');
+    },
+
     getMap: (term) => {
         // console.log(term)
         if (term === undefined){
