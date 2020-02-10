@@ -27,7 +27,7 @@ function splitThousands(value, character = ' ', splitCount = 3) {
         decimalIndex = value.length;
     }
     decimalIndex -= splitCount;
-    while (decimalIndex >= 0) {
+    while (decimalIndex > 0) {
         value = value.slice(0, decimalIndex) + character + value.slice(decimalIndex);
         decimalIndex -= splitCount;
     }

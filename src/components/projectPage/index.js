@@ -5,26 +5,34 @@ import { Container } from 'react-bootstrap';
 import API from 'utils/backendApi';
 import { formatMoney } from 'utils/formatting';
 
+function getNarrative(narrative) {
+    return narrative.narratives[0].text;
+}
+
 export default class projectPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {results: []};
+        this.state = {results: undefined};
 
         API.getProjects(this.props.searchTerm).then((response) => {
             this.setState({ results: response.data });
         });
     }
 
-    render(){
+    render() {
 
         console.log(this.state.results);
         const results = this.state.results;
+        if (results === undefined) {
+            return <></>;
+        }
         return <Container fluid className="text-left">
-            <h1>{results.projectName}</h1>
-            <h3>{results.organization}</h3>
-            <h3>{results.location}</h3>
-            <h4>Budget {formatMoney(results.budgetNumeric, results.budgetCurrency)}</h4>
-            <p>sector: {results.sectors}</p>
+            <h1>{getNarrative(results.title)}</h1>
+            <h3>{results.participating_organisations.map(getNarrative).join(', ')}</h3>
+            <h3>{results.locations.map(location => getNarrative(location.name)).join(', ')}</h3>
+            <h4>Budget {results.budgets.map(budget => formatMoney(budget.value.value, budget.value.currency.code)).join(', ')}</h4>
+            <h4>{results.iati_identifier}</h4>
+            <p>sector: {results.sectors[0].sector.name}</p>
             <p>Start date: {results.startDate}</p>
             <p>End date: {results.endDate}</p>
             <p><a href={results.projectWebsite}>{results.projectWebsite}</a></p>

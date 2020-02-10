@@ -7,8 +7,12 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
-    getProjects: (id) => {
+    getProjectsOld: (id) => {
         return Axios.get(base_url+ '/v1/projects/'+ id);
+    },
+
+    getProjects: (id) => {
+        return Axios.get(base_url + '/v2/activities/' + id);
     },
 
     getSearch: (term) => {
