@@ -75,18 +75,19 @@ export default class Map extends PureComponent {
     }
 
     render() {
-        // console.log(this.props.searchTerm)
+        // console.log(this.state.results)
         const data = this.state.results.map(
             dta=>{
-                return {
-                    index: dta.index,
-                    longitude : dta.longitude,
-                    latitude: dta.latitude,
-                    city: dta.title,
-                    description: dta.description,
-                };
+                if (!isNaN(dta.longitude)){
+                    return {
+                        index: dta.title,
+                        longitude : dta.longitude,
+                        latitude: dta.latitude,
+                        city: dta.title,
+                        description: dta.description,
+                    };}
             });
-
+        // console.log(data);
         return (
             <div className="map-container">
                 <ErrorBoundary>
@@ -95,7 +96,7 @@ export default class Map extends PureComponent {
                         {...this.state.viewport}
                         width="100%"
                         height="100%"
-                        mapStyle="mapbox://styles/mapbox/dark-v9"
+                        mapStyle="mapbox://styles/mapbox/dark-v10"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={data}

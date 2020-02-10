@@ -10,7 +10,7 @@ export default class MapContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            active: 'fundingFlow',
+            active: 'pin',
         };
     }
 

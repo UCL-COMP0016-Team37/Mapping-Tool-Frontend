@@ -44,7 +44,7 @@ export default class HeatMap extends React.Component{
                     {...this.state.viewport}
                     width="100%"
                     height="100%"
-                    mapStyle="mapbox://styles/mapbox/dark-v9"
+                    mapStyle="mapbox://styles/mapbox/dark-v10"
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
                     <Source id="my-data"

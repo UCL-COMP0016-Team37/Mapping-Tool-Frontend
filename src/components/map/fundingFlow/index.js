@@ -12,7 +12,7 @@ const INITIAL_VIEW_STATE = {
     longitude: 50,
     zoom: 1.15,
     bearing: 0,
-    pitch: 15,
+    pitch: 20,
     maxZoom: 25,
 };
 
@@ -90,7 +90,7 @@ export default class Map extends React.Component {
         ];
     }
     render() {
-        const mapStyle = 'mapbox://styles/mapbox/dark-v9';
+        const mapStyle = 'mapbox://styles/mapbox/dark-v10';
         return <div className="map-container">
             <DeckGL
                 layers={this._renderLayers()}
