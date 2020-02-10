@@ -15,7 +15,7 @@ export default class filterSearch extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     handleChange(e){
         this.setState({[e.target.name]:e.target.value});
     }
@@ -23,7 +23,7 @@ export default class filterSearch extends React.Component {
     handleSubmit(){
         history.push(
             '/search-results/?country='+ this.state.country +
-            '&sector=' + this.state.sector + 
+            '&sector=' + this.state.sector +
             '&start=' + this.state.startYear +
             '&end=' + this.state.endYear,
         );

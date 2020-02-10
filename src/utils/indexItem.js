@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Chart from 'chart.js';
-
-// import './chart.scss';
 
 export default class IndexItem extends React.Component{
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+        this.chart = undefined;
     }
-    
+
     componentDidUpdate(){
         let ctx = this.props.id;
-        new Chart(ctx, {
+        if (this.chart !== undefined) {
+            this.chart.destroy();
+        }
+        this.chart = new Chart(ctx, {
             // The type of chart we want to create
             type: this.props.type ,
 
@@ -32,8 +35,8 @@ export default class IndexItem extends React.Component{
                 title: {
                     display: true,
                     text: this.props.title,
-                    position: 'bottom',
-                }
+                    position: 'top',
+                },
             },
         });
     }
@@ -50,3 +53,10 @@ export default class IndexItem extends React.Component{
     }
 }
 
+IndexItem.propTypes = {
+    id: PropTypes.any,
+    type: PropTypes.any,
+    title: PropTypes.any,
+    labels: PropTypes.any,
+    data: PropTypes.any,
+};

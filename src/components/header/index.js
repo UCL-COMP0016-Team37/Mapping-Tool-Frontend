@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, Nav} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import Search from 'components/search';
 
@@ -11,12 +12,19 @@ import './header.scss';
 export default class Header extends React.Component {
     render() {
         return <Navbar>
-            <Navbar.Brand className="logo-title" href="/">
-                ANCSSC Mapping Tool
-            </Navbar.Brand>
-            <Nav variant="pills">
+            <LinkContainer to="/">
+                <Navbar.Brand className="logo-title">
+                    ANCSSC Mapping Tool
+                </Navbar.Brand>
+            </LinkContainer>
+            <Nav>
                 <Nav.Item>
-                    <Nav.Link href="/top-100">Top 100</Nav.Link>
+                    <LinkContainer to="/top-100">
+                        <Nav.Link>Top 100</Nav.Link>
+                    </LinkContainer>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/search">Filter Data</Nav.Link>
                 </Nav.Item>
             </Nav>
             <Nav className='mr-auto'></Nav>
