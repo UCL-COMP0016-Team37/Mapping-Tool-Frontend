@@ -25,18 +25,24 @@ export default class Map extends PureComponent {
             results: [],
             popupInfo : null,
         };
-        API.getMap(this.state.searchTerm).then((response)=> {
-            this.setState({results: response.data});
+        API.getMapPin(this.state.searchTerm).then((response)=> {
+            if (!Array.isArray(response.data)){
+                this.setState({results: [response.data]});
+            }
+            else{
+                this.setState({results: response.data});
+            }
             if(props.pathname === '/location/'){
                 this.setState({viewport: {
-                    latitude: response.data[0].latitude,
-                    longitude: response.data[0].longitude,
+                    latitude: parseFloat(response.data.coordinate.latitude),
+                    longitude: parseFloat(response.data.coordinate.longitude),
                     zoom: 8,
                     bearing: 0,
                     pitch: 0,
                 }});
             }
         });
+        // API.getGeocode().then((response) => console.log(response.data));
     }
 
     _onMouseOver(city) {
@@ -63,31 +69,19 @@ export default class Map extends PureComponent {
                 <Popup
                     tipSize={5}
                     anchor="bottom"
-                    longitude={popupInfo.longitude}
-                    latitude={popupInfo.latitude}
+                    longitude={parseFloat(popupInfo.coordinate.longitude)}
+                    latitude={parseFloat(popupInfo.coordinate.latitude)}
                     closeButton={false}
                 >
                     <div>
-                        {popupInfo.city + ' | ' + popupInfo.description}
+                        {popupInfo.countryCode + ' | ' + popupInfo.activityCount}
                     </div>
                 </Popup>
         );
     }
 
     render() {
-        // console.log(this.state.results)
-        const data = this.state.results.map(
-            dta=>{
-                if (!isNaN(dta.longitude)){
-                    return {
-                        index: dta.title,
-                        longitude : dta.longitude,
-                        latitude: dta.latitude,
-                        city: dta.title,
-                        description: dta.description,
-                    };}
-            });
-        // console.log(data);
+        // console.log(this.state.results);
         return (
             <div className="map-container">
                 <ErrorBoundary>
@@ -99,7 +93,7 @@ export default class Map extends PureComponent {
                         mapStyle="mapbox://styles/mapbox/dark-v10"
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
-                        <Pins data={data}
+                        <Pins data={this.state.results}
                             viewportZoom={this.state.viewport.zoom}
                             onMouseOver={this._onMouseOver.bind(this)}
                             onMouseLeave={this._onMouseLeave.bind(this)}

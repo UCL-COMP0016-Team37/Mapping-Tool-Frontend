@@ -10,9 +10,9 @@ export default class ControlPanel extends React.Component{
         this.state = {
             publisher: [],
         };
-        API.getpublisher().then((response)=> {
-            this.setState({publisher : response.data.slice(0,10)});
-        });
+        // API.getpublisher().then((response)=> {
+        //     this.setState({publisher : response.data.slice(0,10)});
+        // });
     }
 
     render() {
