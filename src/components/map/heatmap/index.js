@@ -18,12 +18,13 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
-        API.getMap().then((response) => {
+        API.getMapPin().then((response) => {
             this.setState({results: response.data});
         });
     }
 
     render(){
+        console.log(this.state.results)
         const geojson = {
             type: 'FeatureCollection',
             features: this.state.results.map(
@@ -32,7 +33,7 @@ export default class HeatMap extends React.Component{
                         type: 'Feature',
                         geometry: {
                             type: 'Point',
-                            coordinates : [dta.longitude,dta.latitude],
+                            coordinates : [dta.coordinate.longitude,dta.coordinate.latitude],
                         },
                     };
                 }),
