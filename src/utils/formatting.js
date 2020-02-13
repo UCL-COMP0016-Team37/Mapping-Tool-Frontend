@@ -15,7 +15,7 @@ function mapCurrencySymbol(currencyCode) {
 
 function splitThousands(value, character = ' ', splitCount = 3) {
     if (value === null){
-        value = 'not provided'
+        value = 'not provided';
         return value;
     }
     if (typeof value ==='string') {
