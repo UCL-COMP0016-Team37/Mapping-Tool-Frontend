@@ -24,6 +24,7 @@ export default class Map extends PureComponent {
             },
             results: [],
             popupInfo : null,
+            countryName : null,
         };
         API.getMapPin(this.state.searchTerm).then((response)=> {
             if (!Array.isArray(response.data)){
@@ -63,7 +64,6 @@ export default class Map extends PureComponent {
     }
     _renderPopup() {
         const {popupInfo} = this.state;
-
         return (
             popupInfo &&
                 <Popup
@@ -74,7 +74,7 @@ export default class Map extends PureComponent {
                     closeButton={false}
                 >
                     <div>
-                        {popupInfo.countryCode + ' | ' + popupInfo.activityCount}
+                        {popupInfo.countryName + ' | ' + popupInfo.activityCount}
                     </div>
                 </Popup>
         );

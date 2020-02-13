@@ -9,12 +9,12 @@ const API = {
     },
 
     getProjects: (id) => {
-        return Axios.get(base_url+ '/v1/projects/'+ id);
+        return Axios.get(base_url+ '/v2/activities/'+ id);
     },
 
     getSearch: (term) => {
         console.log(term);
-        return Axios.get(base_url + '/v1/projects/');//0/100
+        return Axios.get(base_url + '/v2/maps/pin/' + term + '/1');//0/100
     },
 
     getpublisher: () => {
@@ -27,6 +27,10 @@ const API = {
             return Axios.get(url);
         }
         return Axios.get(url + term);
+    },
+
+    getCountry: (term) => {
+        return Axios.get(base_url+ '/v2/countries/'+term);
     },
 
     // getGeocode: () => {

@@ -16,7 +16,7 @@ export default class SearchResult extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: [], ready: false};
-        API.getSearch('test').then((response) => {
+        API.getSearch(this.props.searchTerm).then((response) => {
             this.setState({ results: response.data, ready: true });
         });
     }
@@ -29,10 +29,10 @@ export default class SearchResult extends React.Component{
         if (this.state.ready)
             return <Container className="text-left" fluid>
                 Loaded {this.state.results.length} results before filtering.
-                {this.state.results.filter(item => isMatch(this.props.searchTerm, item.projectName)).map(
-                    something => <SearchResultItem key={something.interaction_intervention_id} data={something}/>,
+                {this.state.results.map(
+                    results => <SearchResultItem key={results.iati_identifier} data={results}/>,
                 )}
-                <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
+                {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }
