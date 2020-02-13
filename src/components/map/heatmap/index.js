@@ -66,6 +66,6 @@ const dataLayer = {
     type: 'fill',
     paint: {
         'fill-color': '#3288bd',
-        'fill-opacity': 0.8,
+        'fill-opacity': 0.5,
     },
 };
