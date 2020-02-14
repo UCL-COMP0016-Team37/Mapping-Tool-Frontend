@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import API_KEY from './bingMaps';
 
 const base_url = 'https://mapping-tool-api.azurewebsites.net/api';
 
@@ -24,9 +25,17 @@ const API = {
         return Axios.get(base_url + '/v2/publisher/');
     },
 
-    getMapPin: () => {
-        return Axios.get('https://mapping-tool-api.azurewebsites.net/api/v2/Country/');
+    getMapPin: (term) => {
+        const url = base_url + '/v2/maps/pin/';
+        if (term === undefined){
+            return Axios.get(url);
+        }
+        return Axios.get(url + term);
     },
+
+    // getGeocode: () => {
+    //     return Axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/United%20States%20of%20America.json?access_token='+ API_KEY);
+    // },
 
     getMap: (term) => {
         // console.log(term)

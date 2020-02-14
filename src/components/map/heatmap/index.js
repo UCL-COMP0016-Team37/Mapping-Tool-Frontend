@@ -4,6 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
+import Countries from '../../../assets/geojson/countries.geojson'
 
 export default class HeatMap extends React.Component{
     constructor(props){
@@ -18,12 +19,13 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
-        API.getMap().then((response) => {
+        API.getMapPin().then((response) => {
             this.setState({results: response.data});
         });
     }
 
     render(){
+        console.log(this.state.results)
         const geojson = {
             type: 'FeatureCollection',
             features: this.state.results.map(
@@ -32,7 +34,7 @@ export default class HeatMap extends React.Component{
                         type: 'Feature',
                         geometry: {
                             type: 'Point',
-                            coordinates : [dta.longitude,dta.latitude],
+                            coordinates : [dta.coordinate.longitude,dta.coordinate.latitude],
                         },
                     };
                 }),
@@ -49,15 +51,21 @@ export default class HeatMap extends React.Component{
                     mapboxApiAccessToken={API_KEY}>
                     <Source id="my-data"
                         type="geojson"
-                        data={geojson}
+                        data={Countries}
                     >
-                        <Layer
-                            id="point"
-                            type="heatmap"
-                        />
+                        <Layer {...dataLayer}/>
                     </Source>
                 </MapGL>
             </ErrorBoundary>
         </div>;
     }
 }
+
+const dataLayer = {
+    id: 'data',
+    type: 'fill',
+    paint: {
+        'fill-color': '#3288bd',
+        'fill-opacity': 0.5,
+    },
+};
