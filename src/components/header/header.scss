@@ -13,8 +13,31 @@
     box-sizing: border-box;
     width: auto;
     margin-right: 0;
+}
 
-    .form-control {
-        width: unset;
+.navbar {
+    z-index: 50;
+    background-color: white;
+}
+
+.search-bar {
+    width: unset;
+}
+
+.search-overlay {
+    background-color: rgba(30,30,30, 0.9);
+    padding: 20px;
+    color: white;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    top: 0;
+    transform: translateY(-100vh);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    &.active {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
