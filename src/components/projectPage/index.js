@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Container, Button, Row, Col, ButtonGroup, Table, Dropdown } from 'react-bootstrap';
-
 import API from 'utils/backendApi';
 import { formatMoney } from 'utils/formatting';
-import { Link } from 'react-router-dom';
+import Map from './locationMap';
 
 const Divider = Dropdown.Divider;
 
@@ -25,7 +25,7 @@ function getMoney(value) {
 
 function joinBR(array) {
     return array.map((j, i) => {
-        return <>{i == 0 || <br/>} {j}</>;
+        return <div key={i}>{i == 0 || <br/>} {j}</div>;
     });
 }
 
@@ -53,7 +53,7 @@ export default class projectPage extends React.Component{
         return <Container className="text-left">
             <Row>
                 <Col>
-
+                    <Map place={getNar(results.locations[0].name)}/>
                 </Col>
                 <Col>
                     <h6>Title</h6>
@@ -92,12 +92,12 @@ export default class projectPage extends React.Component{
 
             <div id="locations">
                 <h4>Locations</h4>
-                {results.locations.map(item =>
-                    <>
+                {results.locations.map((item, i) =>
+                    <div key={i}>
                         <h6>{getNar(item.name)}</h6>
                         {getNar(item.description)}
                         <Divider/>
-                    </>,
+                    </div>,
                 )}
             </div>
 
