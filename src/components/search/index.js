@@ -36,6 +36,7 @@ export default class Search extends React.Component {
                 className="search-bar"
                 placeholder="Search..."
                 value={this.state.search}
+                onFocus={this.props.onFocus}
                 onChange={this.handleChange.bind(this)}
                 onKeyPress={this.handleKeyPress.bind(this)}
             />
@@ -47,4 +48,5 @@ export default class Search extends React.Component {
 
 Search.propTypes = {
     searchTerm: PropTypes.string,
+    onFocus: PropTypes.func,
 };
