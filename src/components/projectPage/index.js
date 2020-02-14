@@ -4,6 +4,7 @@ import { Container, Button, Row, Col, ButtonGroup, Dropdown } from 'react-bootst
 
 import API from 'utils/backendApi';
 import { formatMoney } from 'utils/formatting';
+import { Link } from 'react-router-dom';
 
 
 function getNar(narrative, lang = 'en') {
@@ -21,12 +22,22 @@ function getMoney(value) {
     return formatMoney(value.value, value.currency.code);
 }
 
+function joinBR(array) {
+    return array.map((j, i) => {
+        return <>{i == 0 || <br/>} {j}</>;
+    });
+}
+
+function unique(array) {
+    return array.filter((i, j) => array.indexOf(i) == j);
+}
+
 export default class projectPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: undefined};
 
-        API.getProjects(this.props.searchTerm).then((response) => {
+        API.getProjects(this.props.id).then((response) => {
             this.setState({ results: response.data });
         });
     }
@@ -39,32 +50,41 @@ export default class projectPage extends React.Component{
             return <></>;
         }
         return <Container className="text-left">
-            <h6>Title</h6>
-            <h4>{getNar(results.title)}</h4>
-            <Dropdown.Divider/>
-            <h6>Locations</h6>
-            <h4>{getNarArray(results.locations.map(item => item.name)).join(', ')}</h4>
-            <Dropdown.Divider/>
-            <h6>Reported By</h6>
-            <h4>{getNar(results.reporting_org)}</h4>
-            <Dropdown.Divider/>
-            <h6>Organisations</h6>
-            <h4>{getNarArray(results.participating_organisations).join(', ')}</h4>
-            <Dropdown.Divider/>
-            <h6>Budget</h6>
-            <h4>{results.budgets.map(item => getMoney(item.value)).join(', ')}</h4>
-            <Dropdown.Divider/>
-            <h6>Identifier</h6>
-            <h4>{results.iati_identifier}</h4>
+            <Row>
+                <Col>
+
+                </Col>
+                <Col>
+                    <h6>Title</h6>
+                    <h5>{getNar(results.title)}</h5>
+                    <Dropdown.Divider/>
+                    <h6>Locations</h6>
+                    <h5>{getNarArray(results.locations.map(item => item.name)).join(', ')}</h5>
+                    <Dropdown.Divider/>
+                    <h6>Reported By</h6>
+                    <h5>{getNar(results.reporting_org)}</h5>
+                    <Dropdown.Divider/>
+                    <h6>Organisations</h6>
+                    <h5>{joinBR(unique(getNarArray(results.participating_organisations)))}</h5>
+                    <Dropdown.Divider/>
+                    <h6>Budget</h6>
+                    <h5>{joinBR(results.budgets.map(item => getMoney(item.value)))}</h5>
+                    <Dropdown.Divider/>
+                    <h6>Identifier</h6>
+                    <Button variant="link" to={`/project-page/${results.iati_identifier}`} as={Link}><h5>{results.iati_identifier}</h5></Button>
+                </Col>
+            </Row>
 
             <div className="d-flex flex-column">
                 <ButtonGroup className="mt-3">
-                    <Button variant="link">Overview</Button>
+                    <Button variant="link" href="#overview">Overview</Button>
                     <Button variant="link">Budgets</Button>
                     <Button variant="link">Transactions</Button>
                 </ButtonGroup>
             </div>
-            <h2>Overview</h2>
+            <div id="overview">
+                <h2>Overview</h2>
+            </div>
             {getNarArray(results.descriptions).map((i, j) => <p key={j}>{i}</p>)}
             <p>Sectors: </p>
             <Row className="text-center"><Col>Start Date</Col><Col>End Date</Col></Row>
@@ -80,5 +100,5 @@ export default class projectPage extends React.Component{
 }
 
 projectPage.propTypes = {
-    searchTerm: PropTypes.string,
+    id: PropTypes.string,
 };
