@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Form, Container, Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Search from 'components/search';
@@ -12,6 +12,7 @@ import './header.scss';
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
+        this.search = React.createRef();
         this.state = {
             searchOpen: false,
         };
@@ -19,11 +20,17 @@ export default class Header extends React.Component {
 
     handleStartSearching() {
         this.setState({ searchOpen: true });
+        this.search.current.blur();
+    }
+
+    handleStopSearching() {
+        this.setState({ searchOpen: false });
+        this.search.current.blur();
     }
 
     render() {
         return <>
-            <Navbar>
+            <Navbar className="navbar">
                 <LinkContainer to="/">
                     <Navbar.Brand className="logo-title">
                         ANCSSC Mapping Tool
@@ -40,9 +47,22 @@ export default class Header extends React.Component {
                     </Nav.Item>
                 </Nav>
                 <Nav className='mr-auto'></Nav>
-                <Search onFocus={this.handleStartSearching.bind(this)} searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>
+                <Container className="search-container">
+                    <Form.Control
+                        className="search-bar"
+                        placeholder="Search..."
+                        value={extractSearchTerm(this.props.location.search, 'search')}
+                        onClick={this.handleStartSearching.bind(this)}
+                        onChange={() => {}}
+                        ref={this.search}
+                    />
+                </Container>
             </Navbar>
-            {this.state.searchOpen && <Container fluid>Advanced filter</Container>}
+            <Modal size="lg" show={this.state.searchOpen} onHide={this.handleStopSearching.bind(this)} enforceFocus={false}>
+                <Modal.Body>
+                    <Search onHide={this.handleStopSearching.bind(this)} searchTerm={extractSearchTerm(this.props.location.search, 'search')}/>
+                </Modal.Body>
+            </Modal>
         </>;
     }
 }

@@ -1,19 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Container } from 'react-bootstrap';
+import { Button, Form, Container, Col } from 'react-bootstrap';
 import history from 'utils/history';
 
 export default class Search extends React.Component {
     constructor(props){
         super(props);
+        console.log('Test');
+        this.searchInput = React.createRef();
         this.state = {
             search: props.searchTerm,
         };
     }
 
+    componentDidMount() {
+        setTimeout(() => {
+            this.searchInput.current.focus();
+        }, 1);
+    }
+
     setSearch() {
         // console.log(this.state.search);
         history.push('/search-results/?search='+ this.state.search);
+        this.props.onHide && this.props.onHide();
     }
 
     // advanced() {
@@ -31,17 +40,43 @@ export default class Search extends React.Component {
     }
 
     render() {
-        return <Container className='search-container'>
-            <Form.Control
-                className="search-bar"
-                placeholder="Search..."
-                value={this.state.search}
-                onFocus={this.props.onFocus}
-                onChange={this.handleChange.bind(this)}
-                onKeyPress={this.handleKeyPress.bind(this)}
-            />
-            <Button variant="outline-primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
-            {/* <Button variant="outline-secondary" className='advanced-search-button' onClick={this.advanced.bind(this)}>Advanced</Button> */}
+        return <Container className='advanced-search-container'>
+            <Form>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Control
+                            as="input"
+                            className="search-bar"
+                            placeholder="Search..."
+                            value={this.state.search}
+                            onFocus={this.props.onFocus}
+                            onChange={this.handleChange.bind(this)}
+                            onKeyPress={this.handleKeyPress.bind(this)}
+                            autoFocus
+                            ref={this.searchInput}
+                        />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Country</Form.Label>
+                        <Form.Control as="select">
+                            <option>All Countries</option>
+                            <option>Russia</option>
+                            <option>Cambodia</option>
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>Sector</Form.Label>
+                        <Form.Control as="select">
+                            <option>All Sectors</option>
+                            <option>Health</option>
+                            <option>Humanitarian</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
+                <Button variant="primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
+            </Form>
         </Container>;
     }
 }
@@ -49,4 +84,5 @@ export default class Search extends React.Component {
 Search.propTypes = {
     searchTerm: PropTypes.string,
     onFocus: PropTypes.func,
+    onHide: PropTypes.func,
 };
