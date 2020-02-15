@@ -65,7 +65,7 @@ function clusterpins(original){
                     let lat = Math.abs(parseFloat(copy[i].coordinate.latitude) - parseFloat(copy[j].coordinate.latitude));
                     let long = Math.abs(parseFloat(copy[i].coordinate.longitude) - parseFloat(copy[j].coordinate.longitude));
                     // console.log(copy[i].latitude - copy[i].latitude);
-                    if (lat < 10 && long < 10) {
+                    if (lat < 15 && long < 15) {
                         newlist.push(copy[j]);
                         delete copy[j];
                     }
