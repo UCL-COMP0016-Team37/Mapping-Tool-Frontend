@@ -2,7 +2,6 @@ import React from 'react';
 import './map.scss';
 import PropTypes from 'prop-types';
 import {DropdownButton,Dropdown,ButtonToolbar,ButtonGroup,Button} from 'react-bootstrap';
-import API from 'utils/backendApi';
 
 export default class ControlPanel extends React.Component{
     constructor(props){
