@@ -1,8 +1,8 @@
-export function formatMoney(amount, currency) {
+export function formatMoney(amount, currency, separator = ' ') {
     if (amount === undefined) {
         return '';
     }
-    return `${mapCurrencySymbol(currency)} ${splitThousands(amount, ',')} ${currency}`;
+    return `${mapCurrencySymbol(currency)} ${splitThousands(amount, separator)} ${currency}`;
 }
 
 function mapCurrencySymbol(currencyCode) {

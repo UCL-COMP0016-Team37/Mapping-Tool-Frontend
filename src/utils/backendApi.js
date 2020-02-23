@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import API_KEY from './bingMaps';
 
 const base_url = 'https://mapping-tool-api.azurewebsites.net/api';
 
