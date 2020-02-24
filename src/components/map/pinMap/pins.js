@@ -51,7 +51,7 @@ Pins.propTypes = {
 };
 
 function clusterpins(original){
-    console.log(original)
+    console.log(original);
     let compressed = [];
     let copy = original.slice(0);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Container, Button, Row, Col, ButtonGroup, Table, Dropdown } from 'react-bootstrap';
+import { Container, Button, Row, Col, ButtonGroup, Table, Dropdown, Alert } from 'react-bootstrap';
 import API from 'utils/backendApi';
 import { formatMoney } from 'utils/formatting';
 import Map from './locationMap';
@@ -36,16 +36,29 @@ function unique(array) {
 export default class projectPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {results: undefined};
+        this.state = {results: undefined, error: undefined};
 
         API.getProjects(this.props.id).then((response) => {
+            console.log(response);
             this.setState({ results: response.data });
+        }).catch((error) => {
+            console.log(error.response);
+            this.setState({ error: error.response });
         });
     }
 
     render() {
-
-        console.log(this.state.results);
+        const error = this.state.error;
+        if (error !== undefined) {
+            return <Container><Alert variant="danger">
+                <Alert.Heading>
+                    Backend Server Error: {error.data.error}
+                </Alert.Heading>
+                <p>
+                    {error.data.message}
+                </p>
+            </Alert></Container>;
+        }
         const results = this.state.results;
         if (results === undefined) {
             return <></>;

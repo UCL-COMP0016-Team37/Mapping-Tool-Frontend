@@ -4,7 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-import Countries from '../../../assets/geojson/countries.geojson'
+import Countries from '../../../assets/geojson/countries.geojson';
 
 export default class HeatMap extends React.Component{
     constructor(props){
@@ -25,20 +25,20 @@ export default class HeatMap extends React.Component{
     }
 
     render(){
-        console.log(this.state.results)
-        const geojson = {
-            type: 'FeatureCollection',
-            features: this.state.results.map(
-                dta=>{
-                    return {
-                        type: 'Feature',
-                        geometry: {
-                            type: 'Point',
-                            coordinates : [dta.coordinate.longitude,dta.coordinate.latitude],
-                        },
-                    };
-                }),
-        };
+        console.log(this.state.results);
+        // const geojson = {
+        //     type: 'FeatureCollection',
+        //     features: this.state.results.map(
+        //         dta=>{
+        //             return {
+        //                 type: 'Feature',
+        //                 geometry: {
+        //                     type: 'Point',
+        //                     coordinates : [dta.coordinate.longitude,dta.coordinate.latitude],
+        //                 },
+        //             };
+        //         }),
+        // };
         return <div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>

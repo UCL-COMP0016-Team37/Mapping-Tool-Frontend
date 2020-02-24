@@ -3,7 +3,7 @@ import React from 'react';
 import PinMap from './pinMap';
 import HeatMap from './heatmap';
 import FundingFlowMap from './fundingFlow';
-import ControlPanel from './control-panel'
+import ControlPanel from './control-panel';
 // import { ButtonGroup, Button } from 'react-bootstrap';
 
 export default class MapContainer extends React.Component {
