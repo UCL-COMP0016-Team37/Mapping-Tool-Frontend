@@ -12,9 +12,10 @@ const API = {
         return Axios.get(base_url+ '/v2/activities/'+ id);
     },
 
-    getSearch: (term) => {
+    getSearch: (term,page) => {
         console.log(term);
-        return Axios.get(base_url + '/v2/maps/pin/' + term + '/1');//0/100
+        const newpage = parseInt(page)
+        return Axios.get(base_url + '/v2/maps/pin/' + term + '/' + newpage);//0/100
     },
 
     getpublisher: () => {
