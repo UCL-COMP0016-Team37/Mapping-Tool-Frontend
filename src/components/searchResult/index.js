@@ -35,21 +35,38 @@ export default class SearchResult extends React.Component{
             });}
     }
 
-    changePage(){
-        console.log(this.props.page);
+    forwardPage(){
+        // console.log(this.props.page);
+        this.setState({ready:false});
         const newpage = parseInt(this.state.page) + 1;
-        this.setState({ready:false})
+        history.push('/search-results/?search='+ this.props.searchTerm + '&page='+ newpage);
+    }
+
+    backwardPage(){
+        this.setState({ready:false});
+        const newpage = parseInt(this.state.page) - 1;
         history.push('/search-results/?search='+ this.props.searchTerm + '&page='+ newpage);
     }
 
     render() {
-        if (this.state.ready)
+        if (this.state.ready && this.state.page === '1')
             return <Container className="text-left" fluid>
                 Loaded {this.state.results.length} results before filtering.
                 {this.state.results.map(
                     results => <SearchResultItem key={results.iati_identifier} data={results}/>,
                 )}
-                <Button className='paging-button' onClick={this.changePage.bind(this)}>Next Page</Button> 
+                <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled>Previous Page</Button> 
+                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button> 
+                {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
+            </Container>;
+        else if (this.state.ready)
+            return <Container className="text-left" fluid>
+            Loaded {this.state.results.length} results before filtering.
+                {this.state.results.map(
+                    results => <SearchResultItem key={results.iati_identifier} data={results}/>,
+                )}
+                <Button className='paging-button' onClick={this.backwardPage.bind(this)} >Previous Page</Button> 
+                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button> 
                 {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
