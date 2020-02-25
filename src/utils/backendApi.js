@@ -7,23 +7,11 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
-<<<<<<< HEAD
-    getProjectsOld: (id) => {
-        return Axios.get(base_url+ '/v1/projects/'+ id);
-    },
-
-    getProjects: (id) => {
-        return Axios.get(base_url + '/v2/activities/' + id);
-    },
-
-    getSearch: (term) => {
-=======
     getProjects: (id) => {
         return Axios.get(base_url+ '/v2/activities/'+ id);
     },
 
     getSearch: (term,page) => {
->>>>>>> map-gl-with-iati
         console.log(term);
         const newpage = parseInt(page)
         return Axios.get(base_url + '/v2/maps/pin/' + term + '/' + newpage);//0/100
