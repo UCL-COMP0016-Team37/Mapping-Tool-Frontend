@@ -7,6 +7,7 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
+<<<<<<< HEAD
     getProjectsOld: (id) => {
         return Axios.get(base_url+ '/v1/projects/'+ id);
     },
@@ -16,8 +17,16 @@ const API = {
     },
 
     getSearch: (term) => {
+=======
+    getProjects: (id) => {
+        return Axios.get(base_url+ '/v2/activities/'+ id);
+    },
+
+    getSearch: (term,page) => {
+>>>>>>> map-gl-with-iati
         console.log(term);
-        return Axios.get(base_url + '/v1/projects/');//0/100
+        const newpage = parseInt(page)
+        return Axios.get(base_url + '/v2/maps/pin/' + term + '/' + newpage);//0/100
     },
 
     getpublisher: () => {
@@ -30,6 +39,10 @@ const API = {
             return Axios.get(url);
         }
         return Axios.get(url + term);
+    },
+
+    getCountry: (term) => {
+        return Axios.get(base_url+ '/v2/countries/'+term);
     },
 
     // getGeocode: () => {
