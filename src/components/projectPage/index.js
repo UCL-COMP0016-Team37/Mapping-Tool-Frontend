@@ -12,7 +12,7 @@ function getNar(narrative, lang = 'en') {
     if (!narrative.narratives) {
         return '';
     }
-    return narrative.narratives.find(item => item.language.code == lang).text;
+    return narrative.narratives.find(item => item.language.code === lang).text;
 }
 
 function getNarArray(narrativeArray, lang = 'en') {
@@ -25,17 +25,17 @@ function getMoney(value) {
 
 function joinBR(array) {
     return array.map((j, i) => {
-        return <div key={i}>{i == 0 || <br/>} {j}</div>;
+        return <div key={i}>{i === 0 || <br/>} {j}</div>;
     });
 }
 
 function unique(array) {
-    return array.filter((i, j) => array.indexOf(i) == j);
+    return array.filter((i, j) => array.indexOf(i) === j);
 }
 
-function getNarrative(narrative) {
-    return narrative.narratives[0].text;
-}
+// function getNarrative(narrative) {
+//     return narrative.narratives[0].text;
+// }
 
 export default class projectPage extends React.Component{
     constructor(props) {
