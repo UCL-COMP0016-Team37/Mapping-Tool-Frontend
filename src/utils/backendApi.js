@@ -14,7 +14,7 @@ const API = {
     getSearch: (term,page) => {
         console.log(term);
         const newpage = parseInt(page)
-        return Axios.get(base_url + '/v2/maps/pin/' + term + '/' + newpage);//0/100
+        return Axios.get(base_url + '/v2/filter/' + term + '/' + newpage);//0/100
     },
 
     getpublisher: () => {

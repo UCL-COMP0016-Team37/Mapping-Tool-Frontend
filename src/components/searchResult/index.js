@@ -7,9 +7,9 @@ import history from 'utils/history';
 
 import SearchResultItem from './searchResultItem';
 
-// function isMatch(needle, haystack) {
-//     return haystack.toLowerCase().includes(needle.toLowerCase());
-// }
+function isMatch(needle, haystack) {
+    return haystack.toLowerCase().includes(needle.toLowerCase());
+}
 
 export default class SearchResult extends React.Component{
 
@@ -18,7 +18,8 @@ export default class SearchResult extends React.Component{
         this.state = {results: [], ready: false, page : this.props.page};
         API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
             this.setState({page: this.props.page});
-            this.setState({ results: response.data, ready: true });
+            console.log(response)
+            this.setState({ results: response.data.docs, ready: true });
         });
     }
 
@@ -31,7 +32,7 @@ export default class SearchResult extends React.Component{
         if (this.props.page !== this.state.page){
             API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
                 this.setState({page: this.props.page});
-                this.setState({ results: response.data, ready: true });
+                this.setState({ results: response.data.docs, ready: true });
             });}
     }
 
@@ -51,22 +52,23 @@ export default class SearchResult extends React.Component{
     render() {
         if (this.state.ready && this.state.page === '1')
             return <Container className="text-left" fluid>
+                {console.log(this.state.results)}
                 Loaded {this.state.results.length} results before filtering.
                 {this.state.results.map(
-                    results => <SearchResultItem key={results.iati_identifier} data={results}/>,
+                    results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
                 )}
-                <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled>Previous Page</Button> 
-                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button> 
+                <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled>Previous Page</Button> ,
+                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button>,
                 {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
             </Container>;
         else if (this.state.ready)
             return <Container className="text-left" fluid>
             Loaded {this.state.results.length} results before filtering.
                 {this.state.results.map(
-                    results => <SearchResultItem key={results.iati_identifier} data={results}/>,
+                    results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
                 )}
-                <Button className='paging-button' onClick={this.backwardPage.bind(this)} >Previous Page</Button> 
-                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button> 
+                <Button className='paging-button' onClick={this.backwardPage.bind(this)} >Previous Page</Button>,
+                <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button> ,
                 {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;

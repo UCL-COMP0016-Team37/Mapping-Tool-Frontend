@@ -9,6 +9,7 @@ import Map from './locationMap';
 const Divider = Dropdown.Divider;
 
 function getNar(narrative, lang = 'en') {
+    console.log(narrative);
     if (!narrative.narratives) {
         return '';
     }
@@ -110,7 +111,7 @@ export default class projectPage extends React.Component{
                 {results.locations.map((item, i) =>
                     <div key={i}>
                         <h6>{getNar(item.name)}</h6>
-                        {getNar(item.description)}
+                        {/* {getNar(item.description)} */}
                         <Divider/>
                     </div>,
                 )}
