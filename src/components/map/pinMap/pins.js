@@ -37,7 +37,8 @@ export default class Pins extends PureComponent {
                     <img src={PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
                     <div className="image-marker">{data.activityCount}</div>
                 </div>
-            </Marker>;}},
+            </Marker>;}
+        return <></>;},
         );
     }
 }

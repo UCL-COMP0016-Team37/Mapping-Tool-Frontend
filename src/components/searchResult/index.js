@@ -7,9 +7,9 @@ import history from 'utils/history';
 
 import SearchResultItem from './searchResultItem';
 
-function isMatch(needle, haystack) {
-    return haystack.toLowerCase().includes(needle.toLowerCase());
-}
+// function isMatch(needle, haystack) {
+//     return haystack.toLowerCase().includes(needle.toLowerCase());
+// }
 
 export default class SearchResult extends React.Component{
 

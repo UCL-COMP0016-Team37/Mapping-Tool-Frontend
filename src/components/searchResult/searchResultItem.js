@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import history from 'utils/history';
 
-function trimText(text, limit=300) {
-    if (text.length < limit)
-        return text;
-    text = text.slice(0, limit);
-    text = text.slice(0, text.lastIndexOf(' '));
-    return `${text}...`;
-}
+// function trimText(text, limit=300) {
+//     if (text.length < limit)
+//         return text;
+//     text = text.slice(0, limit);
+//     text = text.slice(0, text.lastIndexOf(' '));
+//     return `${text}...`;
+// }
 
 export default class SearchResultItem extends React.Component {
     constructor(props) {
