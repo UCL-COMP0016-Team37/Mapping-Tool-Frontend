@@ -11,7 +11,7 @@ export default class MapContainer extends React.Component {
         super(props);
         this.state = {
             active: 'pin',
-            mapStyle: 'mapbox://styles/mapbox/dark-v10'
+            mapStyle: 'mapbox://styles/mapbox/dark-v10',
         };
     }
 
