@@ -63,6 +63,7 @@ export default class Map extends PureComponent {
         }
     }
     _renderPopup() {
+        console.log(this.state.results)
         const {popupInfo} = this.state;
         return (
             popupInfo &&
