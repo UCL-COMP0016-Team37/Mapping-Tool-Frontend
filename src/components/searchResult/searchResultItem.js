@@ -19,7 +19,7 @@ export default class SearchResultItem extends React.Component {
 
     projectView(){
         const projectId = this.state.project.data.iati_identifier;
-        history.push('/project-page/?id='+projectId);
+        history.push('/project-page/'+projectId);
     }
 
     render() {

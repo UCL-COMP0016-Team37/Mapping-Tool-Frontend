@@ -69,9 +69,9 @@ export default class projectPage extends React.Component{
         }
         return <Container className="text-left">
             <Row>
-                <Col>
+                {/* <Col>
                     <Map place={getNar(results.locations[0].name)}/>
-                </Col>
+                </Col> */}
                 <Col>
                     <h6>Title</h6>
                     <h5>{getNar(results.title)}</h5>
