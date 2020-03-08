@@ -18,17 +18,17 @@ export default class SearchResultItem extends React.Component {
     }
 
     projectView(){
-        const projectId = this.state.project.data.interaction_intervention_id;
-        history.push('/project-page/?id='+projectId);
+        const projectId = this.state.project.data.iati_identifier;
+        history.push('/project-page/'+projectId);
     }
 
     render() {
         const { data } = this.props;
         return <Card>
             <Card.Body>
-                <Card.Title>{data.projectName}</Card.Title>
-                <Card.Subtitle>{data.organization}</Card.Subtitle>
-                <Card.Text>{trimText(data.projectDescription)}</Card.Text>
+                <Card.Title>{data.title.narratives[0].text}</Card.Title>
+                <Card.Subtitle>{data.recipient_countries[0].country.name}</Card.Subtitle>
+                {/* <Card.Text>{trimText(data.projectDescription)}</Card.Text> */}
                 <Card.Link variant="light" href="" onClick={this.projectView.bind(this)}>View Project</Card.Link>
             </Card.Body>
         </Card>;

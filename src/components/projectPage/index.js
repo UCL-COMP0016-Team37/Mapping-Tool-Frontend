@@ -24,12 +24,22 @@ function getMoney(value) {
 }
 
 function joinBR(array) {
+<<<<<<< HEAD
     return array.map((j, i) => <div key={i}>{i === 0 || <br/>} {j}</div>);
+=======
+    return array.map((j, i) => {
+        return <div key={i}>{i === 0 || <br/>} {j}</div>;
+    });
+>>>>>>> master
 }
 
 function unique(array) {
     return array.filter((i, j) => array.indexOf(i) === j);
 }
+
+// function getNarrative(narrative) {
+//     return narrative.narratives[0].text;
+// }
 
 export default class projectPage extends React.Component{
     constructor(props) {

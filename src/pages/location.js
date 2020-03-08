@@ -7,7 +7,7 @@ export default class LocationPage extends React.Component {
     render() {
         return <div className="page">
             {/* {console.log(this.props)} */}
-            <Map searchTerm={extractSearchTerm(this.props.location.search, 'location')} pathname={this.props.location.pathname}/>
+            <Map searchTerm={extractSearchTerm(this.props.location.search, 'location')} pathname={this.props.location.pathname} mapStyle='mapbox://styles/mapbox/dark-v10'/>
         </div>;
     }
 }

@@ -8,14 +8,19 @@ export default class ControlPanel extends React.Component{
         super(props);
         this.state = {
             publisher: [],
+            value: mapStyle[0]
         };
         // API.getpublisher().then((response)=> {
         //     this.setState({publisher : response.data.slice(0,10)});
         // });
     }
 
+    change(e){
+        console.log(e);
+    }
+
     render() {
-        const {handleButtonClickWrapper} = this.props;
+        const {handleButtonClickWrapper,changeMapStyle} = this.props;
         return <div className="control-panel">
             Filter Data Based on Funder/Thematic Areas
             <ButtonToolbar>
@@ -24,6 +29,9 @@ export default class ControlPanel extends React.Component{
                 </DropdownButton>
                 <DropdownButton  variant="dark"  className="dropdown" id="dropdown-basic" title="Thematic Areas">
                     {information.map(info => <Dropdown.Item key={info.id}  >{info.name}</Dropdown.Item>)}
+                </DropdownButton>
+                <DropdownButton  variant="dark"  className="dropdown" id="dropdown-basic" title="Map Style"  >
+                    {mapStyle.map(info => <Dropdown.Item key={info.id} onSelect={changeMapStyle.bind(this,info.id)} >{info.name}</Dropdown.Item>)}
                 </DropdownButton>
             </ButtonToolbar>
             <div className="map-buttons-container d-flex justify-content-center">
@@ -48,4 +56,13 @@ const information = [
 
 ControlPanel.propTypes = {
     handleButtonClickWrapper : PropTypes.any,
+    changeMapStyle : PropTypes.any,
 };
+
+const mapStyle= [
+    {name:'dark', id:'mapbox://styles/mapbox/dark-v10'},
+    {name:'light', id:'mapbox://styles/mapbox/light-v10'},
+    {name:'street view',id:'mapbox://styles/mapbox/streets-v11'},
+    {name:'outdoor',id:'mapbox://styles/mapbox/outdoors-v11'},
+    {name:'satellite streets',id:'mapbox://styles/mapbox/satellite-streets-v11'}
+]

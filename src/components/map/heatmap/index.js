@@ -5,6 +5,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
 import Countries from '../../../assets/geojson/countries.geojson';
+import PropTypes from 'prop-types';
 
 export default class HeatMap extends React.Component{
     constructor(props){
@@ -46,7 +47,7 @@ export default class HeatMap extends React.Component{
                     {...this.state.viewport}
                     width="100%"
                     height="100%"
-                    mapStyle="mapbox://styles/mapbox/dark-v10"
+                    mapStyle={this.props.mapStyle}
                     onViewportChange={viewport => this.setState({viewport})}
                     mapboxApiAccessToken={API_KEY}>
                     <Source id="my-data"
@@ -61,6 +62,9 @@ export default class HeatMap extends React.Component{
     }
 }
 
+HeatMap.propTypes = {
+    mapStyle: PropTypes.string,
+};
 const dataLayer = {
     id: 'data',
     type: 'fill',
