@@ -21,7 +21,8 @@ export default class Search extends React.Component {
 
     setSearch() {
         // console.log(this.state.search);
-        history.push('/search-results/?search='+ this.state.search);
+        const searchterm = 'title_narrative%3A'+this.state.search+' OR description_narrative%3A' +this.state.search;
+        history.push('/search-results/?search='+searchterm+'&page=1');
         this.props.onHide && this.props.onHide();
     }
 
