@@ -9,7 +9,7 @@ import Map from './locationMap';
 const Divider = Dropdown.Divider;
 
 function getNar(narrative, lang = 'en') {
-    console.log(narrative);
+    // console.log(narrative);
     if (!narrative.narratives) {
         return '';
     }
@@ -42,7 +42,7 @@ export default class projectPage extends React.Component{
         this.state = {results: undefined, error: undefined};
 
         API.getProjects(this.props.id).then((response) => {
-            console.log(response);
+            // console.log(response);
             this.setState({ results: response.data });
         }).catch((error) => {
             console.log(error.response);
