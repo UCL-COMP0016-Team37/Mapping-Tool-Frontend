@@ -24,7 +24,9 @@ function getMoney(value) {
 }
 
 function joinBR(array) {
-    return array.map((j, i) => <div key={i}>{i === 0 || <br/>} {j}</div>);
+    return array.map((j, i) => {
+        return <div key={i}>{i === 0 || <br/>} {j}</div>;
+    });
 }
 
 function unique(array) {
@@ -61,45 +63,56 @@ export default class projectPage extends React.Component{
         if (results === undefined) {
             return <></>;
         }
+        const overview = <>
+            <h6>Title</h6>
+            <h5>{getNar(results.title)}</h5>
+            <Divider/>
+            <h6>Locations</h6>
+            <h5>{getNarArray(results.locations.map(item => item.name)).join(', ')}</h5>
+            <Divider/>
+            <h6>Reported By</h6>
+            <h5>{getNar(results.reporting_org)}</h5>
+            <Divider/>
+            <h6>Organisations</h6>
+            <h5>{joinBR(unique(getNarArray(results.participating_organisations)))}</h5>
+            <Divider/>
+            <h6>Budget</h6>
+            <h5>{joinBR(results.budgets.map(item => getMoney(item.value)))}</h5>
+            <Divider/>
+            <h6>Identifier</h6>
+            <Button variant="link" to={`/project-page/${results.iati_identifier}`} as={Link}><h5>{results.iati_identifier}</h5></Button>
+        </>;
         return <Container className="text-left">
-            <Row>
-                <Col>
-                    {results.locations.length > 0 && <Map place={getNar(results.locations[0].name)}/>}
-                </Col>
-                <Col>
-                    <h6>Title</h6>
-                    <h5>{getNar(results.title)}</h5>
-                    <Divider/>
-                    <h6>Locations</h6>
-                    <h5>{getNarArray(results.locations.map(item => item.name)).join(', ')}</h5>
-                    <Divider/>
-                    <h6>Reported By</h6>
-                    <h5>{getNar(results.reporting_org)}</h5>
-                    <Divider/>
-                    <h6>Organisations</h6>
-                    <h5>{joinBR(unique(getNarArray(results.participating_organisations)))}</h5>
-                    <Divider/>
-                    <h6>Budget</h6>
-                    <h5>{joinBR(results.budgets.map(item => getMoney(item.value)))}</h5>
-                    <Divider/>
-                    <h6>Identifier</h6>
-                    <Button variant="link" to={`/project-page/${results.iati_identifier}`} as={Link}><h5>{results.iati_identifier}</h5></Button>
-                </Col>
-            </Row>
+            {results.locations.length > 0 ?
+                <Row>
+                    <Col>
+                        <Map place={getNar(results.locations[0].name)}/>
+                    </Col>
+                    <Col>
+                        {overview}
+                    </Col>
+                </Row>
+                : overview
+            }
 
             <div className="d-flex flex-column">
                 <ButtonGroup className="mt-3">
-                    <Button variant="link" href="#overview">Overview</Button>
-                    <Button variant="link" href="#locations">Locations</Button>
-                    <Button variant="link" href="#budgets">Budgets</Button>
-                    <Button variant="link" href="#transactions">Transactions</Button>
+                    <Button style={{color:'white'}} variant="primary" href="#overview">Overview</Button>
+                    <Button style={{color:'white'}} variant="primary" href="#locations">Locations</Button>
+                    <Button style={{color:'white'}} variant="primary" href="#budgets">Budgets</Button>
+                    <Button style={{color:'white'}} variant="primary" href="#transactions">Transactions</Button>
                 </ButtonGroup>
             </div>
             <div id="overview">
                 <h4>Overview</h4>
+                {getNarArray(results.descriptions).map((i, j) => <p key={j}>{i}</p>)}
+                <Row className="text-center">
+                    {results.activity_dates.reverse().map(el => <Col key={el.type.name}>{el.type.name}</Col>)}
+                </Row>
+                <Row className="text-center">
+                    {results.activity_dates.reverse().map(el => <Col key={el.type.name}>{el.iso_date}</Col>)}
+                </Row>
             </div>
-            {getNarArray(results.descriptions).map((i, j) => <p key={j}>{i}</p>)}
-            <Row className="text-center"><Col>Start Date</Col><Col>End Date</Col></Row>
 
             <div id="locations">
                 <h4>Locations</h4>
