@@ -56,7 +56,7 @@ export default class Map extends PureComponent {
 
     _onClick(city) {
         if (this.props.pathname === '/location/'){
-            history.push('/search-results/?search='+ city);
+            history.push('/search-results/?search=recipient_country_code:('+ city+ ')&page=1');
         }
         else{
             history.push('/location/?location='+ city);
@@ -81,7 +81,7 @@ export default class Map extends PureComponent {
     }
 
     render() {
-        // console.log(this.state.results);
+        console.log(this.props.mapStyle);
         return (
             <div className="map-container">
                 <ErrorBoundary>
@@ -90,7 +90,7 @@ export default class Map extends PureComponent {
                         {...this.state.viewport}
                         width="100%"
                         height="100%"
-                        mapStyle="mapbox://styles/mapbox/dark-v10"
+                        mapStyle={this.props.mapStyle}
                         onViewportChange={viewport => this.setState({viewport})}
                         mapboxApiAccessToken={API_KEY}>
                         <Pins data={this.state.results}
@@ -111,4 +111,5 @@ export default class Map extends PureComponent {
 Map.propTypes = {
     pathname: PropTypes.string,
     searchTerm: PropTypes.string,
+    mapStyle: PropTypes.string,
 };

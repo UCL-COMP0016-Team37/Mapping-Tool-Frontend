@@ -11,6 +11,7 @@ export default class MapContainer extends React.Component {
         super(props);
         this.state = {
             active: 'pin',
+            mapStyle: 'mapbox://styles/mapbox/dark-v10',
         };
     }
 
@@ -20,17 +21,21 @@ export default class MapContainer extends React.Component {
             'heat': HeatMap,
             'fundingFlow': FundingFlowMap,
         };
-        return React.createElement(maps[this.state.active]);
+        return React.createElement(maps[this.state.active],{mapStyle:this.state.mapStyle});
     }
 
     handleButtonClickWrapper(id) {
         return this.setState({ active: id });
     }
 
+    changeMapStyle(e){
+        return this.setState({ mapStyle: e });
+    }
+
     render() {
         return <div className="map-container d-flex flex-column">
             {this.getActiveMap()}
-            <ControlPanel handleButtonClickWrapper={this.handleButtonClickWrapper.bind(this)}/>
+            <ControlPanel changeMapStyle={this.changeMapStyle.bind(this)} handleButtonClickWrapper={this.handleButtonClickWrapper.bind(this)}/>
         </div>;
     }
 

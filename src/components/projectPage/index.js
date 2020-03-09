@@ -9,6 +9,7 @@ import Map from './locationMap';
 const Divider = Dropdown.Divider;
 
 function getNar(narrative, lang = 'en') {
+    // console.log(narrative);
     if (!narrative.narratives) {
         return '';
     }
@@ -33,13 +34,17 @@ function unique(array) {
     return array.filter((i, j) => array.indexOf(i) === j);
 }
 
+// function getNarrative(narrative) {
+//     return narrative.narratives[0].text;
+// }
+
 export default class projectPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: undefined, error: undefined};
 
         API.getProjects(this.props.id).then((response) => {
-            console.log(response);
+            // console.log(response);
             this.setState({ results: response.data });
         }).catch((error) => {
             console.log(error.response);
@@ -119,7 +124,7 @@ export default class projectPage extends React.Component{
                 {results.locations.map((item, i) =>
                     <div key={i}>
                         <h6>{getNar(item.name)}</h6>
-                        {getNar(item.description)}
+                        {/* {getNar(item.description)} */}
                         <Divider/>
                     </div>,
                 )}

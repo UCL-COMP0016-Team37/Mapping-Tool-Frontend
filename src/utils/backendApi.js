@@ -7,17 +7,14 @@ const API = {
         return Axios.get(base_url + '/greeting');
     },
 
-    getProjectsOld: (id) => {
-        return Axios.get(base_url+ '/v1/projects/'+ id);
-    },
-
     getProjects: (id) => {
-        return Axios.get(base_url + '/v2/activities/' + id);
+        return Axios.get(base_url+ '/v2/activities/'+ id);
     },
 
-    getSearch: (term) => {
+    getSearch: (term,page) => {
         console.log(term);
-        return Axios.get(base_url + '/v1/projects/');//0/100
+        const newpage = parseInt(page)
+        return Axios.get(base_url + '/v2/filter/' + term + '/' + newpage);//0/100
     },
 
     getpublisher: () => {
@@ -30,6 +27,10 @@ const API = {
             return Axios.get(url);
         }
         return Axios.get(url + term);
+    },
+
+    getCountry: (term) => {
+        return Axios.get(base_url+ '/v2/countries/'+term);
     },
 
     // getGeocode: () => {

@@ -90,7 +90,6 @@ export default class Map extends React.Component {
         ];
     }
     render() {
-        const mapStyle = 'mapbox://styles/mapbox/dark-v10';
         return <div className="map-container">
             <DeckGL
                 layers={this._renderLayers()}
@@ -101,7 +100,7 @@ export default class Map extends React.Component {
             >
                 <StaticMap
                     reuseMaps
-                    mapStyle={mapStyle}
+                    mapStyle={this.props.mapStyle}
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={API_KEY}
                 />
