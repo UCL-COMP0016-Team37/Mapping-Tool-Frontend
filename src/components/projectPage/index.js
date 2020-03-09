@@ -12,7 +12,11 @@ function getNar(narrative, lang = 'en') {
     if (!narrative.narratives) {
         return '';
     }
-    return narrative.narratives.find(item => item.language.code === lang).text;
+    const nar = narrative.narratives.find(item => item.language.code === lang);
+    if (nar === undefined) {
+        return narrative.narratives[0].text;
+    }
+    return nar.text;
 }
 
 function getNarArray(narrativeArray, lang = 'en') {
@@ -77,7 +81,7 @@ export default class projectPage extends React.Component{
             <h5>{joinBR(unique(getNarArray(results.participating_organisations)))}</h5>
             <Divider/>
             <h6>Budget</h6>
-            <h5>{joinBR(results.budgets.map(item => getMoney(item.value)))}</h5>
+            <h5>{results.budgets.map(item => getMoney(item.value)).join(', ')}</h5>
             <Divider/>
             <h6>Identifier</h6>
             <Button variant="link" to={`/project-page/${results.iati_identifier}`} as={Link}><h5>{results.iati_identifier}</h5></Button>
