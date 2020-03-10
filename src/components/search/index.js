@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Container, Col } from 'react-bootstrap';
 import history from 'utils/history';
-import API from '../../utils/backendApi'
+import API from '../../utils/backendApi';
+import {sector} from '../../utils/sectorCode';
 
 export default class Search extends React.Component {
     constructor(props){
@@ -10,8 +11,9 @@ export default class Search extends React.Component {
         // console.log('Test');
         this.searchInput = React.createRef();
         this.state = {
-            search: props.searchTerm,
+            search: '',
             searchCountry: '',
+            searchSector: null,
             country: [],
         };
         API.getCountry('').then((response) => {
@@ -26,18 +28,29 @@ export default class Search extends React.Component {
     }
 
     setSearch() {
-        // console.log(this.state.search);
-        var searchterm = 'title_narrative%3A'+this.state.search+' OR description_narrative%3A' +this.state.search;
+        var first = true;
+        var searchterm = '';
+        if (this.state.search !== ''){
+            searchterm = 'title_narrative%3A'+this.state.search+' OR description_narrative%3A' +this.state.search;
+            first = false;
+        }
         if (this.state.searchCountry !== ''){
-            searchterm = searchterm + 'AND%20recipient_country_code%3A('+ this.state.searchCountry+')';
+            if (!first){
+                searchterm = searchterm + 'AND%20';
+            }
+            else{first = false;}
+            searchterm = searchterm + 'recipient_country_code%3A('+ this.state.searchCountry+')';
+        }
+        if (this.state.searchSector !== null){
+            if (!first){
+                searchterm = searchterm + 'AND%20';
+            }
+            else{first = false;}
+            searchterm = searchterm + 'sector_code%3A('+ this.state.searchSector+')';
         }
         history.push('/search-results/?search='+searchterm+'&page=1');
         this.props.onHide && this.props.onHide();
     }
-
-    // advanced() {
-    //     history.push('/search');
-    // }
 
     handleChange(e) {
         this.setState({ search: e.target.value });
@@ -57,7 +70,16 @@ export default class Search extends React.Component {
         }
         else{ this.setState({searchCountry: ''});}
     }
+
+    setSector(e){
+        if (e.target.value !== 'All Sectors'){
+            const id = sector.find(sector => sector.name === e.target.value);
+            this.setState({searchSector: id.code});
+        }
+        else{ this.setState({searchSector: null});}
+    }
     render() {
+        console.log(this.state.search);
         return <Container className='advanced-search-container'>
             <Form>
                 <Form.Row>
@@ -85,10 +107,9 @@ export default class Search extends React.Component {
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Sector</Form.Label>
-                        <Form.Control as="select">
+                        <Form.Control as="select" onClick={this.setSector.bind(this)}>
                             <option>All Sectors</option>
-                            <option>Health</option>
-                            <option>Humanitarian</option>
+                            {sector.map(sector => <option key={sector.code}>{sector.name}</option>)}
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>

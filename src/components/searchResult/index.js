@@ -15,11 +15,17 @@ export default class SearchResult extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = {results: [], ready: false, page : this.props.page};
+        this.state = {
+            results: [],
+            ready: false,
+            page : this.props.page,
+            totalpage: 1,};
         API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
             this.setState({page: this.props.page});
-            console.log(response)
+            console.log(response);
             this.setState({ results: response.data.docs, ready: true });
+            const numFound = response.data.numFound;
+            this.setState({totalpage: Math.ceil(numFound/10)})
         });
     }
 
@@ -50,6 +56,7 @@ export default class SearchResult extends React.Component{
     }
 
     render() {
+        console.log(this.state.totalpage)
         if (this.state.ready && this.state.page === '1')
             return <Container className="text-left" fluid>
                 {console.log(this.state.results)}
@@ -59,6 +66,17 @@ export default class SearchResult extends React.Component{
                 )}
                 <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled>Previous Page</Button> ,
                 <Button className='paging-button' onClick={this.forwardPage.bind(this)}>Next Page</Button>,
+                {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
+            </Container>;
+        else if (this.state.ready && this.state.page === this.state.totalpage)
+            return <Container className="text-left" fluid>
+                {console.log(this.state.results)}
+                Loaded {this.state.results.length} results before filtering.
+                {this.state.results.map(
+                    results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
+                )}
+                <Button className='paging-button' onClick={this.backwardPage.bind(this)} >Previous Page</Button> ,
+                <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled>Next Page</Button>,
                 {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
             </Container>;
         else if (this.state.ready)

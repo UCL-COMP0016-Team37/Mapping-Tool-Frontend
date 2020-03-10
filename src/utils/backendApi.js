@@ -13,7 +13,7 @@ const API = {
 
     getSearch: (term,page) => {
         console.log(term);
-        const newpage = parseInt(page)
+        const newpage = parseInt(page)-1;
         return Axios.get(base_url + '/v2/filter/' + term + '/' + newpage);//0/100
     },
 
