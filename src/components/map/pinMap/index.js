@@ -81,7 +81,7 @@ export default class Map extends PureComponent {
     }
 
     render() {
-        console.log(this.props.mapStyle);
+        // console.log(this.props.mapStyle);
         return (
             <div className="map-container">
                 <ErrorBoundary>
