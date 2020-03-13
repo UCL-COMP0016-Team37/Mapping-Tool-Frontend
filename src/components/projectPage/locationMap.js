@@ -16,7 +16,12 @@ export default class Map extends React.Component {
 
         MapboxGeocoder.geocode('mapbox.places', this.props.place, (err, data) => {
             console.log(data);
-            const center = data.features[0].center;
+            const feature = data.features[0];
+            if (feature === undefined) {
+                this.setState({ error: true });
+                return;
+            }
+            const center = feature.center;
             this.setState({ longitude: center[0], latitude: center[1], place_longitude: center[0], place_latitude: center[1] });
         });
         this.state = {
@@ -25,10 +30,14 @@ export default class Map extends React.Component {
             pitch: 0,
             place_latitude: 0,
             place_longitude: 0,
+            error: false,
         };
     }
 
     render() {
+        if (this.state.error) {
+            return <></>;
+        }
         return <ErrorBoundary>
             <MapGL
                 {...this.state}
