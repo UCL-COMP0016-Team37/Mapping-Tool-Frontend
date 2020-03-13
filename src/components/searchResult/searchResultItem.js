@@ -14,20 +14,21 @@ import history from 'utils/history';
 export default class SearchResultItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {project: this.props};
+        this.state = {project: this.props.id};
     }
 
     projectView(){
-        const projectId = this.state.project.data.iati_identifier;
+        const projectId = this.state.project;
         history.push('/project-page/'+projectId);
     }
 
     render() {
         const { data } = this.props;
+        // console.log(data)
         return <Card>
             <Card.Body>
-                <Card.Title>{data.title.narratives[0].text}</Card.Title>
-                <Card.Subtitle>{data.recipient_countries[0].country.name}</Card.Subtitle>
+                <Card.Title>{data}</Card.Title>
+                {/* <Card.Subtitle>{data.recipient_countries[0].country.name}</Card.Subtitle> */}
                 {/* <Card.Text>{trimText(data.projectDescription)}</Card.Text> */}
                 <Card.Link variant="light" href="" onClick={this.projectView.bind(this)}>View Project</Card.Link>
             </Card.Body>
@@ -37,4 +38,5 @@ export default class SearchResultItem extends React.Component {
 
 SearchResultItem.propTypes = {
     data: PropTypes.any,
+    id: PropTypes.string,
 };
