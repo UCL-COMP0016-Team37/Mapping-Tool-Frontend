@@ -42,9 +42,9 @@ export default class Header extends React.Component {
                             <Nav.Link>Top 100</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
-                    <Nav.Item>
+                    {/* <Nav.Item>
                         <Nav.Link href="/search">Filter Data</Nav.Link>
-                    </Nav.Item>
+                    </Nav.Item> */}
                 </Nav>
                 <Nav className='mr-auto'></Nav>
                 <Container className="search-container">

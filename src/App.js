@@ -11,7 +11,7 @@ import SearchResults from 'pages/searchResults';
 import Chart from 'pages/chart';
 import Location from 'pages/location';
 import Navbar from 'components/header';
-import FilterSearch from './components/filterSearch';
+// import FilterSearch from './components/filterSearch';
 import history from 'utils/history';
 import Top100 from 'components/top100';
 import './App.css';
@@ -27,7 +27,7 @@ function App() {
                     <Switch>
                         <Route path="/data" component={Data}/>
                         <Route path="/top-100" component={Top100}/>
-                        <Route path="/search" component={FilterSearch}/>
+                        {/* <Route path="/search" component={FilterSearch}/> */}
                         <Route path="/search-results" component={SearchResults}/>
                         <Route path="/project-page/:id" component={ProjectPage}/>
                         <Route path="/chart" component={Chart}/>
