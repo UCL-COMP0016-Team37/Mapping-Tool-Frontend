@@ -28,27 +28,29 @@ export default class Search extends React.Component {
     }
 
     setSearch() {
-        var first = true;
-        var searchterm = '';
+        let first = true;
+        let searchTerm = '';
         if (this.state.search !== ''){
-            searchterm = 'title_narrative%3A'+this.state.search+' OR description_narrative%3A' +this.state.search;
+            searchTerm = `title_narrative%3A${this.state.search} OR description_narrative%3A${this.state.search}`;
             first = false;
         }
-        if (this.state.searchCountry !== ''){
-            if (!first){
-                searchterm = searchterm + 'AND%20';
+        if (this.state.searchCountry !== '') {
+            if (!first) {
+                searchTerm += 'AND%20';
+            } else {
+                first = false;
             }
-            else{first = false;}
-            searchterm = searchterm + 'recipient_country_code%3A('+ this.state.searchCountry+')';
+            searchTerm += `recipient_country_code%3A(${this.state.searchCountry})`;
         }
-        if (this.state.searchSector !== null){
-            if (!first){
-                searchterm = searchterm + 'AND%20';
+        if (this.state.searchSector !== null) {
+            if (!first) {
+                searchTerm += 'AND%20';
+            } else {
+                first = false;
             }
-            else{first = false;}
-            searchterm = searchterm + 'sector_code%3A('+ this.state.searchSector+')';
+            searchTerm += `sector_code%3A(${this.state.searchSector})`;
         }
-        history.push('/search-results/?search='+searchterm+'&page=1');
+        history.push(`/search-results/?search=${searchTerm}&page=1`);
         this.props.onHide && this.props.onHide();
     }
 
@@ -56,32 +58,27 @@ export default class Search extends React.Component {
         this.setState({ search: e.target.value });
     }
 
-    handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            this.setSearch();
-        }
-    }
-
-    setcountry(e){
-        // console.log(e.target.value);
-        if (e.target.value !== 'All Countries'){
+    setCountry(e) {
+        if (e.target.value !== 'All Countries') {
             const id = this.state.country.find(country => country.name === e.target.value);
-            this.setState({searchCountry: id.code});
+            this.setState({ searchCountry: id.code });
+        } else {
+            this.setState({ searchCountry: '' });
         }
-        else{ this.setState({searchCountry: ''});}
     }
 
-    setSector(e){
-        if (e.target.value !== 'All Sectors'){
+    setSector(e) {
+        if (e.target.value !== 'All Sectors') {
             const id = sector.find(sector => sector.name === e.target.value);
             this.setState({searchSector: id.code});
+        } else {
+            this.setState({ searchSector: null });
         }
-        else{ this.setState({searchSector: null});}
     }
+
     render() {
-        console.log(this.state.search);
         return <Container className='advanced-search-container'>
-            <Form>
+            <Form onSubmit={e => { e.preventDefault(); this.setSearch(); }}>
                 <Form.Row>
                     <Form.Group as={Col}>
                         <Form.Control
@@ -91,7 +88,6 @@ export default class Search extends React.Component {
                             value={this.state.search}
                             onFocus={this.props.onFocus}
                             onChange={this.handleChange.bind(this)}
-                            onKeyPress={this.handleKeyPress.bind(this)}
                             autoFocus
                             ref={this.searchInput}
                         />
@@ -100,7 +96,7 @@ export default class Search extends React.Component {
                 <Form.Row>
                     <Form.Group as={Col} controlId="country">
                         <Form.Label>Country</Form.Label>
-                        <Form.Control as="select" onClick={this.setcountry.bind(this)}>
+                        <Form.Control as="select" onClick={this.setCountry.bind(this)}>
                             <option>All Countries</option>
                             {this.state.country.map(country => <option key={country.code}>{country.name}</option>)}
                         </Form.Control>
@@ -113,7 +109,7 @@ export default class Search extends React.Component {
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>
-                <Button variant="primary" type="submit" className='search-button mx-2' onClick={this.setSearch.bind(this)}>Search</Button>
+                <Button variant="primary" type="submit" className='search-button mx-2'>Search</Button>
             </Form>
         </Container>;
     }
