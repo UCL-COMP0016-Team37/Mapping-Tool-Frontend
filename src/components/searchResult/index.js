@@ -28,12 +28,10 @@ export default class SearchResult extends React.Component{
     }
 
     chartView() {
-        console.log('chartView');
         history.push('/chart/?search='+this.props.searchTerm);
     }
 
     componentDidUpdate() {
-        console.log('update');
         if (this.props.page !== this.state.page){
             API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
                 this.setState({ results: response.data.docs, ready: true, page: this.props.page });
@@ -42,21 +40,18 @@ export default class SearchResult extends React.Component{
     }
 
     forwardPage() {
-        console.log('forward');
         const newPage = parseInt(this.state.page) + 1;
         this.setState({ backwardButton: false, ready: false, forwardButton: newPage === this.state.totalPage });
         history.push('/search-results/?search='+ this.props.searchTerm + '&page='+ newPage);
     }
 
     backwardPage() {
-        console.log('backward');
         const newPage = parseInt(this.state.page) - 1;
         this.setState({ forwardButton: false, ready: false, backwardButton: newPage === 1 });
         history.push('/search-results/?search='+ this.props.searchTerm + '&page='+ newPage);
     }
 
     render() {
-        console.log('render');
         if (this.state.ready)
             return <Container className="text-left" fluid>
                 Loaded {this.state.results.length} results before filtering.
