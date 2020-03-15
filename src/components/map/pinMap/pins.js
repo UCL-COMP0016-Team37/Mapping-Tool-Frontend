@@ -88,7 +88,7 @@ function clusterpins(original){
                     let lat = Math.abs(parseFloat(copy[i].coordinate.latitude) - parseFloat(copy[j].coordinate.latitude));
                     let long = Math.abs(parseFloat(copy[i].coordinate.longitude) - parseFloat(copy[j].coordinate.longitude));
                     // console.log(copy[i].latitude - copy[i].latitude);
-                    if (lat < 14 && long < 14) {
+                    if (lat < 11 && long < 11) {
                         newlist.push(copy[j]);
                         delete copy[j];
                     }
@@ -100,8 +100,8 @@ function clusterpins(original){
             var num = 0;
             for (k = 0; k < newlist.length; k++){
                 if (k > 0){
-                    desc = desc + ' & ' ;
-                    name = name + ' & ' ;
+                    desc = desc + ', ' ;
+                    name = name + ', ' ;
                 }
                 desc= desc+ newlist[k].code;
                 name= name+ newlist[k].countryName;
