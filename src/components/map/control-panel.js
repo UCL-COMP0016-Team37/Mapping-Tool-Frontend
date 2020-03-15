@@ -38,7 +38,7 @@ export default class ControlPanel extends React.Component{
                 <ButtonGroup size="md">
                     <Button variant="dark" onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
                     <Button variant="dark" onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
-                    <Button variant="dark" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button>
+                    {/* <Button variant="dark" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button> */}
                 </ButtonGroup>
             </div>
         </div>;
