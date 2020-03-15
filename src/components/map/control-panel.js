@@ -8,7 +8,7 @@ export default class ControlPanel extends React.Component{
         super(props);
         this.state = {
             publisher: [],
-            value: mapStyle[0]
+            value: mapStyle[0],
         };
         // API.getpublisher().then((response)=> {
         //     this.setState({publisher : response.data.slice(0,10)});
@@ -64,5 +64,5 @@ const mapStyle= [
     {name:'light', id:'mapbox://styles/mapbox/light-v10'},
     {name:'street view',id:'mapbox://styles/mapbox/streets-v11'},
     {name:'outdoor',id:'mapbox://styles/mapbox/outdoors-v11'},
-    {name:'satellite streets',id:'mapbox://styles/mapbox/satellite-streets-v11'}
-]
+    {name:'satellite streets',id:'mapbox://styles/mapbox/satellite-streets-v11'},
+];
