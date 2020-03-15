@@ -3,11 +3,32 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Marker } from 'react-map-gl';
-import PinImage from 'assets/images/white-white.png';
+import WhiteImage from 'assets/images/white-white.png';
+import GoldImage from 'assets/images/gold.png';
+import RedImage from 'assets/images/transparent-red.png';
+import {MAP_STYLE,mapStyle} from '../../../utils/mapbox';
 import '../map.scss';
 
 export default class Pins extends PureComponent {
+    constructor(props){
+        super(props);
+        this.state = {
+            mapStyle: this.props.mapStyle,
+            PinImage: WhiteImage,
+        };
+    }
 
+    componentDidUpdate(){
+        if(this.state.mapStyle!==this.props.mapStyle){
+            if (this.props.mapStyle === mapStyle[4].id){
+                this.setState({PinImage : RedImage, mapStyle : this.props.mapStyle});
+            }
+            else if (this.props.mapStyle !== MAP_STYLE){
+                this.setState({PinImage : GoldImage, mapStyle : this.props.mapStyle});
+            }
+            else this.setState({PinImage : WhiteImage, mapStyle : this.props.mapStyle});
+        }
+    }
 
     render() {
         const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
@@ -21,7 +42,7 @@ export default class Pins extends PureComponent {
                     <div className="image-container"
                         onMouseOver={() => onMouseOver(data)}
                         onMouseOut ={() => onMouseLeave()}>
-                        <img src={PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
+                        <img src={this.state.PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
                         <div className="image-marker">{data.activityCount}</div>
                     </div>
                 </Marker>,
@@ -34,7 +55,7 @@ export default class Pins extends PureComponent {
                     onMouseOver={() => onMouseOver(data)}
                     onMouseOut ={() => onMouseLeave()}
                     onClick ={() => onClick(data.code)}>
-                    <img src={PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
+                    <img src={this.state.PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
                     <div className="image-marker">{data.activityCount}</div>
                 </div>
             </Marker>;}
@@ -49,6 +70,7 @@ Pins.propTypes = {
     onClick: PropTypes.any,
     onMouseLeave: PropTypes.any,
     viewportZoom: PropTypes.number,
+    mapStyle: PropTypes.string,
 };
 
 function clusterpins(original){
