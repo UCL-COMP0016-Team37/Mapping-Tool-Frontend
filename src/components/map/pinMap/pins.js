@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Marker } from 'react-map-gl';
 import WhiteImage from 'assets/images/white-white.png';
 import GoldImage from 'assets/images/gold.png';
-import RedImage from 'assets/images/transparent-red.png';
+// import RedImage from 'assets/images/transparent-red.png';
 import {MAP_STYLE,mapStyle} from '../../../utils/mapbox';
 import '../map.scss';
 
@@ -20,10 +20,7 @@ export default class Pins extends PureComponent {
 
     componentDidUpdate(){
         if(this.state.mapStyle!==this.props.mapStyle){
-            if (this.props.mapStyle === mapStyle[4].id){
-                this.setState({PinImage : RedImage, mapStyle : this.props.mapStyle});
-            }
-            else if (this.props.mapStyle !== MAP_STYLE){
+            if (this.props.mapStyle !== MAP_STYLE && this.props.mapStyle !== mapStyle[4].id){
                 this.setState({PinImage : GoldImage, mapStyle : this.props.mapStyle});
             }
             else this.setState({PinImage : WhiteImage, mapStyle : this.props.mapStyle});
