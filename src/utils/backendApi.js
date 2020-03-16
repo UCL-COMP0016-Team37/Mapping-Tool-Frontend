@@ -18,7 +18,7 @@ const API = {
     },
 
     getpublisher: () => {
-        return Axios.get(base_url + '/v2/publisher/');
+        return Axios.get(base_url + '/v2/publishers/');
     },
 
     getMapPin: (term) => {

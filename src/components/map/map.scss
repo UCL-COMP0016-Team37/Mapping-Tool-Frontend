@@ -40,7 +40,8 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     padding: 12px 24px;
     margin: 20px;
-    height: 50vh;
+    height: 10%;
+    width: 25%;
     font-size: 13px;
     line-height: 2;
     color: #38383f;
@@ -49,7 +50,5 @@
   }
 
 .dropdown{
-    position: absolute;
-    margin-top: 3vh;
-    left: 10%;
+    display: inline-block;
 }
