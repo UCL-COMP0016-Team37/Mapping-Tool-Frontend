@@ -110,6 +110,7 @@ export default class projectPage extends React.Component{
                     <Button style={{color:'white'}} variant="primary" href="#locations">Locations</Button>
                     <Button style={{color:'white'}} variant="primary" href="#budgets">Budgets</Button>
                     <Button style={{color:'white'}} variant="primary" href="#transactions">Transactions</Button>
+                    <Button style={{color:'white'}} variant="primary" href="#related">Related Activities</Button>
                 </ButtonGroup>
             </div>
             <div id="overview">
@@ -160,6 +161,10 @@ export default class projectPage extends React.Component{
 
             <div id="transactions">
                 <h4>Transactions</h4>
+            </div>
+            <div id="related">
+                <h4>Related Activities</h4>
+                {results.related_activities.map(el => <Button key={el.ref} variant="link" to={`/project-page/${el.ref}`} as={Link}>{el.ref}</Button>)}
             </div>
         </Container>;
     }
