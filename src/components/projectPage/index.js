@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Container, Button, Row, Col, ButtonGroup, Table, Dropdown, Alert } from 'react-bootstrap';
+import { Container, Button, Row, Col, Table, Dropdown, Alert } from 'react-bootstrap';
 import API from 'utils/backendApi';
 import { formatMoney } from 'utils/formatting';
 import Map from './locationMap';
+import './projectPage.scss';
 
 const Divider = Dropdown.Divider;
 
 function getNar(narrative, lang = 'en') {
-    // console.log(narrative);
     if (!narrative.narratives) {
         return '';
     }
@@ -38,21 +38,31 @@ function unique(array) {
     return array.filter((i, j) => array.indexOf(i) === j);
 }
 
-// function getNarrative(narrative) {
-//     return narrative.narratives[0].text;
-// }
+Array.prototype.mapOr = function(func, otherwise) {
+    if (this.length === 0)
+        return otherwise;
+    return this.map(func);
+};
 
-export default class projectPage extends React.Component{
+export default class ProjectPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {results: undefined, error: undefined};
 
         API.getProjects(this.props.id).then((response) => {
-            // console.log(response);
+            console.log(response);
             this.setState({ results: response.data });
         }).catch((error) => {
             console.log(error.response);
             this.setState({ error: error.response });
+        });
+
+        API.getTransactions(this.props.id).then((response) => {
+            console.log(response);
+            this.setState({ transactionResults: response.data });
+        }).catch((error) => {
+            console.log(error.response);
+            this.setState({ transactionError: error.response});
         });
     }
 
@@ -104,16 +114,9 @@ export default class projectPage extends React.Component{
                 : overview
             }
 
-            <div className="d-flex flex-column">
-                <ButtonGroup className="mt-3">
-                    <Button style={{color:'white'}} variant="primary" href="#overview">Overview</Button>
-                    <Button style={{color:'white'}} variant="primary" href="#locations">Locations</Button>
-                    <Button style={{color:'white'}} variant="primary" href="#budgets">Budgets</Button>
-                    <Button style={{color:'white'}} variant="primary" href="#transactions">Transactions</Button>
-                    <Button style={{color:'white'}} variant="primary" href="#related">Related Activities</Button>
-                </ButtonGroup>
-            </div>
-            <div id="overview">
+            <Divider/>
+
+            <div id="overview" className="section">
                 <h4>Overview</h4>
                 {getNarArray(results.descriptions).map((i, j) => <p key={j}>{i}</p>)}
                 <Row className="text-center">
@@ -123,19 +126,23 @@ export default class projectPage extends React.Component{
                     {results.activity_dates.reverse().map(el => <Col key={el.type.name}>{el.iso_date}</Col>)}
                 </Row>
             </div>
+            <Divider/>
 
-            <div id="locations">
+            <div id="locations" className="section">
                 <h4>Locations</h4>
-                {results.locations.map((item, i) =>
+                {results.locations.mapOr((item, i) =>
                     <div key={i}>
                         <h6>{getNar(item.name)}</h6>
                         {/* {getNar(item.description)} */}
                         <Divider/>
                     </div>,
+                'There are no locations.',
                 )}
             </div>
 
-            <div id="budgets">
+            <Divider/>
+
+            <div id="budgets" className="section">
                 <h4>Budgets</h4>
                 <Table hover>
                     <thead>
@@ -147,30 +154,58 @@ export default class projectPage extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {results.budgets.map((item, i) =>
+                        {results.budgets.mapOr((item, i) =>
                             <tr key={i}>
                                 <td>{item.type.name}</td>
                                 <td>{item.period_start}</td>
                                 <td>{item.period_end}</td>
                                 <td>{getMoney(item.value)}</td>
                             </tr>,
+                        'There are no budgets',
                         )}
                     </tbody>
                 </Table>
             </div>
 
-            <div id="transactions">
+            <Divider/>
+
+            <div id="transactions" className="section">
                 <h4>Transactions</h4>
+                <Table hover>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Finance Type</th>
+                            <th>Tied Status</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.transactionResults.mapOr((transaction, i) =>
+                            <tr key={i}>
+                                <td>{transaction.transaction_date}</td>
+                                <td>{transaction.transaction_type.name}</td>
+                                <td>{transaction.finance_type.name}</td>
+                                <td>{transaction.tied_status.name}</td>
+                                <td>{getMoney(transaction)}</td>
+                            </tr>,
+                        'There are no transactions.')}
+                    </tbody>
+                </Table>
             </div>
-            <div id="related">
+
+            <Divider/>
+
+            <div id="related" className="section">
                 <h4>Related Activities</h4>
-                {results.related_activities.map(el => <Button key={el.ref} variant="link" to={`/project-page/${el.ref}`} as={Link}>{el.ref}</Button>)}
+                {results.related_activities.mapOr(el => <Button key={el.ref} variant="link" to={`/project-page/${el.ref}`} as={Link}>{el.ref}</Button>, 'There are no related activities')}
             </div>
         </Container>;
     }
 
 }
 
-projectPage.propTypes = {
+ProjectPage.propTypes = {
     id: PropTypes.string,
 };
