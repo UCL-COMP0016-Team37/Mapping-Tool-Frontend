@@ -41,8 +41,8 @@ const API = {
         return Axios.get(base_url + '/v2/analysis/topOrgs');
     },
 
-    getSectorInCountryAnalysis: (term) =>{
-        return Axios.get(base_url + '/v2/analysis/sector-in-country/' + term);
+    getSectorInCountryAnalysis: (country) =>{
+        return Axios.get(base_url + '/v2/analysis/sector-in-country/' + country);
     },
 
     getTopOrgsinCountry: (country,sector) => {

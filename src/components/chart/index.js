@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
-import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
+import {DropdownButton,Dropdown,ButtonToolbar,Button} from 'react-bootstrap';
 import getarrayvalue from 'utils/sortUniqueArray';
 
 function isMatch(needle, haystack) {
@@ -13,20 +13,37 @@ function isMatch(needle, haystack) {
 export default class Chart extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {results: [],
+        this.state = {
+            results: undefined,
             info: 'humanitarian',
             graph: 'doughnut',
+            graphcolor: ['#00C6F7','#43D86F','#662541','#7FC432'],
             countryCode: props.countryCode,
-            sectorCode: props.sectorCode};
+            sectorCode: props.sectorCode,
+            sector: props.sectorCode === '',
+            country: props.countryCode === '',
+            both: !(props.countryCode !== '' && props.sectorCode !== ''),
+            ready: false,
+        };
         this.chartRef = React.createRef();
-        // API.getSearch('test').then((response) => {
-        //     // console.log(response);
-        //     this.setState({ results: response.data });
-        // });
     }
 
     _onClickInfo(data) {
-        this.setState({info : data});
+        if(data === 'donors'){
+            API.getTopDonorPerOrg(this.state.sectorCode).then((response) =>{
+                this.setState({results: response.data.tops, number: response.data.totalOrgs, ready:true});
+            });
+        }
+        else if(data === 'organization'){
+            API.getTopReceiverPerOrg(this.state.sectorCode).then((response) =>{
+                this.setState({results: response.data.tops, number: response.data.totalOrgs, ready:true});
+            });
+        }
+        else {
+            API.getTopReceiverPerSector(this.state.sectorCode).then((response) =>{
+                this.setState({results: response.data.tops, number: response.data.totalOrgs, ready:true});
+            });
+        }
         // console.log(data)
     }
 
@@ -35,44 +52,43 @@ export default class Chart extends React.Component{
         // console.log(data)
     }
 
-    valueByInfo(data) {
-        if(this.state.info === 'donors'){
-            return data.donors;
-        }
-        else if(this.state.info === 'organization'){
-            return data.organization;
-        }
-        else if(this.state.info === 'sector'){
-            return data.sector;
-        }
-        else if(this.state.info === 'location'){
-            return data.location.split('|')[0].split('>')[0];
-        }
-        else if(this.state.info === 'status'){
-            return data.status;
-        }
-        else{
-            return data.humanitarian;
-        }
+    displaybothData(){
+        API.getTopOrgsinCountry(this.state.countryCode,this.state.sectorCode).then((response) =>{
+            this.setState({results: response.data.tops, number: response.data.totalOrgs, ready:true});
+        });
     }
 
+    displayCountryData(){
+        API.getSectorInCountryAnalysis(this.state.countryCode).then((response) =>{
+            this.setState({results: response.data.tops, number: response.data.totalOrgs, ready:true});
+        });
+    }
     render() {
-        // console.log(this.props.countryCode + ' ' + this.props.sectorCode);
-        // const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(data => this.valueByInfo(data));
-        // const dataToEvaluate = getarrayvalue(humanitarian);
-        // const value = dataToEvaluate.map(data => data.value);
-        // const count = dataToEvaluate.map(data => data.count);
-
-        return <div className="chart-canvas">
-            {/* <ButtonToolbar>
+        if (this.state.ready)
+            return <div className="chart-canvas">
+                <ButtonToolbar>
+                    <Button className='both-button' onClick={() => this.displaybothData()}disabled={this.state.both}>Sector and country Analysis</Button>
+                    <Button className='country-button' onClick={() => this.displayCountryData()} disabled={this.state.country}>Country Analysis</Button>
+                    <DropdownButton id="dropdown-basic-button" title="Sector Analysis" disabled={this.state.sector}>
+                        {information.map(info => <Dropdown.Item key={info.id} onClick={() => this._onClickInfo(info.id)} >{info.name}</Dropdown.Item>)}
+                    </DropdownButton>
+                    <DropdownButton id="dropdown-basic-button" title="Type of Graph">
+                        {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
+                    </DropdownButton>
+                </ButtonToolbar>
+                <IndexItem id={this.state.sectorCode + '-'+ this.state.countryCode} type={this.state.graph} title={this.state.info} labels={this.state.results.map(data => data.name)} data={this.state.results.map(data => data.number)} color={this.state.graphcolour}/>
+            </div>;
+        return<div className="chart-canvas">
+            <ButtonToolbar>
+                <Button className='both-button' onClick={() => this.displaybothData()}disabled={this.state.both}>Sector and country Analysis</Button>
+                <Button className='country-button'disabled={this.state.country}>Country Analysis</Button>
+                <DropdownButton id="dropdown-basic-button" title="Sector Analysis" disabled={this.state.sector}>
+                    {information.map(info => <Dropdown.Item key={info.id} onClick={() => this._onClickInfo(info.id)} >{info.name}</Dropdown.Item>)}
+                </DropdownButton>
                 <DropdownButton id="dropdown-basic-button" title="Type of Graph">
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
                 </DropdownButton>
-                <DropdownButton id="dropdown-basic-button" title="Type of Information">
-                    {information.map(info => <Dropdown.Item key={info.id} onClick={() => this._onClickInfo(info.id)} >{info.name}</Dropdown.Item>)}
-                </DropdownButton>
             </ButtonToolbar>
-            <IndexItem id={this.state.info + '-'+ this.state.graph} type={this.state.graph} title={this.state.info} labels={value} data={count}/> */}
         </div>;
     }
 }
@@ -88,12 +104,9 @@ const typeOfGraph = [
 ];
 
 const information = [
-    {name:'Donors',id:'donors'},
-    {name:'Organisation',id:'organization'},
-    {name:'Sector',id:'sectors'},
-    {name:'Location',id:'location'},
-    {name:'Status',id:'status'},
-    {name:'Humanitarian',id:'humanitarian'},
+    {name:'Top Donor Org',id:'donors'},
+    {name:'Top Receiver Org',id:'organization'},
+    {name:'Top Receiver Country',id:'country'},
 ];
 
 Chart.propTypes = {
