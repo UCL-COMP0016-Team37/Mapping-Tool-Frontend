@@ -10,9 +10,9 @@ export default class Chart extends React.Component{
         super(props);
         this.state = {
             results: undefined,
-            info: 'humanitarian',
+            info: '',
             graph: 'doughnut',
-            graphcolor: ['#00C6F7','#43D86F','#662541','#7FC432'],
+            graphcolor: ['red','green','blue','yellow'],
             countryCode: props.countryCode,
             sectorCode: props.sectorCode,
             sector: props.sectorCode === '',
@@ -34,6 +34,7 @@ export default class Chart extends React.Component{
                     results: response.data.tops,
                     number: response.data.totalOrgs,
                     ready:true,
+                    info: 'top 4 donor organisation for sector (in $)',
                 });
             });
         }
@@ -43,6 +44,7 @@ export default class Chart extends React.Component{
                     results: response.data.tops,
                     number: response.data.totalOrgs,
                     ready:true,
+                    info: 'top 4 receiver organisation for sector (in $)',
                 });
             });
         }
@@ -52,6 +54,7 @@ export default class Chart extends React.Component{
                     results: response.data.tops,
                     number: response.data.totalOrgs,
                     ready:true,
+                    info: 'top 4 receiver country for sector (in $)',
                 });
             });
         }
@@ -63,6 +66,7 @@ export default class Chart extends React.Component{
                 results: response.data.tops,
                 number: response.data.totalOrgs,
                 ready:true,
+                info: 'top 4 organisation in country',
             });
         });
     }
@@ -73,6 +77,7 @@ export default class Chart extends React.Component{
                 results: response.data.tops,
                 number: response.data.totalOrgs,
                 ready:true,
+                info: 'top 4 sector in country',
             });
         });
     }
@@ -109,7 +114,7 @@ export default class Chart extends React.Component{
                     title={this.state.info}
                     labels={this.state.results.map(data => data.name)}
                     data={this.state.results.map(data => data.number)}
-                    color={this.state.graphcolour}
+                    color={this.state.graphcolor}
                 />
             </div>;
         return<div className="chart-canvas">
@@ -136,6 +141,7 @@ export default class Chart extends React.Component{
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
                 </DropdownButton>
             </ButtonToolbar>
+            No Graph To Display
         </div>;
     }
 }
