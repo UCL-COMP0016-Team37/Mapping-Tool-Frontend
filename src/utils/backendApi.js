@@ -37,6 +37,10 @@ const API = {
         return Axios.get(base_url + '/v2/transactions/' + id);
     },
 
+    getTopHundred: () => {
+        return Axios.get(base_url + '/v2/analysis/topOrgs');
+    },
+
     // getGeocode: () => {
     //     return Axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/United%20States%20of%20America.json?access_token='+ API_KEY);
     // },
