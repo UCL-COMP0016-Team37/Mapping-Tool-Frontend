@@ -51,7 +51,7 @@ export default class Header extends React.Component {
                     <Form.Control
                         className="search-bar"
                         placeholder="Search..."
-                        value={extractSearchTerm(this.props.location.search, 'search')}
+                        value={extractSearchTerm(this.props.location.search, 'search').split('title_narrative%3A')[1].split('%20')[0]}
                         onClick={this.handleStartSearching.bind(this)}
                         onChange={() => {}}
                         ref={this.search}
