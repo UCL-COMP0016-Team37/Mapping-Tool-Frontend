@@ -41,9 +41,25 @@ const API = {
         return Axios.get(base_url + '/v2/analysis/topOrgs');
     },
 
-    // getGeocode: () => {
-    //     return Axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/United%20States%20of%20America.json?access_token='+ API_KEY);
-    // },
+    getSectorInCountryAnalysis: (term) =>{
+        return Axios.get(base_url + '/v2/analysis/sector-in-country/' + term);
+    },
+
+    getTopOrgsinCountry: (country,sector) => {
+        return Axios.get(base_url + '/v2/analysis/topOrgs/sector=' + sector + '&country=' + country);
+    },
+
+    getTopDonorPerOrg: (sector) => {
+        return Axios.get(base_url + '/v2/analysis/transaction-from-org/'+ sector );
+    },
+
+    getTopReceiverPerOrg: (sector) => {
+        return Axios.get(base_url + '/v2/analysis/transaction-to-org/' + sector);
+    },
+
+    getTopReceiverPerSector: (sector) => {
+        return Axios.get(base_url + '/v2/analysis/budget-to-country/' + sector);
+    },
 };
 
 export default API;

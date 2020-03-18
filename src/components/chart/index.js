@@ -15,12 +15,14 @@ export default class Chart extends React.Component{
         super(props);
         this.state = {results: [],
             info: 'humanitarian',
-            graph: 'doughnut'};
+            graph: 'doughnut',
+            countryCode: props.countryCode,
+            sectorCode: props.sectorCode};
         this.chartRef = React.createRef();
-        API.getSearch('test').then((response) => {
-            // console.log(response);
-            this.setState({ results: response.data });
-        });
+        // API.getSearch('test').then((response) => {
+        //     // console.log(response);
+        //     this.setState({ results: response.data });
+        // });
     }
 
     _onClickInfo(data) {
@@ -55,13 +57,14 @@ export default class Chart extends React.Component{
     }
 
     render() {
-        const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(data => this.valueByInfo(data));
-        const dataToEvaluate = getarrayvalue(humanitarian);
-        const value = dataToEvaluate.map(data => data.value);
-        const count = dataToEvaluate.map(data => data.count);
+        // console.log(this.props.countryCode + ' ' + this.props.sectorCode);
+        // const humanitarian = this.state.results.filter(something => isMatch(this.props.searchTerm, something.projectName)).map(data => this.valueByInfo(data));
+        // const dataToEvaluate = getarrayvalue(humanitarian);
+        // const value = dataToEvaluate.map(data => data.value);
+        // const count = dataToEvaluate.map(data => data.count);
 
         return <div className="chart-canvas">
-            <ButtonToolbar>
+            {/* <ButtonToolbar>
                 <DropdownButton id="dropdown-basic-button" title="Type of Graph">
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
                 </DropdownButton>
@@ -69,7 +72,7 @@ export default class Chart extends React.Component{
                     {information.map(info => <Dropdown.Item key={info.id} onClick={() => this._onClickInfo(info.id)} >{info.name}</Dropdown.Item>)}
                 </DropdownButton>
             </ButtonToolbar>
-            <IndexItem id={this.state.info + '-'+ this.state.graph} type={this.state.graph} title={this.state.info} labels={value} data={count}/>
+            <IndexItem id={this.state.info + '-'+ this.state.graph} type={this.state.graph} title={this.state.info} labels={value} data={count}/> */}
         </div>;
     }
 }
@@ -95,4 +98,6 @@ const information = [
 
 Chart.propTypes = {
     searchTerm: PropTypes.string,
+    countryCode: PropTypes.string,
+    sectorCode: PropTypes.string,
 };

@@ -38,6 +38,7 @@ export default class IndexItem extends React.Component{
                     text: this.props.title,
                     position: 'top',
                     fontSize: 25,
+                    fontFamily: 'Arial',
                 },
             },
         });

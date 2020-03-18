@@ -4,7 +4,7 @@ import API from 'utils/backendApi';
 import IndexItem from '../../utils/indexItem';
 import './top100.scss';
 import PropTypes from 'prop-types';
-import { Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import history from '../../utils/history';
 
 export default class Top100 extends React.Component{
