@@ -30,7 +30,7 @@ export default class Header extends React.Component {
 
     render() {
         return <>
-            <Navbar className="navbar">
+            <Navbar className="navbar" variant="dark" bg="primary">
                 <LinkContainer to="/">
                     <Navbar.Brand className="logo-title">
                         ANCSSC Mapping Tool
