@@ -10,6 +10,7 @@ import Data from 'pages/data';
 import SearchResults from 'pages/searchResults';
 import Chart from 'pages/chart';
 import Location from 'pages/location';
+import Help from 'pages/help';
 import Navbar from 'components/header';
 // import FilterSearch from './components/filterSearch';
 import history from 'utils/history';
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/project-page/:id" component={ProjectPage}/>
                         <Route path="/chart" component={Chart}/>
                         <Route path="/location" component={Location}/>
+                        <Route path="/help" component={Help}/>
                         <Route path="/" component={Map}/>
                         <Route>
                             {/* Error */}

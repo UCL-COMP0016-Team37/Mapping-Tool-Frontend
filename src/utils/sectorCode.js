@@ -167,7 +167,7 @@ export const sector = [
     {
         code: 510,
         name: 'General Budget Support',
-        description: 'Budget support in the form of sector-wide approaches (SWAps) should be included in the respective sectors.'
+        description: 'Budget support in the form of sector-wide approaches (SWAps) should be included in the respective sectors.',
     },
     {
         code: 520,

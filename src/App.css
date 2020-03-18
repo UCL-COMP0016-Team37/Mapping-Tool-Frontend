@@ -36,5 +36,5 @@ a:active {
 }
 
 .page {
-    height: 80vh;
+    height: calc(100vh - 56px);
 }

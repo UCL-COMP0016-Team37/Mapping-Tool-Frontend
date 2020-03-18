@@ -18,7 +18,7 @@ const API = {
     },
 
     getpublisher: () => {
-        return Axios.get(base_url + '/v2/publisher/');
+        return Axios.get(base_url + '/v2/publishers/');
     },
 
     getMapPin: (term) => {
@@ -31,6 +31,10 @@ const API = {
 
     getCountry: (term) => {
         return Axios.get(base_url+ '/v2/countries/'+term);
+    },
+
+    getTransactions: (id) => {
+        return Axios.get(base_url + '/v2/transactions/' + id);
     },
 
     // getGeocode: () => {
