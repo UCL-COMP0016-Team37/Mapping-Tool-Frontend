@@ -38,7 +38,7 @@ export default class Header extends React.Component {
                 </LinkContainer>
                 <Nav>
                     <Nav.Item>
-                        <LinkContainer to="/top-100">
+                        <LinkContainer to="/top-100/?page=1">
                             <Nav.Link>Top 100</Nav.Link>
                         </LinkContainer>
                     </Nav.Item>
