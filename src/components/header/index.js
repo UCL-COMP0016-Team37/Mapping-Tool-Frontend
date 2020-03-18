@@ -9,6 +9,14 @@ import extractSearchTerm from 'utils/extractSearchTerm';
 
 import './header.scss';
 
+function getSearchTerm(search) {
+    const splitSearch = extractSearchTerm(search, 'search').split('title_narrative%3A');
+    if (splitSearch.length > 1) {
+        return splitSearch[1].split('%20')[0];
+    }
+    return '';
+}
+
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +59,7 @@ export default class Header extends React.Component {
                     <Form.Control
                         className="search-bar"
                         placeholder="Search..."
-                        value={extractSearchTerm(this.props.location.search, 'search').split('title_narrative%3A')[1].split('%20')[0]}
+                        value={getSearchTerm(this.props.location.search)}
                         onClick={this.handleStartSearching.bind(this)}
                         onChange={() => {}}
                         ref={this.search}
