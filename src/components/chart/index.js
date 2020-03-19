@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
+import history from '../../utils/history';
 import {DropdownButton,Dropdown,ButtonToolbar,Button} from 'react-bootstrap';
 
 export default class Chart extends React.Component{
@@ -19,7 +20,11 @@ export default class Chart extends React.Component{
             country: props.countryCode === '',
             both: !(props.countryCode !== '' && props.sectorCode !== ''),
             ready: false,
+            number: undefined,
         };
+        API.getSearch(this.props.searchTerm,1).then((response) => {
+            this.setState({ number: response.data.numFound});
+        });
         this.chartRef = React.createRef();
     }
 
@@ -32,7 +37,7 @@ export default class Chart extends React.Component{
             API.getTopDonorPerOrg(this.state.sectorCode).then((response) =>{
                 this.setState({
                     results: response.data.tops,
-                    number: response.data.totalOrgs,
+                    number: response.data.orgNum,
                     ready:true,
                     info: 'top 4 donor organisation for sector (in $)',
                 });
@@ -42,7 +47,7 @@ export default class Chart extends React.Component{
             API.getTopReceiverPerOrg(this.state.sectorCode).then((response) =>{
                 this.setState({
                     results: response.data.tops,
-                    number: response.data.totalOrgs,
+                    number: response.data.orgNum,
                     ready:true,
                     info: 'top 4 receiver organisation for sector (in $)',
                 });
@@ -52,7 +57,7 @@ export default class Chart extends React.Component{
             API.getTopReceiverPerSector(this.state.sectorCode).then((response) =>{
                 this.setState({
                     results: response.data.tops,
-                    number: response.data.totalOrgs,
+                    number: response.data.countryNum,
                     ready:true,
                     info: 'top 4 receiver country for sector (in $)',
                 });
@@ -75,11 +80,15 @@ export default class Chart extends React.Component{
         API.getSectorInCountryAnalysis(this.state.countryCode).then((response) =>{
             this.setState({
                 results: response.data.tops,
-                number: response.data.totalOrgs,
+                number: response.data.totalSector,
                 ready:true,
                 info: 'top 4 sector in country',
             });
         });
+    }
+
+    goToSearchResult(){
+        history.push('/search-results/?search='+ this.props.searchTerm + '&page=1');
     }
 
     render() {
@@ -94,9 +103,12 @@ export default class Chart extends React.Component{
                     data={this.state.results.map(data => data.number)}
                     color={this.state.graphcolor}
                 />
+                {/* <>{this.state.number}</> */}
             </div>;
         }
-        else displaygraph = <div>No Graph To Display</div>
+        else displaygraph = <div className="chart-canvas">
+            {this.state.number} projects found
+        </div>;
         return <div>
             <ButtonToolbar>
                 <Button
@@ -122,6 +134,10 @@ export default class Chart extends React.Component{
                 </DropdownButton>
             </ButtonToolbar>
             {displaygraph}
+            <Button
+                className='search-result-button'
+                onClick={() => this.goToSearchResult()}
+            >Project List</Button>
         </div>;
     }
 }

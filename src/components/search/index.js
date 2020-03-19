@@ -50,7 +50,7 @@ export default class Search extends React.Component {
             }
             searchTerm += `sector_code%3A(${this.state.searchSector})`;
         }
-        history.push(`/search-results/?search=${searchTerm}&page=1`);
+        history.push(`/chart/?search=${searchTerm}`);
         this.props.onHide && this.props.onHide();
     }
 
