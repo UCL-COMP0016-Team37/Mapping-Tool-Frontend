@@ -4,7 +4,7 @@ import ErrorBoundary from 'utils/errorBoundary';
 import Spinner from 'react-bootstrap/Spinner';
 import MapGL,{Source,Layer}  from 'react-map-gl';
 import API from 'utils/backendApi';
-import Countries from '../../../assets/geojson/countries.geojson';
+import Countries from '../../../assets/geojson/country.json';
 import PropTypes from 'prop-types';
 
 export default class HeatMap extends React.Component{
@@ -20,26 +20,32 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
-        API.getMapPin().then((response) => {
-            this.setState({results: response.data});
+        API.getTopReceiverPerSector(113).then((response) =>{
+            const data = response.data.tops.map(data => data.name);
+            let results = [];
+            for (var i = 0; i < data.length ; i++){
+                console.log(data[i]);
+                let add = Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === data[i].toLowerCase());
+                if (add !== undefined){
+                    console.log(add);
+                    results.push(add);
+                }
+            }
+            this.setState({
+                results: results,
+            });
         });
     }
 
     render(){
-        console.log(this.state.results);
-        // const geojson = {
-        //     type: 'FeatureCollection',
-        //     features: this.state.results.map(
-        //         dta=>{
-        //             return {
-        //                 type: 'Feature',
-        //                 geometry: {
-        //                     type: 'Point',
-        //                     coordinates : [dta.coordinate.longitude,dta.coordinate.latitude],
-        //                 },
-        //             };
-        //         }),
-        // };
+        // console.log(this.state.results)
+        // console.log(Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === 'iraq'));
+        const geojson = {
+            type: 'FeatureCollection',
+            features: this.state.results.map(
+                dta=> dta),
+        };
+        console.log(geojson)
         return <div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>
@@ -52,7 +58,7 @@ export default class HeatMap extends React.Component{
                     mapboxApiAccessToken={API_KEY}>
                     <Source id="my-data"
                         type="geojson"
-                        data={Countries}
+                        data={geojson}
                     >
                         <Layer {...dataLayer}/>
                     </Source>
