@@ -71,7 +71,7 @@ export default class Top100 extends React.Component{
     render() {
         return <div className="top100-canvas">
             <IndexItem id='chart' type='horizontalBar' title='Top 100 donor with number of projects' labels={this.state.value} data={this.state.count} color={this.state.graphcolour}/>
-            <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button> 
+            <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
             <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>
         </div>;
     }

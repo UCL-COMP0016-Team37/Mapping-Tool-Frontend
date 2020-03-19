@@ -45,14 +45,14 @@ export default class ControlPanel extends React.Component{
     }
 }
 
-const information = [
-    {name:'Health',id:'health'},
-    {name:'Humanitarian',id:'humanitarian'},
-    {name:'Agricultural',id:'agricultural'},
-    {name:'Culture',id:'culture'},
-    {name:'Energy',id:'energy'},
-    {name:'Industrial development',id:'industrialDevelopment'},
-];
+// const information = [
+//     {name:'Health',id:'health'},
+//     {name:'Humanitarian',id:'humanitarian'},
+//     {name:'Agricultural',id:'agricultural'},
+//     {name:'Culture',id:'culture'},
+//     {name:'Energy',id:'energy'},
+//     {name:'Industrial development',id:'industrialDevelopment'},
+// ];
 
 ControlPanel.propTypes = {
     handleButtonClickWrapper : PropTypes.any,
