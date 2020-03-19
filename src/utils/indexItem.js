@@ -24,6 +24,7 @@ export default class IndexItem extends React.Component{
                 datasets: [{
                     borderColor : 'grey',
                     data: this.props.data,
+                    backgroundColor: this.props.color,
                 }],
             },
 
@@ -36,6 +37,8 @@ export default class IndexItem extends React.Component{
                     display: true,
                     text: this.props.title,
                     position: 'top',
+                    fontSize: 25,
+                    fontFamily: 'Arial',
                 },
             },
         });
@@ -59,4 +62,5 @@ IndexItem.propTypes = {
     title: PropTypes.any,
     labels: PropTypes.any,
     data: PropTypes.any,
+    color: PropTypes.array,
 };

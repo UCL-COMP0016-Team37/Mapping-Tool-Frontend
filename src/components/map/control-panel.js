@@ -1,7 +1,7 @@
 import React from 'react';
 import './map.scss';
 import PropTypes from 'prop-types';
-import {DropdownButton,Dropdown,ButtonToolbar,ButtonGroup,Button} from 'react-bootstrap';
+import {DropdownButton,Dropdown,ButtonGroup,Button} from 'react-bootstrap';
 import {mapStyle} from '../../utils/mapbox';
 
 export default class ControlPanel extends React.Component{
@@ -10,6 +10,7 @@ export default class ControlPanel extends React.Component{
         this.state = {
             publisher: [],
             value: mapStyle[0],
+            buttonVariant: 'light',
         };
         // API.getpublisher().then((response)=> {
         //     this.setState({publisher : response.data.slice(0,10)});
@@ -33,11 +34,11 @@ export default class ControlPanel extends React.Component{
                 </DropdownButton> */}
             {/* </ButtonToolbar> */}
             <ButtonGroup size="md">
-                <DropdownButton  variant="dark"  className="dropdown" id="dropdown-basic" title="Map Style"  >
+                <DropdownButton  variant={this.state.buttonVariant} className="dropdown" id="dropdown-basic" title="Map Style">
                     {mapStyle.map(info => <Dropdown.Item key={info.id} onSelect={changeMapStyle.bind(this,info.id)} >{info.name}</Dropdown.Item>)}
                 </DropdownButton>
-                <Button variant="dark" onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
-                <Button variant="dark" onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
+                <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
+                <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
                 {/* <Button variant="dark" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button> */}
             </ButtonGroup>
         </div>;

@@ -60,7 +60,7 @@ export default class SearchResult extends React.Component{
                 )}
                 <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button> ,
                 <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>,
-                {/* <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button> */}
+                <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Chart</Button>
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }

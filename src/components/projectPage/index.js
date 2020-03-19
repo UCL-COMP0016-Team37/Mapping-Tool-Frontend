@@ -102,17 +102,19 @@ export default class ProjectPage extends React.Component{
             <Button variant="link" to={`/project-page/${results.iati_identifier}`} as={Link}><h5>{results.iati_identifier}</h5></Button>
         </>;
         return <Container className="text-left">
-            {results.locations.length > 0 ?
-                <Row>
-                    <Col>
-                        <Map place={getNar(results.locations[0].name)}/>
-                    </Col>
-                    <Col>
-                        {overview}
-                    </Col>
-                </Row>
-                : overview
-            }
+            <div className="section">
+                {results.locations.length > 0 ?
+                    <Row>
+                        <Col>
+                            <Map place={getNar(results.locations[0].name)}/>
+                        </Col>
+                        <Col>
+                            {overview}
+                        </Col>
+                    </Row>
+                    : overview
+                }
+            </div>
 
             <Divider/>
 
