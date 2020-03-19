@@ -31,21 +31,14 @@ export default class Pins extends PureComponent {
         const {data,viewportZoom,onMouseOver,onMouseLeave,onClick} = this.props;
         // console.log(data);
         // console.log(data[0].longitude)
+        let returndata;
         if (viewportZoom < 2.5){
-            const newdata = clusterpins(data);
+            returndata = clusterpins(data);
             // console.log(newdata)
-            return newdata.map(data =>
-                <Marker key={`marker-${data.code}`} longitude={parseFloat(data.coordinate.longitude)} latitude={parseFloat(data.coordinate.latitude)}>
-                    <div className="image-container"
-                        onMouseOver={() => onMouseOver(data)}
-                        onMouseOut ={() => onMouseLeave()}>
-                        <img src={this.state.PinImage} alt="pin map pins" width={getSizeofPin(data.activityCount)} height={getSizeofPin(data.activityCount)}/>
-                        <div className="image-marker">{data.activityCount}</div>
-                    </div>
-                </Marker>,
-            );
         }
-        return data.map(data =>
+        else returndata = data;
+
+        return returndata.map(data =>
         { if (!isNaN(data.coordinate.longitude)){
             return <Marker key={`marker-${data.code}`} longitude={parseFloat(data.coordinate.longitude)} latitude={parseFloat(data.coordinate.latitude)}>
                 <div className="image-container"

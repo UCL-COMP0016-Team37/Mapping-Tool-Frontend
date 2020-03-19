@@ -11,7 +11,7 @@ export default class Chart extends React.Component{
         this.state = {
             results: undefined,
             info: '',
-            graph: 'doughnut',
+            graph: 'pie',
             graphcolor: ['red','green','blue','yellow'],
             countryCode: props.countryCode,
             sectorCode: props.sectorCode,
@@ -83,41 +83,21 @@ export default class Chart extends React.Component{
     }
 
     render() {
-        if (this.state.ready)
-            return <div className="chart-canvas">
-                <ButtonToolbar>
-                    <Button
-                        className='both-button'
-                        onClick={() => this.displaybothData()}
-                        disabled={this.state.both}
-                    >Sector and country Analysis</Button>
-                    <Button
-                        className='country-button'
-                        onClick={() => this.displayCountryData()}
-                        disabled={this.state.country}
-                    >Country Analysis</Button>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Sector Analysis"
-                        disabled={this.state.sector}>
-                        {information.map(info => <Dropdown.Item key={info.id} onClick={() => this._onClickInfo(info.id)} >{info.name}</Dropdown.Item>)}
-                    </DropdownButton>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Type of Graph">
-                        {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
-                    </DropdownButton>
-                </ButtonToolbar>
+        let displaygraph;
+        if (this.state.ready){
+            displaygraph = <div className="chart-canvas">
                 <IndexItem
                     id={this.state.sectorCode + '-'+ this.state.countryCode}
                     type={this.state.graph}
                     title={this.state.info}
-                    labels={this.state.results.map(data => data.name)}
+                    labels={this.state.results.map(data => data.name.split('-')[0])}
                     data={this.state.results.map(data => data.number)}
                     color={this.state.graphcolor}
                 />
             </div>;
-        return<div className="chart-canvas">
+        }
+        else displaygraph = <div>No Graph To Display</div>
+        return <div>
             <ButtonToolbar>
                 <Button
                     className='both-button'
@@ -141,7 +121,7 @@ export default class Chart extends React.Component{
                     {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
                 </DropdownButton>
             </ButtonToolbar>
-            No Graph To Display
+            {displaygraph}
         </div>;
     }
 }
