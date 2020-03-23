@@ -70,6 +70,7 @@ export default class HeatMap extends React.Component{
 
 HeatMap.propTypes = {
     mapStyle: PropTypes.string,
+    sectorCode: PropTypes.string,
 };
 const dataLayer = {
     id: 'data',

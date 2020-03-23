@@ -37,12 +37,12 @@ export default class Chart extends React.Component{
     render() {
         let analysis;
         if (this.state.both){
-            analysis = <BothAnalysis countryCode={this.props.countryCode} sectorCode={this.props.sectorCode}/>;
+            analysis = <BothAnalysis searchTerm={this.props.searchTerm} countryCode={this.props.countryCode} sectorCode={this.props.sectorCode}/>;
         }
         else if (this.state.country){
-            analysis = <CountryAnalysis countryCode={this.props.countryCode}/>;
+            analysis = <CountryAnalysis searchTerm={this.props.searchTerm} countryCode={this.props.countryCode}/>;
         }
-        else analysis = <SectorAnalysis sectorCode={this.props.sectorCode}/>;
+        else analysis = <SectorAnalysis searchTerm={this.props.searchTerm} sectorCode={this.props.sectorCode}/>;
         return <div>
             {analysis}
             <Button

@@ -17,6 +17,7 @@ export default class CountryAnalysis extends React.Component{
             ready: false,
             rest: undefined,
             totalSector: undefined,
+            number: undefined,
         };
         API.getSectorInCountryAnalysis(props.countryCode).then((response) =>{
             let value = response.data.tops.map(data => data.name.split('-')[0]);
