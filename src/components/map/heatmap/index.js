@@ -24,7 +24,7 @@ export default class HeatMap extends React.Component{
             const data = response.data.tops.map(data => data.name);
             let results = [];
             for (var i = 0; i < data.length ; i++){
-                console.log(data[i]);
+                // console.log(data[i]);
                 let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].toLowerCase());
                 if (add !== undefined){
                     console.log(add);

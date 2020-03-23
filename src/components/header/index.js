@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Navbar, Nav, Form, Container, Modal } from 'react-bootstrap';
+import { Navbar, Nav, Form, Container, Modal} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
 import Search from 'components/search';
 
 import extractSearchTerm from 'utils/extractSearchTerm';
