@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import '../chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
-import history from '../../../utils/history';
-import {DropdownButton,Dropdown,ButtonToolbar,Button} from 'react-bootstrap';
+import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
 
-export default class Chart extends React.Component{
+export default class CountryAnalysis extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -41,10 +40,6 @@ export default class Chart extends React.Component{
         this.setState({graph : data});
     }
 
-    goToSearchResult(){
-        history.push('/search-results/?search='+ this.props.searchTerm + '&page=1');
-    }
-
     render() {
         if (this.state.ready){
             return <div>
@@ -68,11 +63,6 @@ export default class Chart extends React.Component{
                 <div className="chart-canvas">
                     {this.state.number} total projects 
                 </div>
-                {/* {displaygraph} */}
-                <Button
-                    className='search-result-button'
-                    onClick={() => this.goToSearchResult()}
-                >Project List</Button>
             </div>;}
         else return <div></div>;
     }
@@ -88,7 +78,7 @@ const typeOfGraph = [
     {name:'Bubble Graph',id:'bubble'},
 ];
 
-Chart.propTypes = {
+CountryAnalysis.propTypes = {
     searchTerm: PropTypes.string,
     countryCode: PropTypes.string,
     sectorCode: PropTypes.string,

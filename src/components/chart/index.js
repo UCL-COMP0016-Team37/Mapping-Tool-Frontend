@@ -5,6 +5,7 @@ import SectorAnalysis from './sectorAnalysis';
 import CountryAnalysis from './countryAnalysis';
 import BothAnalysis from './bothAnalysis';
 import history from '../../utils/history';
+import {Button} from 'react-bootstrap';
 
 export default class Chart extends React.Component{
     constructor(props) {
@@ -44,6 +45,10 @@ export default class Chart extends React.Component{
         else analysis = <SectorAnalysis sectorCode={this.props.sectorCode}/>;
         return <div>
             {analysis}
+            <Button
+                className='search-result-button'
+                onClick={() => this.goToSearchResult()}
+            >Project List</Button>
         </div>;
     }
 }

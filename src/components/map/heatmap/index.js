@@ -20,14 +20,14 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
-        API.getTopReceiverPerSector(113).then((response) =>{
+        API.getTopReceiverPerSector(this.props.sectorCode).then((response) =>{
             const data = response.data.tops.map(data => data.name);
             let results = [];
             for (var i = 0; i < data.length ; i++){
                 // console.log(data[i]);
-                let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].toLowerCase());
+                let add = Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === data[i].toLowerCase());
                 if (add !== undefined){
-                    console.log(add);
+                    // console.log(add);
                     results.push(add);
                 }
             }
@@ -45,7 +45,7 @@ export default class HeatMap extends React.Component{
             features: this.state.results.map(
                 dta=> dta),
         };
-        console.log(geojson)
+        // console.log(geojson)
         return <div className="map-container">
             <ErrorBoundary>
                 <Spinner className="loading" variant="primary" animation="border"/>

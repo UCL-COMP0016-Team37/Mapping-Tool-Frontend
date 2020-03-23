@@ -37,8 +37,8 @@ export default class ControlPanel extends React.Component{
                 <DropdownButton  variant={this.state.buttonVariant} className="dropdown" id="dropdown-basic" title="Map Style">
                     {mapStyle.map(info => <Dropdown.Item key={info.id} onSelect={changeMapStyle.bind(this,info.id)} >{info.name}</Dropdown.Item>)}
                 </DropdownButton>
-                <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
-                <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button>
+                {/* <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('pin')}>Points</Button>
+                <Button variant={this.state.buttonVariant} onClick={() => handleButtonClickWrapper('heat')}>Heatmap</Button> */}
                 {/* <Button variant="dark" onClick={() => handleButtonClickWrapper('fundingFlow')}>Funding Flow</Button> */}
             </ButtonGroup>
         </div>;
