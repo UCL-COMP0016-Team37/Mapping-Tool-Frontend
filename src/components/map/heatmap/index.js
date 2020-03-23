@@ -23,7 +23,7 @@ export default class HeatMap extends React.Component{
         API.getTopReceiverPerSector(this.props.sectorCode).then((response) =>{
             const data = response.data.tops.map(data => data.name);
             let results = [];
-            for (var i = 0; i < data.length ; i++){
+            for (let i = 0; i < data.length ; i++){
                 // console.log(data[i]);
                 let add = Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === data[i].toLowerCase());
                 if (add !== undefined){

@@ -1,7 +1,7 @@
 import React from 'react';
 import './map.scss';
 import PropTypes from 'prop-types';
-import {DropdownButton,Dropdown,ButtonGroup,Button} from 'react-bootstrap';
+import {DropdownButton,Dropdown,ButtonGroup} from 'react-bootstrap';
 import {mapStyle} from '../../utils/mapbox';
 
 export default class ControlPanel extends React.Component{
@@ -22,7 +22,7 @@ export default class ControlPanel extends React.Component{
     }
 
     render() {
-        const {handleButtonClickWrapper,changeMapStyle} = this.props;
+        const { changeMapStyle } = this.props;
         return <div className="control-panel">
             {/* Filter Data Based on Funder/Thematic Areas */}
             {/* <ButtonToolbar> */}
