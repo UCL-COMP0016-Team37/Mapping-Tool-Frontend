@@ -18,9 +18,15 @@ export default class SearchResult extends React.Component{
             totalPage: 1,
             backwardButton: true,
             forwardButton: true,
+            zeronumber: true,
         };
         API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
-            this.setState({ page: this.props.page, results: response.data.docs, ready: true, totalPage: Math.ceil(response.data.numFound/10) });
+            this.setState({
+                page: this.props.page,
+                results: response.data.docs,
+                ready: true,
+                totalPage: Math.ceil(response.data.numFound/10),
+                zeronumber: response.data.numFound === 0});
             if (response.data.numFound > 10){
                 this.setState({ forwardButton: false });
             }
@@ -60,7 +66,7 @@ export default class SearchResult extends React.Component{
                 )}
                 <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button> ,
                 <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>,
-                <Button className='chart-view-button' onClick={this.chartView.bind(this)}>Analysis</Button>
+                <Button className='chart-view-button' onClick={this.chartView.bind(this)} disabled={this.state.zeronumber}>Analysis</Button>
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }

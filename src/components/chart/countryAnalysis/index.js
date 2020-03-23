@@ -62,7 +62,7 @@ export default class CountryAnalysis extends React.Component{
                     />
                 </div>
                 <div className="chart-canvas">
-                    {this.state.number} total projects 
+                    {this.state.number} total projects
                 </div>
             </div>;}
         else return <div></div>;
