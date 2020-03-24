@@ -4,21 +4,21 @@ import '../chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
 import HeatMap from '../../map/heatmap';
-import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
+import { DropdownButton, Dropdown, ButtonToolbar, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
 
 export default class SectorAnalysis extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            graph: 'pie',
-            graphcolor: ['red','green','blue','yellow'],
+            graph: 'bar',
+            graphcolor: ['#1565C0','#0D47A1','#1976D2','#1E88E5'],
             sectorCode: props.sectorCode,
-            donorlabel:undefined,
-            donorcount:undefined,
-            orglabel:undefined,
-            orgcount:undefined,
-            receiverlabel:undefined,
-            receivercount:undefined,
+            donorlabel: undefined,
+            donorcount: undefined,
+            orglabel: undefined,
+            orgcount: undefined,
+            receiverlabel: undefined,
+            receivercount: undefined,
             ready: false,
             donorNumber: undefined,
             orgNumber: undefined,
@@ -47,7 +47,7 @@ export default class SectorAnalysis extends React.Component{
             });
         });
         API.getSearch(this.props.searchTerm,1).then((response) => {
-            this.setState({ number: response.data.numFound,ready:true});
+            this.setState({ number: response.data.numFound, ready:true });
         });
         this.chartRef = React.createRef();
     }
@@ -58,60 +58,70 @@ export default class SectorAnalysis extends React.Component{
 
     render() {
         if (this.state.ready){
-            return <div>
-                <ButtonToolbar>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Type of Graph">
-                        {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
-                    </DropdownButton>
-                </ButtonToolbar>
-                <div className="chart-canvas">
-                    <IndexItem
-                        id="donorchart"
-                        type={this.state.graph}
-                        title="top donor organisation of the sector"
-                        labels={this.state.donorlabel}
-                        data={this.state.donorcount}
-                        color={this.state.graphcolor}
-                    />
-                </div>
-                <div className="chart-canvas">
-                    <HeatMap mapStyle="mapbox://styles/mapbox/dark-v10" sectorCode={this.props.sectorCode}/>
-                </div>
-                <div className="chart-canvas">
-                    <IndexItem
-                        id="receiverchart"
-                        type={this.state.graph}
-                        title="top receiver organisation of the sector"
-                        labels={this.state.orglabel}
-                        data={this.state.orgcount}
-                        color={this.state.graphcolor}
-                    />
-                </div>
-                <div className="chart-canvas">
-                    <IndexItem
-                        id="receivercountrychart"
-                        type={this.state.graph}
-                        title="top receiver country of the sector"
-                        labels={this.state.receiverlabel}
-                        data={this.state.receivercount}
-                        color={this.state.graphcolor}
-                    />
-                </div>
-                <div className="chart-canvas">
-                    {this.state.number} total projects,
-                    {this.state.donorNumber} donors,
-                    {this.state.orgNumber} receiving organisations,
-                    {this.state.receiverNumber} receiving country
-                </div>
-            </div>;}
-        else return <div></div>;
+            return <Container fluid className='charts-container'>
+                <Container fluid className='my-3 text-right'>
+                    <ButtonGroup className='float-right'>
+                        <ButtonToolbar>
+                            <DropdownButton
+                                id="dropdown-basic-button"
+                                title="Change Graph">
+                                {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
+                            </DropdownButton>
+                        </ButtonToolbar>
+                    </ButtonGroup>
+                </Container>
+                <h1>Sector Analysis</h1>
+                <Row className="my-5">
+                    <Col><h1>{this.state.number}</h1> Total Projects</Col>
+                    <Col><h1>{this.state.donorNumber}</h1> Donors</Col>
+                    <Col><h1>{this.state.orgNumber}</h1> Receiving Organisations</Col>
+                    <Col><h1>{this.state.receiverNumber}</h1> Receiving Country</Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <IndexItem
+                            id="donorchart"
+                            type={this.state.graph}
+                            title="Top donor organisation of the sector"
+                            labels={this.state.donorlabel}
+                            data={this.state.donorcount}
+                            color={this.state.graphcolor}
+                        />
+                    </Col>
+                    <Col>
+                        <HeatMap mapStyle="mapbox://styles/mapbox/dark-v10" sectorCode={this.props.sectorCode}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <IndexItem
+                            id="receiverchart"
+                            type={this.state.graph}
+                            title="Top receiver organisation of the sector"
+                            labels={this.state.orglabel}
+                            data={this.state.orgcount}
+                            color={this.state.graphcolor}
+                        />
+                    </Col>
+                    <Col>
+                        <IndexItem
+                            id="receivercountrychart"
+                            type={this.state.graph}
+                            title="Top receiver country of the sector"
+                            labels={this.state.receiverlabel}
+                            data={this.state.receivercount}
+                            color={this.state.graphcolor}
+                        />
+                    </Col>
+                </Row>
+            </Container>;
+        } else
+            return <div></div>;
     }
 }
 
 const typeOfGraph = [
-    {name:'line Graph',id:'line'},
+    {name:'Line Graph',id:'line'},
     {name:'Bar Chart',id:'bar'},
     {name:'Radar',id:'radar'},
     {name:'Doughnut chart',id:'doughnut'},

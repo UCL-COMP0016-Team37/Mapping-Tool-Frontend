@@ -5,7 +5,7 @@ import SectorAnalysis from './sectorAnalysis';
 import CountryAnalysis from './countryAnalysis';
 import BothAnalysis from './bothAnalysis';
 import history from '../../utils/history';
-import {Button} from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 export default class Chart extends React.Component{
     constructor(props) {
@@ -43,13 +43,13 @@ export default class Chart extends React.Component{
             analysis = <CountryAnalysis searchTerm={this.props.searchTerm} countryCode={this.props.countryCode}/>;
         }
         else analysis = <SectorAnalysis searchTerm={this.props.searchTerm} sectorCode={this.props.sectorCode}/>;
-        return <div>
-            {analysis}
+        return <Container fluid className='text-left'>
             <Button
-                className='search-result-button'
-                onClick={() => this.goToSearchResult()}
-            >Project List</Button>
-        </div>;
+                className='search-result-button my-3'
+                onClick={this.goToSearchResult.bind(this)}
+            >Back to Search Results</Button>
+            {analysis}
+        </Container>;
     }
 }
 
