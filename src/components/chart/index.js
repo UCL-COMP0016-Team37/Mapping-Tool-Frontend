@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './chart.scss';
 import SectorAnalysis from './sectorAnalysis';
 import CountryAnalysis from './countryAnalysis';
 import BothAnalysis from './bothAnalysis';
-import history from '../../utils/history';
+import history from 'utils/history';
 import { Button, Container } from 'react-bootstrap';
 
 export default class Chart extends React.Component{

@@ -17,7 +17,15 @@ export default class Search extends React.Component {
             country: [],
         };
         API.getCountry('').then((response) => {
-            this.setState({country: response.data});
+            this.setState({country: response.data.sort((a, b) => {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+                if (nameA < nameB)
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                return 0;
+            })});
         });
     }
 

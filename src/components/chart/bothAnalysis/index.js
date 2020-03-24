@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
-import {DropdownButton,Dropdown,ButtonToolbar} from 'react-bootstrap';
+import { DropdownButton, Dropdown, ButtonToolbar, Spinner, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
 
 export default class BothAnalysis extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             graph: 'pie',
-            graphcolor: ['red','green','blue','yellow','black'],
+            graphcolor: ['#0D47A1', '#1565C0', '#1976D2', '#1E88E5', '#2196F3'],
             value: undefined,
             count: undefined,
             sectorCode: props.sectorCode,
@@ -28,8 +27,7 @@ export default class BothAnalysis extends React.Component{
                 value: value,
                 count: count,
                 totalorgs: response.data.totalOrgs,
-                rest:response.data.rest,
-
+                rest: response.data.rest,
             });
         });
         API.getSearch(this.props.searchTerm,1).then((response) => {
@@ -43,30 +41,39 @@ export default class BothAnalysis extends React.Component{
     }
 
     render() {
-        if (this.state.ready){
-            return <div>
-                <ButtonToolbar>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Type of Graph">
-                        {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
-                    </DropdownButton>
-                </ButtonToolbar>
-                <div className="chart-canvas">
-                    <IndexItem
-                        id={this.state.sectorCode + '-'+ this.state.countryCode}
-                        type={this.state.graph}
-                        title="top report organisation of sector in country"
-                        labels={this.state.value}
-                        data={this.state.count}
-                        color={this.state.graphcolor}
-                    />
-                </div>
-                <div className="chart-canvas">
-                    {this.state.number} total projects
-                </div>
-            </div>;}
-        else return <div></div>;
+        if (this.state.ready) {
+            return <Container fluid>
+                <Container fluid className='my-3 text-right'>
+                    <ButtonGroup className='float-right'>
+                        <ButtonToolbar>
+                            <DropdownButton
+                                id="dropdown-basic-button"
+                                title="Change Graph">
+                                {typeOfGraph.map(graph => <Dropdown.Item key={graph.id} onClick={() => this._onClickGraph(graph.id)} >{graph.name}</Dropdown.Item>)}
+                            </DropdownButton>
+                        </ButtonToolbar>
+                    </ButtonGroup>
+                </Container>
+                <h1>Country and Sector Analysis</h1>
+                <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
+                <Row className="text-center">
+                    <Col><h1>{this.state.number}</h1> Total Projects</Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <IndexItem
+                            id={this.state.sectorCode + '-'+ this.state.countryCode}
+                            type={this.state.graph}
+                            title="Top report organisation of sector in country"
+                            labels={this.state.value}
+                            data={this.state.count}
+                            color={this.state.graphcolor}
+                        />
+                    </Col>
+                </Row>
+            </Container>;
+        }
+        else return <Spinner className="loading" variant="primary" animation="border"/>;
     }
 }
 

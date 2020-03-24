@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../chart.scss';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
 import HeatMap from '../../map/heatmap';
@@ -11,7 +10,7 @@ export default class SectorAnalysis extends React.Component{
         super(props);
         this.state = {
             graph: 'bar',
-            graphcolor: ['#1565C0','#0D47A1','#1976D2','#1E88E5'],
+            graphcolor: ['#0D47A1', '#1565C0', '#1976D2', '#1E88E5', '#2196F3'],
             sectorCode: props.sectorCode,
             donorlabel: undefined,
             donorcount: undefined,
@@ -71,7 +70,8 @@ export default class SectorAnalysis extends React.Component{
                     </ButtonGroup>
                 </Container>
                 <h1>Sector Analysis</h1>
-                <Row className="my-5">
+                <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
+                <Row className="my-5 text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
                     <Col><h1>{this.state.donorNumber}</h1> Donors</Col>
                     <Col><h1>{this.state.orgNumber}</h1> Receiving Organisations</Col>
