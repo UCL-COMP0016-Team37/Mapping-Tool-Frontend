@@ -38,6 +38,7 @@ function unique(array) {
     return array.filter((i, j) => array.indexOf(i) === j);
 }
 
+// eslint-disable-next-line
 Array.prototype.mapOr = function(func, otherwise) {
     if (this.length === 0)
         return otherwise;
@@ -87,7 +88,7 @@ export default class ProjectPage extends React.Component{
             <h5>{getNar(results.title)}</h5>
             <Divider/>
             <h6>Locations</h6>
-            <h5>{getNarArray(results.locations.map(item => item.name)).join(', ')}</h5>
+            <h5>{getNarArray(results.locations.map(item => item.name).filter(Boolean)).join(', ')}</h5>
             <Divider/>
             <h6>Reported By</h6>
             <h5>{getNar(results.reporting_org)}</h5>
@@ -103,7 +104,7 @@ export default class ProjectPage extends React.Component{
         </>;
         return <Container className="text-left">
             <div className="section">
-                {results.locations.length > 0 ?
+                {results.locations.length > 0 && results.locations[0].name ?
                     <Row>
                         <Col>
                             <Map place={getNar(results.locations[0].name)}/>
@@ -132,10 +133,9 @@ export default class ProjectPage extends React.Component{
 
             <div id="locations" className="section">
                 <h4>Locations</h4>
-                {results.locations.mapOr((item, i) =>
+                {results.locations.filter(item => item.name).mapOr((item, i) =>
                     <div key={i}>
                         <h6>{getNar(item.name)}</h6>
-                        {/* {getNar(item.description)} */}
                         <Divider/>
                     </div>,
                 'There are no locations.',

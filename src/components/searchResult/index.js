@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Spinner, Container } from 'react-bootstrap';
+import { Button, Spinner, Container, ButtonGroup } from 'react-bootstrap';
 
 import API from 'utils/backendApi';
 import history from 'utils/history';
@@ -26,7 +26,8 @@ export default class SearchResult extends React.Component{
                 results: response.data.docs,
                 ready: true,
                 totalPage: Math.ceil(response.data.numFound/10),
-                zeronumber: response.data.numFound === 0});
+                zeronumber: response.data.numFound === 0,
+            });
             if (response.data.numFound > 10){
                 this.setState({ forwardButton: false });
             }
@@ -60,13 +61,21 @@ export default class SearchResult extends React.Component{
     render() {
         if (this.state.ready)
             return <Container className="text-left" fluid>
-                Loaded {this.state.results.length} results before filtering.
-                {this.state.results.map(
+                <Container fluid>
+                    <Button className='chart-view-button' onClick={this.chartView.bind(this)} disabled={this.state.zeronumber}>View Analysis</Button>
+                    <ButtonGroup className='float-right'>
+                        <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
+                        <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>
+                    </ButtonGroup>
+                </Container>
+                <div>Loaded {this.state.results.length} results on this page.</div>
+                {this.state.results.filter(el => !el.iati_identifier.includes('/')).map(
                     results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
                 )}
-                <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button> ,
-                <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>,
-                <Button className='chart-view-button' onClick={this.chartView.bind(this)} disabled={this.state.zeronumber}>Analysis</Button>
+                <ButtonGroup>
+                    <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
+                    <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>
+                </ButtonGroup>
             </Container>;
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }
