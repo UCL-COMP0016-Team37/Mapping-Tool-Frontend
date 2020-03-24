@@ -60,6 +60,7 @@ export default class Header extends React.Component {
                         placeholder="Search..."
                         value={getSearchTerm(this.props.location.search)}
                         onClick={this.handleStartSearching.bind(this)}
+                        onFocus={this.handleStartSearching.bind(this)}
                         onChange={() => {}}
                         ref={this.search}
                     />

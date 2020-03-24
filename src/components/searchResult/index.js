@@ -14,24 +14,12 @@ export default class SearchResult extends React.Component{
         this.state = {
             results: [],
             ready: false,
-            page : this.props.page,
             totalPage: 1,
             backwardButton: true,
             forwardButton: true,
             zeronumber: true,
         };
-        API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
-            this.setState({
-                page: this.props.page,
-                results: response.data.docs,
-                ready: true,
-                totalPage: Math.ceil(response.data.numFound/10),
-                zeronumber: response.data.numFound === 0,
-            });
-            if (response.data.numFound > 10){
-                this.setState({ forwardButton: false });
-            }
-        });
+        this.requestSearch();
     }
 
     chartView() {
@@ -39,9 +27,23 @@ export default class SearchResult extends React.Component{
     }
 
     componentDidUpdate() {
-        if (this.props.page !== this.state.page){
-            API.getSearch(this.props.searchTerm,this.props.page).then((response) => {
-                this.setState({ results: response.data.docs, ready: true, page: this.props.page });
+        this.requestSearch();
+    }
+
+    requestSearch() {
+        if (this.props.page !== this.state.page || this.props.searchTerm !== this.state.searchTerm) {
+            API.getSearch(this.props.searchTerm, this.props.page).then((response) => {
+                this.setState({
+                    results: response.data.docs,
+                    searchTerm: this.props.searchTerm,
+                    ready: true,
+                    page: this.props.page,
+                    totalPage: Math.ceil(response.data.numFound/10),
+                    zeronumber: response.data.numFound === 0,
+                });
+                if (response.data.numFound > 10){
+                    this.setState({ forwardButton: false });
+                }
             });
         }
     }
@@ -59,24 +61,26 @@ export default class SearchResult extends React.Component{
     }
 
     render() {
-        if (this.state.ready)
-            return <Container className="text-left" fluid>
-                <Container fluid>
+        if (this.state.ready) {
+            const results = this.state.results.filter(el => !el.iati_identifier.includes('/'));
+            return <Container className="text-left py-3" fluid>
+                <Container fluid className="my-3">
                     <Button className='chart-view-button' onClick={this.chartView.bind(this)} disabled={this.state.zeronumber}>View Analysis</Button>
                     <ButtonGroup className='float-right'>
                         <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
                         <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>
                     </ButtonGroup>
                 </Container>
-                <div>Loaded {this.state.results.length} results on this page.</div>
-                {this.state.results.filter(el => !el.iati_identifier.includes('/')).map(
+                <div className="text-right">Loaded {results.length} results on this page out of {this.state.totalPage} pages.</div>
+                {results.map(
                     results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
                 )}
-                <ButtonGroup>
+                <ButtonGroup className="my-3">
                     <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
                     <Button className='paging-button' onClick={this.forwardPage.bind(this)} disabled={this.state.forwardButton}>Next Page</Button>
                 </ButtonGroup>
             </Container>;
+        }
         return <Spinner className="loading" variant="primary" animation="border"/>;
     }
 }
