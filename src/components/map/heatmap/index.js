@@ -20,12 +20,12 @@ export default class HeatMap extends React.Component{
             },
             results: [],
         };
-        API.getTopReceiverPerSector(this.props.sectorCode).then((response) =>{
-            const data = response.data.tops.map(data => data.name);
+        API.getHeatMap(this.props.sectorCode).then((response) =>{
+            const data = response.data.map(data => data.code);
             let results = [];
             for (let i = 0; i < data.length ; i++){
                 // console.log(data[i]);
-                let add = Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === data[i].toLowerCase());
+                let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].toLowerCase());
                 if (add !== undefined){
                     // console.log(add);
                     results.push(add);

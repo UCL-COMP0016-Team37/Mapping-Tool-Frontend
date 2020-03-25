@@ -60,6 +60,10 @@ const API = {
     getTopReceiverPerSector: (sector) => {
         return Axios.get(base_url + '/v2/analysis/budget-to-country/' + sector);
     },
+
+    getHeatMap: (sector) => {
+        return Axios.get(base_url + '/v2/maps/pin/filter/sector/' + sector);
+    },
 };
 
 export default API;
