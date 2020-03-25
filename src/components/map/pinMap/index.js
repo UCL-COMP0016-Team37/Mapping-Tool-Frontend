@@ -74,7 +74,7 @@ export default class Map extends PureComponent {
                     closeButton={false}
                 >
                     <div>
-                        {popupInfo.countryName + ' | ' + popupInfo.activityCount}
+                        {popupInfo.countryName + ' | ' + popupInfo.activityCount + ' projects'}
                     </div>
                 </Popup>
         );
