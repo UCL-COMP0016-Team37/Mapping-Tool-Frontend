@@ -45,6 +45,10 @@ const API = {
         return Axios.get(base_url + '/v2/analysis/sector-in-country/' + country);
     },
 
+    getTopOrgsPerCountry: (country) => {
+        return Axios.get(base_url + '/v2/analysis/topOrgs/country=' + country);
+    },
+
     getTopOrgsinCountry: (country,sector) => {
         return Axios.get(base_url + '/v2/analysis/topOrgs/sector=' + sector + '&country=' + country);
     },

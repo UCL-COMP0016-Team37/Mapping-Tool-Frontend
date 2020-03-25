@@ -14,9 +14,11 @@ export default class CountryAnalysis extends React.Component{
             count: undefined,
             countryCode: props.countryCode,
             ready: false,
-            rest: undefined,
             totalSector: undefined,
             number: undefined,
+            orgsvalue: undefined,
+            orgscount: undefined,
+            orgsnumber: undefined,
         };
         API.getSectorInCountryAnalysis(props.countryCode).then((response) =>{
             let value = response.data.tops.map(data => data.name.split('-')[0]);
@@ -27,7 +29,17 @@ export default class CountryAnalysis extends React.Component{
                 value: value,
                 count: count,
                 totalSector: response.data.totalSector,
-                rest: response.data.rest,
+            });
+        });
+        API.getTopOrgsPerCountry(props.countryCode).then((response) =>{
+            let value = response.data.tops.map(data => data.name.split('-')[0]);
+            value.push(response.data.rest.name);
+            let count = response.data.tops.map(data => data.number);
+            count.push(response.data.rest.number);
+            this.setState({
+                orgsvalue: value,
+                orgscount: count,
+                orgsnumber: response.data.totalOrgs,
             });
         });
         API.getSearch(this.props.searchTerm,1).then((response) => {
@@ -58,15 +70,26 @@ export default class CountryAnalysis extends React.Component{
                 <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
                 <Row className="text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
+                    <Col><h1>{this.state.orgsnumber}</h1> Total Donor</Col>
                 </Row>
                 <Row>
-                    <Col>
+                    {/* <Col>
                         <IndexItem
                             id={this.state.sectorCode + '-'+ this.state.countryCode}
                             type={this.state.graph}
                             title="Sector analysis for country"
                             labels={this.state.value}
                             data={this.state.count}
+                            color={this.state.graphcolor}
+                        />
+                    </Col> */}
+                    <Col>
+                        <IndexItem
+                            id={this.state.sectorCode + '-'+ this.state.countryCode}
+                            type={this.state.graph}
+                            title="Top organisation for country"
+                            labels={this.state.orgsvalue}
+                            data={this.state.orgscount}
                             color={this.state.graphcolor}
                         />
                     </Col>

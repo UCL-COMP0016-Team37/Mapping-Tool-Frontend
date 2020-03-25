@@ -24,24 +24,36 @@ export default class SectorAnalysis extends React.Component{
             receiverNumber: undefined,
         };
         API.getTopDonorPerOrg(props.sectorCode).then((response) =>{
+            let value = response.data.tops.map(data => data.name);
+            value.push(response.data.rest.name);
+            let count = response.data.tops.map(data => data.number);
+            count.push(response.data.rest.number);
             this.setState({
-                donorlabel:response.data.tops.map(data => data.name),
-                donorcount:response.data.tops.map(data => data.number),
+                donorlabel: value,
+                donorcount:count,
                 donorNumber: response.data.orgNum,
                 // info: 'top 4 donor organisation for sector (in $)',
             });
         });
         API.getTopReceiverPerOrg(this.state.sectorCode).then((response) =>{
+            let value = response.data.tops.map(data => data.name);
+            value.push(response.data.rest.name);
+            let count = response.data.tops.map(data => data.number);
+            count.push(response.data.rest.number);
             this.setState({
-                orglabel:response.data.tops.map(data => data.name),
-                orgcount:response.data.tops.map(data => data.number),
+                orglabel:value,
+                orgcount:count,
                 orgNumber: response.data.orgNum,
             });
         });
         API.getTopReceiverPerSector(this.state.sectorCode).then((response) =>{
+            let value = response.data.tops.map(data => data.name);
+            value.push(response.data.rest.name);
+            let count = response.data.tops.map(data => data.number);
+            count.push(response.data.rest.number);
             this.setState({
-                receiverlabel:response.data.tops.map(data => data.name),
-                receivercount:response.data.tops.map(data => data.number),
+                receiverlabel:value,
+                receivercount:count,
                 receiverNumber: response.data.countryNum,
             });
         });
