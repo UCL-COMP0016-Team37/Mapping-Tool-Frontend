@@ -5,7 +5,7 @@ export default class LocationPage extends React.Component {
         return <div className="page">
             <h1>Using the ANCSSC Mapping Tool</h1>
 
-            <h2>MAIN / MAP PAGE</h2>
+            <h3>MAIN / MAP PAGE</h3>
             <p>
                 Main page shows the number of ngo project around the world 
                 which is grouped in a pin. On initial zoom, some countries
@@ -15,24 +15,24 @@ export default class LocationPage extends React.Component {
                 user will go to search results page which shows all project in the
                 country
             </p>
-            <h2>PROJECT PAGE</h2>
+            <h3>PROJECT PAGE</h3>
             <p>
                 Project page shows all the details of one particular project.
                 Among the data shown includes, location, reporting organisations, 
                 budget, overview and transactions.
             </p>
-            <h2>TOP 100</h2>
+            <h3>TOP 100</h3>
             <p>
                 Top 100 page shows the list Top 100 donors/reportiong organisations
                 including their number of projects reported.
             </p>
-            <h2>SEARCH</h2>
+            <h3>SEARCH</h3>
             <p>
                 In search, user can choose to search either by keyword, sectors or 
                 country or any combination of all of them. User will then be redirected
                 to the search results page to view the project list.
             </p>
-            <h2>ANALYSIS</h2>
+            <h3>ANALYSIS</h3>
             <p>
                 Analysis helps aggregate all the data of the search category and graph 
                 it so that user would be able to get the general overview of projects in

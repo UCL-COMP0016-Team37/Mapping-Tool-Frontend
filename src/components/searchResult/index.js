@@ -39,7 +39,7 @@ export default class SearchResult extends React.Component{
                     ready: true,
                     page: this.props.page,
                     totalPage: Math.ceil(response.data.numFound/10),
-                    zeronumber: response.data.numFound === 0,
+                    zeronumber: response.data.numFound === 0 || (this.props.countryCode === '' && this.props.sectorCode === '')
                 });
                 if (response.data.numFound > 10){
                     this.setState({ forwardButton: false });
@@ -88,4 +88,6 @@ export default class SearchResult extends React.Component{
 SearchResult.propTypes = {
     searchTerm: PropTypes.string,
     page: PropTypes.string,
+    countryCode: PropTypes.string,
+    sectorCode: PropTypes.string,
 };
