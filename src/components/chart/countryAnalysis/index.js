@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
 import { DropdownButton, Dropdown, ButtonToolbar, Container, Row, Col, ButtonGroup } from 'react-bootstrap';
+import FundingFlow from '../../map/fundingFlow';
 
 export default class CountryAnalysis extends React.Component{
     constructor(props) {
@@ -20,17 +21,17 @@ export default class CountryAnalysis extends React.Component{
             orgscount: undefined,
             orgsnumber: undefined,
         };
-        API.getSectorInCountryAnalysis(props.countryCode).then((response) =>{
-            let value = response.data.tops.map(data => data.name.split('-')[0]);
-            value.push(response.data.rest.name);
-            let count = response.data.tops.map(data => data.number);
-            count.push(response.data.rest.number);
-            this.setState({
-                value: value,
-                count: count,
-                totalSector: response.data.totalSector,
-            });
-        });
+        // API.getSectorInCountryAnalysis(props.countryCode).then((response) =>{
+        //     let value = response.data.tops.map(data => data.name.split('-')[0]);
+        //     value.push(response.data.rest.name);
+        //     let count = response.data.tops.map(data => data.number);
+        //     count.push(response.data.rest.number);
+        //     this.setState({
+        //         value: value,
+        //         count: count,
+        //         totalSector: response.data.totalSector,
+        //     });
+        // });
         API.getTopOrgsPerCountry(props.countryCode).then((response) =>{
             let value = response.data.tops.map(data => data.name.split('-')[0]);
             value.push(response.data.rest.name);
@@ -70,7 +71,8 @@ export default class CountryAnalysis extends React.Component{
                 <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
                 <Row className="text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
-                    <Col><h1>{this.state.orgsnumber}</h1> Total Donor</Col>
+                    <Col><h1>{this.state.orgsnumber}</h1> Total Reporting organisations</Col>
+                    {/* <Col><h1>{this.state.totalSector}</h1> Total Sector</Col> */}
                 </Row>
                 <Row>
                     {/* <Col>
@@ -92,6 +94,9 @@ export default class CountryAnalysis extends React.Component{
                             data={this.state.orgscount}
                             color={this.state.graphcolor}
                         />
+                    </Col>
+                    <Col>
+                        <FundingFlow mapStyle="mapbox://styles/mapbox/dark-v10" countryCode={this.props.countryCode}/>
                     </Col>
                 </Row>
             </Container>;

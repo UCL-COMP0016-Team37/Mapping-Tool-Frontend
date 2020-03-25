@@ -49,6 +49,10 @@ const API = {
         return Axios.get(base_url + '/v2/analysis/topOrgs/country=' + country);
     },
 
+    getFundingFlow: (country) => {
+        return Axios.get(base_url + '/v2/maps/pin/filter/country/' + country);
+    },
+
     getTopOrgsinCountry: (country,sector) => {
         return Axios.get(base_url + '/v2/analysis/topOrgs/sector=' + sector + '&country=' + country);
     },
