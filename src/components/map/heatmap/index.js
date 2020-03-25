@@ -21,16 +21,31 @@ export default class HeatMap extends React.Component{
             results: [],
         };
         API.getHeatMap(this.props.sectorCode).then((response) =>{
-            const data = response.data.map(data => data.code);
+            const data = response.data.map(data => {
+                return {
+                    code: data.code,
+                    value: data.value,
+                };
+            });
             let results = [];
             for (let i = 0; i < data.length ; i++){
                 // console.log(data[i]);
-                let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].toLowerCase());
+                let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].code.toLowerCase());
                 if (add !== undefined){
-                    // console.log(add);
-                    results.push(add);
+                    const gson = {
+                        type: add.type,
+                        properties: {
+                            ADMIN : add.properties.ADMIN,
+                            ISO_A3: add.properties.ISO_A3,
+                            value: data[i].value,
+                        },
+                        geometry: add.geometry,
+                    };
+                    // console.log(gson)
+                    results.push(gson);
                 }
             }
+
             this.setState({
                 results: results,
             });
@@ -76,7 +91,20 @@ const dataLayer = {
     id: 'data',
     type: 'fill',
     paint: {
-        'fill-color': '#3288bd',
+        'fill-color': {
+            property: 'value',
+            stops: [
+                [1000, '#3288bd'],
+                [10000, '#66c2a5'],
+                [100000, '#abdda4'],
+                [3000000, '#e6f598'],
+                [40000000, '#ffffbf'],
+                [500000000, '#fee08b'],
+                [6000000000, '#fdae61'],
+                [70000000000, '#f46d43'],
+                [800000000000, '#d53e4f'],
+            ],
+        },
         'fill-opacity': 0.5,
     },
 };
