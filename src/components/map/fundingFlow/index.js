@@ -39,7 +39,7 @@ export default class Map extends React.Component {
             arcs: [],
             INITIAL_VIEW_STATE: {
                 latitude: 30,
-                longitude: 50,
+                longitude: 0,
                 zoom: 1.15,
                 bearing: 0,
                 pitch: 20,

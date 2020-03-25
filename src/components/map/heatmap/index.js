@@ -13,8 +13,8 @@ export default class HeatMap extends React.Component{
         this.state = {
             viewport: {
                 latitude: 30,
-                longitude: 50,
-                zoom: 1.15,
+                longitude: 0,
+                zoom: 0.5,
                 bearing: 0,
                 pitch: 0,
             },
