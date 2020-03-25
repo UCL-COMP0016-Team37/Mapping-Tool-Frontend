@@ -39,7 +39,7 @@ export default class SearchResult extends React.Component{
                     ready: true,
                     page: this.props.page,
                     totalPage: Math.ceil(response.data.numFound/10),
-                    zeronumber: response.data.numFound === 0 || (this.props.countryCode === '' && this.props.sectorCode === '')
+                    zeronumber: response.data.numFound === 0 || (this.props.countryCode === '' && this.props.sectorCode === ''),
                 });
                 if (response.data.numFound > 10){
                     this.setState({ forwardButton: false });

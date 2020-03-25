@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'components/chart';
 import extractSearchTerm from 'utils/extractSearchTerm';
-import extractTerm from 'utils/extractTerm'
+import extractTerm from 'utils/extractTerm';
 
 export default class ChartPage extends React.Component {
     render() {

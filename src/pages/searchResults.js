@@ -11,7 +11,7 @@ export default class SearchResultsPage extends React.Component {
         return <SearchResult
             searchTerm={search}
             page={extractSearchTerm(this.props.location.search, 'page')}
-            countryCode ={extractTerm(search,'recipient_country_code')} 
+            countryCode ={extractTerm(search,'recipient_country_code')}
             sectorCode = {extractTerm(search,'sector_code')}
         />;
     }
