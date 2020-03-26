@@ -38,3 +38,14 @@ a:active {
 .page {
     height: calc(100vh - 56px);
 }
+
+.help-page .img-container {
+    max-width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+.help-page .img-container img {
+    max-width: 100%;
+}
