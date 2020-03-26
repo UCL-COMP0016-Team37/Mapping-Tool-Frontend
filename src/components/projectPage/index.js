@@ -55,8 +55,12 @@ function errorWrapper(func, otherwise='') {
 export default class ProjectPage extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {results: undefined, error: undefined};
+        this.state = {results: undefined, error: undefined, id:undefined};
 
+        this.getdata();
+    }
+
+    getdata(){
         API.getProjects(this.props.id).then((response) => {
             console.log(response);
             this.setState({ results: response.data });
@@ -72,6 +76,13 @@ export default class ProjectPage extends React.Component{
             console.log(error.response);
             this.setState({ transactionError: error.response});
         });
+    }
+
+    componentDidUpdate(){
+        if (this.props.id !== this.state.id){
+            this.getdata();
+            this.setState({id:this.props.id});
+        }
     }
 
     render() {
