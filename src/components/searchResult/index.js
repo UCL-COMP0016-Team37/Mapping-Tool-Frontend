@@ -73,7 +73,10 @@ export default class SearchResult extends React.Component{
                 </Container>
                 <div className="text-right">Loaded {results.length} results on this page out of {this.state.totalPage} pages.</div>
                 {results.map(
-                    results => <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>,
+                    results => {
+                        if(results.title_narrative === undefined)
+                            return <SearchResultItem key={results.iati_identifier} data="no title" id={results.iati_identifier}/>;
+                        else return <SearchResultItem key={results.iati_identifier} data={results.title_narrative[0]} id={results.iati_identifier}/>;},
                 )}
                 <ButtonGroup className="my-3">
                     <Button className='paging-button' onClick={this.backwardPage.bind(this)} disabled={this.state.backwardButton}>Previous Page</Button>
