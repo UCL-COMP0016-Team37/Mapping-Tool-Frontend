@@ -15,7 +15,6 @@ export default class BothAnalysis extends React.Component{
             sectorCode: props.sectorCode,
             countryCode: props.countryCode,
             ready: false,
-            rest: undefined,
             totalorgs: undefined,
         };
         API.getTopOrgsinCountry(this.state.countryCode,this.state.sectorCode).then((response) =>{
@@ -27,7 +26,6 @@ export default class BothAnalysis extends React.Component{
                 value: value,
                 count: count,
                 totalorgs: response.data.totalOrgs,
-                rest: response.data.rest,
             });
         });
         API.getSearch(this.props.searchTerm,1).then((response) => {
@@ -58,6 +56,7 @@ export default class BothAnalysis extends React.Component{
                 <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
                 <Row className="text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
+                    <Col><h1>{this.state.totalorgs}</h1> Total reporting organisations</Col>
                 </Row>
                 <Row>
                     <Col>

@@ -50,7 +50,7 @@ export default class Header extends React.Component {
                         </LinkContainer>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/help">Help</Nav.Link>
+                        <Nav.Link href="/help">Get Started</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <Nav className='mr-auto'></Nav>

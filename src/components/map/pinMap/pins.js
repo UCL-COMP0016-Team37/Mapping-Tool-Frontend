@@ -88,7 +88,11 @@ function clusterpins(original){
             var desc = '';
             var name = '';
             var num = 0;
-            for (k = 0; k < newlist.length; k++){
+            var length = 3;
+            if (newlist.length <= 3){
+                length = newlist.length;
+            }
+            for (k = 0; k < length; k++){
                 if (k > 0){
                     desc = desc + ', ' ;
                     name = name + ', ' ;
@@ -96,6 +100,9 @@ function clusterpins(original){
                 desc= desc+ newlist[k].code;
                 name= name+ newlist[k].countryName;
                 num = num + newlist[k].activityCount;
+            }
+            if (newlist.length > 3){
+                name = name + ' and ' + (newlist.length - 3) + ' more countries';
             }
             const result = {
                 code : desc,

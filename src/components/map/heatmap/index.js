@@ -13,24 +13,39 @@ export default class HeatMap extends React.Component{
         this.state = {
             viewport: {
                 latitude: 30,
-                longitude: 50,
-                zoom: 1.15,
+                longitude: 0,
+                zoom: 0.5,
                 bearing: 0,
                 pitch: 0,
             },
             results: [],
         };
-        API.getTopReceiverPerSector(this.props.sectorCode).then((response) =>{
-            const data = response.data.tops.map(data => data.name);
+        API.getHeatMap(this.props.sectorCode).then((response) =>{
+            const data = response.data.map(data => {
+                return {
+                    code: data.code,
+                    value: data.value,
+                };
+            });
             let results = [];
             for (let i = 0; i < data.length ; i++){
                 // console.log(data[i]);
-                let add = Countries.features.find(elem => elem.properties.ADMIN.toLowerCase() === data[i].toLowerCase());
+                let add = Countries.features.find(elem => elem.properties.ISO_A3.toLowerCase() === data[i].code.toLowerCase());
                 if (add !== undefined){
-                    // console.log(add);
-                    results.push(add);
+                    const gson = {
+                        type: add.type,
+                        properties: {
+                            ADMIN : add.properties.ADMIN,
+                            ISO_A3: add.properties.ISO_A3,
+                            value: data[i].value,
+                        },
+                        geometry: add.geometry,
+                    };
+                    // console.log(gson)
+                    results.push(gson);
                 }
             }
+
             this.setState({
                 results: results,
             });
@@ -76,7 +91,20 @@ const dataLayer = {
     id: 'data',
     type: 'fill',
     paint: {
-        'fill-color': '#3288bd',
+        'fill-color': {
+            property: 'value',
+            stops: [
+                [100000, '#3288bd'],
+                [1000000, '#66c2a5'],
+                [10000000, '#abdda4'],
+                [100000000, '#e6f598'],
+                [1000000000, '#ffffbf'],
+                [10000000000, '#fee08b'],
+                [100000000000, '#fdae61'],
+                [1000000000000, '#f46d43'],
+                [10000000000000, '#d53e4f'],
+            ],
+        },
         'fill-opacity': 0.5,
     },
 };

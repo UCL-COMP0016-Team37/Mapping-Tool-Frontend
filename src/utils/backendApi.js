@@ -45,6 +45,14 @@ const API = {
         return Axios.get(base_url + '/v2/analysis/sector-in-country/' + country);
     },
 
+    getTopOrgsPerCountry: (country) => {
+        return Axios.get(base_url + '/v2/analysis/topOrgs/country=' + country);
+    },
+
+    getFundingFlow: (country) => {
+        return Axios.get(base_url + '/v2/maps/pin/filter/country/' + country);
+    },
+
     getTopOrgsinCountry: (country,sector) => {
         return Axios.get(base_url + '/v2/analysis/topOrgs/sector=' + sector + '&country=' + country);
     },
@@ -59,6 +67,10 @@ const API = {
 
     getTopReceiverPerSector: (sector) => {
         return Axios.get(base_url + '/v2/analysis/budget-to-country/' + sector);
+    },
+
+    getHeatMap: (sector) => {
+        return Axios.get(base_url + '/v2/maps/pin/filter/sector/' + sector);
     },
 };
 
