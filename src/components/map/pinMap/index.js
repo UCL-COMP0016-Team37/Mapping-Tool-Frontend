@@ -55,6 +55,9 @@ export default class Map extends PureComponent {
     }
 
     _onClick(city) {
+        if (city.includes(',')){
+            return;
+        }
         if (this.props.pathname === '/location/'){
             history.push('/search-results/?search=recipient_country_code%3A('+ city+ ')&page=1');
         }
