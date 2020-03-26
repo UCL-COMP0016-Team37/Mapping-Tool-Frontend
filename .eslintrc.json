@@ -39,7 +39,11 @@
             "always-multiline"
         ],
         "no-extra-parens": [
-            "error"
+            "error",
+            "all",
+            {
+                "nestedBinaryExpressions": false
+            }
         ],
         "no-trailing-spaces": [
             "error"
