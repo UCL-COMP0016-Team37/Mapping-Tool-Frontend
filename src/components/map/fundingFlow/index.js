@@ -34,7 +34,6 @@ export default class Map extends React.Component {
             results: [],
             hoveredCounty: null,
             data: [],
-            // Set default selection to San Francisco
             selectedCounty: null,
             arcs: [],
             INITIAL_VIEW_STATE: {
@@ -73,9 +72,13 @@ export default class Map extends React.Component {
             };
             this.setState({
                 results: data,
-                latitude:parseFloat(response.data.funding[0].to.latitude),
-                longitude:parseFloat(response.data.funding[0].to.longitude),
                 data: geojson});
+        });
+        API.getCountry(props.countryCode).then((response) => {
+            this.setState({
+                latitude:parseFloat(response.data.latitude),
+                longitude:parseFloat(response.data.longitude),
+            });
         });
     }
 

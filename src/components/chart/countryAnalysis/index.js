@@ -20,6 +20,7 @@ export default class CountryAnalysis extends React.Component{
             orgsvalue: undefined,
             orgscount: undefined,
             orgsnumber: undefined,
+            name:undefined,
         };
         // API.getSectorInCountryAnalysis(props.countryCode).then((response) =>{
         //     let value = response.data.tops.map(data => data.name.split('-')[0]);
@@ -46,6 +47,11 @@ export default class CountryAnalysis extends React.Component{
         API.getSearch(this.props.searchTerm,1).then((response) => {
             this.setState({ number: response.data.numFound,ready:true});
         });
+        API.getCountry(props.countryCode).then((response) => {
+            this.setState({
+                name:response.data.name,
+            });
+        });
         this.chartRef = React.createRef();
     }
 
@@ -68,7 +74,7 @@ export default class CountryAnalysis extends React.Component{
                     </ButtonGroup>
                 </Container>
                 <h1>Country Analysis</h1>
-                <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
+                <h4>{this.state.name}</h4>
                 <Row className="text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
                     <Col><h1>{this.state.orgsnumber}</h1> Total Reporting organisations</Col>
@@ -96,7 +102,10 @@ export default class CountryAnalysis extends React.Component{
                         />
                     </Col>
                     <Col>
-                        <FundingFlow mapStyle="mapbox://styles/mapbox/dark-v10" countryCode={this.props.countryCode}/>
+                        <FundingFlow
+                            mapStyle="mapbox://styles/mapbox/dark-v10"
+                            countryCode={this.props.countryCode}
+                        />
                     </Col>
                 </Row>
             </Container>;

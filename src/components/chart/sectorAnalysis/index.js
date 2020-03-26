@@ -4,6 +4,7 @@ import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
 import HeatMap from '../../map/heatmap';
 import { DropdownButton, Dropdown, ButtonToolbar, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
+import {sector} from 'utils/sectorCode';
 
 export default class SectorAnalysis extends React.Component{
     constructor(props) {
@@ -68,6 +69,7 @@ export default class SectorAnalysis extends React.Component{
     }
 
     render() {
+        const sectorobj = sector.find(data => data.code === parseInt(this.props.sectorCode));
         if (this.state.ready){
             return <Container fluid className='charts-container'>
                 <Container fluid className='my-3 text-right'>
@@ -82,7 +84,7 @@ export default class SectorAnalysis extends React.Component{
                     </ButtonGroup>
                 </Container>
                 <h1>Sector Analysis</h1>
-                <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
+                <h4>{sectorobj.name}</h4>
                 <Row className="my-5 text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
                     <Col><h1>{this.state.donorNumber}</h1> Donors</Col>
