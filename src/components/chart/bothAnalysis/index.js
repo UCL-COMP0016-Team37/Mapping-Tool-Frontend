@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import API from 'utils/backendApi';
 import IndexItem from 'utils/indexItem';
 import { DropdownButton, Dropdown, ButtonToolbar, Spinner, Row, Col, Container, ButtonGroup } from 'react-bootstrap';
+import {sector} from 'utils/sectorCode';
 
 export default class BothAnalysis extends React.Component{
     constructor(props) {
@@ -16,6 +17,7 @@ export default class BothAnalysis extends React.Component{
             countryCode: props.countryCode,
             ready: false,
             totalorgs: undefined,
+            name:undefined,
         };
         API.getTopOrgsinCountry(this.state.countryCode,this.state.sectorCode).then((response) =>{
             let value = response.data.tops.map(data => data.name);
@@ -26,6 +28,11 @@ export default class BothAnalysis extends React.Component{
                 value: value,
                 count: count,
                 totalorgs: response.data.totalOrgs,
+            });
+        });
+        API.getCountry(props.countryCode).then((response) => {
+            this.setState({
+                name:response.data.name,
             });
         });
         API.getSearch(this.props.searchTerm,1).then((response) => {
@@ -39,6 +46,7 @@ export default class BothAnalysis extends React.Component{
     }
 
     render() {
+        const sectorobj = sector.find(data => data.code === parseInt(this.props.sectorCode));
         if (this.state.ready) {
             return <Container fluid>
                 <Container fluid className='my-3 text-right'>
@@ -53,7 +61,7 @@ export default class BothAnalysis extends React.Component{
                     </ButtonGroup>
                 </Container>
                 <h1>Country and Sector Analysis</h1>
-                <h4>{decodeURIComponent(this.props.searchTerm)}</h4>
+                <h4>{this.state.name + ' | ' + sectorobj.name}</h4>
                 <Row className="text-center">
                     <Col><h1>{this.state.number}</h1> Total Projects</Col>
                     <Col><h1>{this.state.totalorgs}</h1> Total reporting organisations</Col>
