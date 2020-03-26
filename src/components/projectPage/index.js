@@ -10,7 +10,7 @@ import './projectPage.scss';
 const Divider = Dropdown.Divider;
 
 function getNar(narrative, lang = 'en') {
-    if (!narrative.narratives) {
+    if (!narrative.narratives || narrative.narratives.length === 0) {
         return '';
     }
     const nar = narrative.narratives.find(item => item.language.code === lang);
@@ -38,12 +38,19 @@ function unique(array) {
     return array.filter((i, j) => array.indexOf(i) === j);
 }
 
-// eslint-disable-next-line
-Array.prototype.mapOr = function(func, otherwise) {
-    if (this.length === 0)
+function mapOr(array, func, otherwise) {
+    if (array === undefined || array.length === 0)
         return otherwise;
-    return this.map(func);
-};
+    return array.map(func);
+}
+
+function errorWrapper(func, otherwise='') {
+    try {
+        return func();
+    } catch (error) {
+        return otherwise;
+    }
+}
 
 export default class ProjectPage extends React.Component{
     constructor(props) {
@@ -133,7 +140,7 @@ export default class ProjectPage extends React.Component{
 
             <div id="locations" className="section">
                 <h4>Locations</h4>
-                {results.locations.filter(item => item.name).mapOr((item, i) =>
+                {mapOr(results.locations.filter(item => item.name), (item, i) =>
                     <div key={i}>
                         <h6>{getNar(item.name)}</h6>
                         <Divider/>
@@ -156,12 +163,12 @@ export default class ProjectPage extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {results.budgets.mapOr((item, i) =>
+                        {mapOr(results.budgets, (item, i) =>
                             <tr key={i}>
-                                <td>{item.type.name}</td>
-                                <td>{item.period_start}</td>
-                                <td>{item.period_end}</td>
-                                <td>{getMoney(item.value)}</td>
+                                <td>{errorWrapper(() => item.type.name)}</td>
+                                <td>{errorWrapper(() => item.period_start)}</td>
+                                <td>{errorWrapper(() => item.period_end)}</td>
+                                <td>{errorWrapper(() => getMoney(item.value))}</td>
                             </tr>,
                         'There are no budgets',
                         )}
@@ -184,12 +191,12 @@ export default class ProjectPage extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.transactionResults.mapOr((transaction, i) =>
+                        {mapOr(this.state.transactionResults, (transaction, i) =>
                             <tr key={i}>
-                                <td>{transaction.transaction_date}</td>
-                                <td>{transaction.transaction_type.name}</td>
-                                <td>{transaction.finance_type.name}</td>
-                                <td>{transaction.tied_status.name}</td>
+                                <td>{errorWrapper(() => transaction.transaction_date)}</td>
+                                <td>{errorWrapper(() => transaction.transaction_type.name)}</td>
+                                <td>{errorWrapper(() => transaction.finance_type.name)}</td>
+                                <td>{errorWrapper(() => transaction.tied_status.name)}</td>
                                 <td>{getMoney(transaction)}</td>
                             </tr>,
                         'There are no transactions.')}
@@ -201,7 +208,7 @@ export default class ProjectPage extends React.Component{
 
             <div id="related" className="section">
                 <h4>Related Activities</h4>
-                {results.related_activities.mapOr(el => <Button key={el.ref} variant="link" to={`/project-page/${el.ref}`} as={Link}>{el.ref}</Button>, 'There are no related activities')}
+                {mapOr(results.related_activities, el => <Button key={el.ref} variant="link" to={`/project-page/${el.ref}`} as={Link}>{el.ref}</Button>, 'There are no related activities')}
             </div>
         </Container>;
     }
